@@ -1,8 +1,9 @@
 import './app.scss';
 
 class App {
-  constructor() {
-    console.log('app start')
+
+  start():void {
+    console.log('app start');
   }
 }
 

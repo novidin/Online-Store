@@ -1,0 +1,60 @@
+/* ============= Colors ============ */
+
+$color-primary: #e2001a;
+$color-primary-hover: #ff0020;
+$color-accent: #0167cd;
+$color-accent-hover: #024b95;
+
+$color-background-page: #f5f5f5;
+$color-background-additional: #303030;
+$color-background-rsschool: #565656;
+$color-background-card: #ffffff;
+$color-background-navigation: #ffffff;
+$color-background-options: #ead2d3;
+
+$color-font-regular: #b3b3b4;
+$color-font-regular-light: #ffffff;
+$color-font-card: #666666;
+$color-font-input: #747474;
+$color-font-link: #ffffff;
+$color-font-chapter: #000000;
+$color-font-button: #ffffff;
+$color-font-link-hover: $color-primary-hover;
+
+$color-border-input: #d3d3d3;
+
+/* ========= Filter (SVG) ========= */
+
+$filter-rsschool-icon-hover: brightness(0) saturate(100%) invert(13%) sepia(0%) saturate(179%) hue-rotate(159deg) brightness(94%) contrast(83%);
+
+/* =========== Font Size =========== */
+
+$font-size: (
+  2xl: 4.8rem,
+  xl: 3.2rem,
+  l: 2.4rem,
+  m: 1.8rem,
+  s: 1.6rem,
+  xs: 1.4rem,
+  2xs: 1.2rem
+);
+
+/* ========= Width & Media ========= */
+
+$content-max-width: 1400px;
+$content-min-width: 300px;
+
+$media-breakpoints: (
+  2xl: 1400px,
+  xl: 1200px,
+  lg: 992px,
+  md: 768px,
+  sm: 576px,
+  2sm: 414px
+);
+
+/* ================================= */
+
+$font-family-base: roboto-latin, Verdana, sans-serif;
+$border-radius-button: 0.6rem;
+$delay: 0.2s;

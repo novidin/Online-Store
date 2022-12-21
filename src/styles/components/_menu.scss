@@ -1,0 +1,52 @@
+.menu__list {
+  padding: 0;
+  display: flex;
+  list-style: none;
+
+  @include media-md {
+    display: none;
+  }
+}
+
+.menu__item {
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &--not-allowed {
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    .menu__title {
+      color: $color-font-link-hover;
+    }
+
+    .icon--basket {
+      @include square-size(2.4rem);
+      background-image: url("../assets/icons/basket-hover.svg");
+    }
+  }
+}
+
+.menu__title {
+  @include font($font-family-base, map-get($font-size, m));
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  color: $color-font-link;
+  transition: $delay*2;
+
+  @include media-md {
+    @include font($font-family-base, map-get($font-size, s));
+  }
+}
+
+.menu__button {
+  display: none;
+
+  @include media-md {
+    display: inline-block;
+  }
+}

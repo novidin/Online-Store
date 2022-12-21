@@ -1,0 +1,81 @@
+.icon {
+  display: inline-block;
+  transition: $delay*2;
+}
+
+/* ============== Menu ============= */
+
+$menu-icons: (
+  map: "../assets/icons/map.svg",
+  phone: "../assets/icons/phone.svg",
+  basket: "../assets/icons/basket.svg",
+);
+
+.icon {
+  @each $modificator, $url in $menu-icons {
+    &--#{$modificator} {
+      @include square-size(2.4rem);
+      background-image: url($url);
+    }
+  }
+}
+
+/* =========== Navigation ========== */
+
+$navigation-icons: (
+  tire: "../assets/icons/tire.svg",
+  rim: "../assets/icons/rim.svg",
+  service: "../assets/icons/service.svg",
+);
+
+.icon {
+  @each $modificator, $url in $navigation-icons {
+    &--#{$modificator} {
+      @include square-size(3.6rem);
+      background-image: url($url);
+
+      @include media-md {
+        @include square-size(2.4rem);
+      }
+
+      @include media-2sm {
+        @include square-size(1.8rem);
+      }
+    }
+  }
+}
+
+%navigation-icons-hover {
+  $navigation-icons-hover: (
+    tire: "../assets/icons/tire-hover.svg",
+    rim: "../assets/icons/rim-hover.svg",
+    service: "../assets/icons/service-hover.svg",
+  );
+
+  .icon {
+    @each $modificator, $url in $navigation-icons-hover {
+      &--#{$modificator} {
+        background-image: url($url);
+      }
+    }
+  }
+}
+
+/* ============ RS School ========== */
+
+.icon--github {
+  width: 4rem;
+  height: 2rem;
+  background-image: url("../assets/icons/github.svg");
+}
+
+.icon--rsschool {
+  width: 6rem;
+  height: 3rem;
+  background-image: url("../assets/icons/rs-school.svg");
+}
+
+.icon--github:hover,
+.icon--rsschool:hover {
+  filter: $filter-rsschool-icon-hover;
+}

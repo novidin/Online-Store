@@ -1,0 +1,9 @@
+.logo {
+  width: 25rem;
+  transition: $delay*2;
+  cursor: pointer;
+
+  @include media-2sm {
+    width: 20rem;
+  }
+}

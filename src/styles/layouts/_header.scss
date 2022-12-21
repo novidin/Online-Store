@@ -1,0 +1,15 @@
+.header {
+  background-color: $color-background-additional;
+}
+
+.header__main {
+  height: 8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: $delay*2;
+
+  @include media-2sm {
+    height: 6rem;
+  }
+}

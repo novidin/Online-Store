@@ -1,0 +1,10 @@
+.wrapper {
+  max-width: $content-max-width;
+  margin: 0 auto;
+  padding: 0 2rem;
+  transition: $delay*2;
+
+  @include media-2sm {
+    padding: 0 1rem;
+  }
+}

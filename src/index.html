@@ -1,12 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Store</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="googlebot-news" content="noindex">
+  <title>Автосеть — Главная</title>
 </head>
 <body>
-  
+<header class="header">
+  <div class="wrapper">
+    <div class="header__main">
+      <div class="logo">
+        <img class="logo__image" src="./assets/icons/logo.svg" alt="Автосеть — логотип">
+      </div>
+      <div class="menu">
+        <ul class="menu__list">
+          <li class="menu__item menu__item--not-allowed">
+            <span class="icon icon--map"></span>
+            <span class="menu__title">Адреса магазинов</span>
+          </li>
+          <li class="menu__item menu__item--not-allowed">
+            <span class="icon icon--phone"></span>
+            <span class="menu__title">686-86-86</span>
+          </li>
+          <li class="menu__item">
+            <span class="icon icon--basket"></span>
+            <span class="menu__title">Корзина</span>
+          </li>
+        </ul>
+        <button class="button menu__button">Меню</button>
+      </div>
+    </div>
+  </div>
+  <nav class="navigation">
+    <ul class="navigation__list">
+      <li class="navigation__item">
+        <span class="icon icon--tire"></span>
+        <span class="navigation__title">Шины</span>
+      </li>
+      <li class="navigation__item navigation__item--not-allowed">
+        <span class="icon icon--rim"></span>
+        <span class="navigation__title">Колеса</span>
+      </li>
+      <li class="navigation__item navigation__item--not-allowed">
+        <span class="icon icon--service"></span>
+        <span class="navigation__title">Сервис</span>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div id="root"></div>
+<footer class="footer">
+  <div class="footer__container">
+    <div class="wrapper">
+      <nav class="footer-navigation footer__line">
+        <div class="footer-navigation__column">
+          <h3 class="footer__header">Шины</h3>
+          <ul class="footer-navigation__list">
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Летние шины</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Зимние шины</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Всесезонные шины</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Грузовые шины</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Подбор шин для авто</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-navigation__column">
+          <h3 class="footer__header">Диски</h3>
+          <ul class="footer-navigation__list">
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Литые диски</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Штампованные диски</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Грузовые диски</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Подбор дисков для авто</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-navigation__column">
+          <h3 class="footer__header">Все о шинах</h3>
+          <ul class="footer-navigation__list">
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Видеоблог</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Тесты шин</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Шинный калькулятор</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Полезно знать</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-navigation__column">
+          <h3 class="footer__header">Покупателю</h3>
+          <ul class="footer-navigation__list">
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Акции</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Доставка и оплата</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Гарантия</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Рассрочка</a>
+            </li>
+            <li class="footer-navigation__item">
+              <a href="#" class="footer-navigation__link">Новости</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="footer-info footer__line">
+        <p class="footer-info__text">Заказы по электронной почте и через сайт принимаются круглосуточно. Электронная
+          почта <a class="footer-info__link" href="mailto:order@autoset.by">order@autoset.by</a>
+        </p>
+        <p class="footer-info__text">Режим работы и обработки заказов
+          <b class="footer-info__text--bold">08.30 - 19.00 (Пн - Сб), 10.00 - 16.00 (Вс)</b>
+        </p>
+      </div>
+      <div class="footer-contacts footer__line">
+        <div class="footer-pay">
+          <h3 class="footer__header">Мы принимает к оплате</h3>
+          <ul class="footer-pay__list">
+            <li class="footer-pay__item">
+              <img class="footer-pay__image" src="./assets/icons/mastercard-securecode.png"
+                   alt="Mastercard securecode">
+            </li>
+            <li class="footer-pay__item">
+              <img class="footer-pay__image" src="./assets/icons/belcard.png" alt="Belcard">
+            </li>
+            <li class="footer-pay__item">
+              <img class="footer-pay__image" src="./assets/icons/visa.png" alt="Visa">
+            </li>
+            <li class="footer-pay__item">
+              <img class="footer-pay__image" src="./assets/icons/mastercard.png" alt="Mastercard">
+            </li>
+            <li class="footer-pay__item">
+              <img class="footer-pay__image" src="./assets/icons/belcard-int.png" alt="Belcard">
+            </li>
+          </ul>
+        </div>
+        <div class="footer-socials">
+          <h3 class="footer__header">Следи за нами</h3>
+          <ul class="footer-socials__list">
+            <li class="footer-socials__item">
+              <img class="footer-socials__image" src="./assets/icons/instagram.svg" alt="Instagram">
+            </li>
+            <li class="footer-socials__item">
+              <img class="footer-socials__image" src="./assets/icons/facebook.svg" alt="Facebook">
+            </li>
+            <li class="footer-socials__item">
+              <img class="footer-socials__image" src="./assets/icons/youtube.svg" alt="Youtube">
+            </li>
+            <li class="footer-socials__item">
+              <img class="footer-socials__image" src="./assets/icons/vkontakte.svg" alt="Vkontakte">
+            </li>
+            <li class="footer-socials__item">
+              <img class="footer-socials__image" src="./assets/icons/odnoklasniki.svg" alt="Odnoklassniki">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rsschool">
+    <a class="rsschool__link" href="https://github.com/novidin" title="@novidin">
+      <span class="icon icon--github"></span>
+    </a>
+    <a class="rsschool__link" href="https://rs.school/js/" title="RS School JS Course (Frontend/JavaScript)">
+      <span class="icon icon--rsschool"></span>
+    </a>
+    <a class="rsschool__link" href="https://github.com/ablbsk" title="@ablbsk">
+      <span class="icon icon--github"></span>
+    </a>
+  </div>
+</footer>
 </body>
 </html>

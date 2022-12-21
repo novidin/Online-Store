@@ -1,5 +1,3 @@
-import './app.scss';
-
 class App {
 
   start():void {

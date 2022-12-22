@@ -2,6 +2,7 @@
 /* ========= Filter (SVG) ========= */
 /* =========== Font Size =========== */
 /* ========= Width & Media ========= */
+/* ============ Border ============= */
 /* ================================= */
 *,
 *::after,
@@ -12,6 +13,11 @@
 html {
   box-sizing: border-box;
   font-size: 10px;
+}
+
+body {
+  min-width: 320px;
+  background-color: #f5f5f5;
 }
 
 a {
@@ -371,29 +377,35 @@ template {
 .icon--map {
   height: 2.4rem;
   width: 2.4rem;
-  background-image: url("../assets/icons/map.svg");
+  background-image: url("../assets/icons/menu/map.svg");
 }
 .icon--phone {
   height: 2.4rem;
   width: 2.4rem;
-  background-image: url("../assets/icons/phone.svg");
+  background-image: url("../assets/icons/menu/phone.svg");
 }
 .icon--basket {
   height: 2.4rem;
   width: 2.4rem;
-  background-image: url("../assets/icons/basket.svg");
+  background-image: url("../assets/icons/menu/basket.svg");
+}
+
+.menu__item:hover .icon--basket {
+  height: 2.4rem;
+  width: 2.4rem;
+  background-image: url("../assets/icons/menu/basket-hover.svg");
 }
 
 /* =========== Navigation ========== */
 .icon--tire {
-  height: 3.6rem;
-  width: 3.6rem;
-  background-image: url("../assets/icons/tire.svg");
+  height: 3rem;
+  width: 3rem;
+  background-image: url("../assets/icons/navigation/tire.svg");
 }
 @media (max-width: 768px) {
   .icon--tire {
-    height: 2.4rem;
-    width: 2.4rem;
+    height: 2rem;
+    width: 2rem;
   }
 }
 @media (max-width: 414px) {
@@ -403,14 +415,14 @@ template {
   }
 }
 .icon--rim {
-  height: 3.6rem;
-  width: 3.6rem;
-  background-image: url("../assets/icons/rim.svg");
+  height: 3rem;
+  width: 3rem;
+  background-image: url("../assets/icons/navigation/rim.svg");
 }
 @media (max-width: 768px) {
   .icon--rim {
-    height: 2.4rem;
-    width: 2.4rem;
+    height: 2rem;
+    width: 2rem;
   }
 }
 @media (max-width: 414px) {
@@ -420,14 +432,14 @@ template {
   }
 }
 .icon--service {
-  height: 3.6rem;
-  width: 3.6rem;
-  background-image: url("../assets/icons/service.svg");
+  height: 3rem;
+  width: 3rem;
+  background-image: url("../assets/icons/navigation/service.svg");
 }
 @media (max-width: 768px) {
   .icon--service {
-    height: 2.4rem;
-    width: 2.4rem;
+    height: 2rem;
+    width: 2rem;
   }
 }
 @media (max-width: 414px) {
@@ -438,13 +450,13 @@ template {
 }
 
 .navigation__item:hover .icon--tire {
-  background-image: url("../assets/icons/tire-hover.svg");
+  background-image: url("../assets/icons/navigation/tire-hover.svg");
 }
 .navigation__item:hover .icon--rim {
-  background-image: url("../assets/icons/rim-hover.svg");
+  background-image: url("../assets/icons/navigation/rim-hover.svg");
 }
 .navigation__item:hover .icon--service {
-  background-image: url("../assets/icons/service-hover.svg");
+  background-image: url("../assets/icons/navigation/service-hover.svg");
 }
 
 /* ============ About Us =========== */
@@ -603,11 +615,6 @@ template {
 .menu__item:hover .menu__title {
   color: #ff0020;
 }
-.menu__item:hover .icon--basket {
-  height: 2.4rem;
-  width: 2.4rem;
-  background-image: url("../assets/icons/basket-hover.svg");
-}
 
 .menu__title {
   font-family: roboto-latin, Verdana, sans-serif;
@@ -641,7 +648,7 @@ template {
 }
 
 .navigation {
-  height: 10rem;
+  height: 8rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -649,12 +656,12 @@ template {
 }
 @media (max-width: 768px) {
   .navigation {
-    height: 8rem;
+    height: 6rem;
   }
 }
 @media (max-width: 414px) {
   .navigation {
-    height: 6rem;
+    height: 4rem;
   }
 }
 
@@ -685,7 +692,7 @@ template {
     padding: 0 2rem;
   }
 }
-@media (max-width: 576px) {
+@media (max-width: 414px) {
   .navigation__item {
     padding: 0 1rem;
   }

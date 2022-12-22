@@ -19,13 +19,9 @@
   }
 
   &:hover {
+    @extend %basket-icon-hover;
     .menu__title {
       color: $color-font-link-hover;
-    }
-
-    .icon--basket {
-      @include square-size(2.4rem);
-      background-image: url("../assets/icons/basket-hover.svg");
     }
   }
 }

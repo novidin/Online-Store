@@ -9,6 +9,11 @@ html {
   font-size: 10px;
 }
 
+body {
+  min-width: 320px;
+  background-color: $color-background-page;
+}
+
 a {
 	text-decoration: none;
 }

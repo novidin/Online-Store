@@ -8,8 +8,7 @@ $color-accent-hover: #024b95;
 $color-background-page: #f5f5f5;
 $color-background-additional: #303030;
 $color-background-rsschool: #565656;
-$color-background-card: #ffffff;
-$color-background-navigation: #ffffff;
+$color-background-element: #ffffff;
 $color-background-options: #ead2d3;
 
 $color-font-regular: #b3b3b4;
@@ -53,8 +52,12 @@ $media-breakpoints: (
   2sm: 414px
 );
 
+/* ============ Border ============= */
+
+$border-radius-button: 0.6rem;
+$border-radius-element: 0.8rem;
+
 /* ================================= */
 
 $font-family-base: roboto-latin, Verdana, sans-serif;
-$border-radius-button: 0.6rem;
 $delay: 0.2s;

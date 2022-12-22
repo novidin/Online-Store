@@ -6,9 +6,9 @@
 /* ============== Menu ============= */
 
 $menu-icons: (
-  map: "../assets/icons/map.svg",
-  phone: "../assets/icons/phone.svg",
-  basket: "../assets/icons/basket.svg",
+  map: "../assets/icons/menu/map.svg",
+  phone: "../assets/icons/menu/phone.svg",
+  basket: "../assets/icons/menu/basket.svg",
 );
 
 .icon {
@@ -20,22 +20,29 @@ $menu-icons: (
   }
 }
 
+%basket-icon-hover {
+  .icon--basket {
+    @include square-size(2.4rem);
+    background-image: url("../assets/icons/menu/basket-hover.svg");
+  }
+}
+
 /* =========== Navigation ========== */
 
 $navigation-icons: (
-  tire: "../assets/icons/tire.svg",
-  rim: "../assets/icons/rim.svg",
-  service: "../assets/icons/service.svg",
+  tire: "../assets/icons/navigation/tire.svg",
+  rim: "../assets/icons/navigation/rim.svg",
+  service: "../assets/icons/navigation/service.svg",
 );
 
 .icon {
   @each $modificator, $url in $navigation-icons {
     &--#{$modificator} {
-      @include square-size(3.6rem);
+      @include square-size(3rem);
       background-image: url($url);
 
       @include media-md {
-        @include square-size(2.4rem);
+        @include square-size(2rem);
       }
 
       @include media-2sm {
@@ -47,9 +54,9 @@ $navigation-icons: (
 
 %navigation-icons-hover {
   $navigation-icons-hover: (
-    tire: "../assets/icons/tire-hover.svg",
-    rim: "../assets/icons/rim-hover.svg",
-    service: "../assets/icons/service-hover.svg",
+    tire: "../assets/icons/navigation/tire-hover.svg",
+    rim: "../assets/icons/navigation/rim-hover.svg",
+    service: "../assets/icons/navigation/service-hover.svg",
   );
 
   .icon {

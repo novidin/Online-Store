@@ -1,0 +1,91 @@
+.about-us {
+  padding: 10rem 0;
+  background-color: $color-background-page;
+  transition: $delay*2;
+
+  @include media-md {
+    padding: 5rem 0;
+  }
+}
+
+.about-us__header {
+  @include font($font-family-base, map-get($font-size, xl), 125%, bold);
+  margin: 0 0 5rem 0;
+  text-align: center;
+  color: $color-font-regular;
+  transition: $delay*2;
+
+  @include media-md {
+    font-size: map-get($font-size, l);
+    margin-bottom: 2.5rem;
+  }
+
+  @include media-2sm {
+    font-size: map-get($font-size, m);
+  }
+}
+
+.about-us__list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+}
+
+.about-us__item {
+  width: 33%;
+  margin: 5rem 0;
+  text-align: center;
+
+  @include media-md {
+    width: 50%;
+    margin: 2.5rem 0;
+  }
+
+  @include media-2sm {
+    width: 100%;
+  }
+}
+
+.about-us__title {
+  @include font($font-family-base, map-get($font-size, l), 100%, bold);
+  width: 100%;
+  max-width: 30rem;
+  margin: 1.5rem auto;
+  color: $color-accent;
+
+  @include media-md {
+    font-size: map-get($font-size, m);
+  }
+
+  @include media-sm {
+    font-size: map-get($font-size, s);
+  }
+
+  @include media-2sm {
+    font-size: map-get($font-size, m);
+  }
+}
+
+.about-us__description {
+  @include font($font-family-base, map-get($font-size, m), 100%);
+  width: 100%;
+  max-width: 30rem;
+  margin: 0 auto;
+  color: $color-font-regular;
+  text-align: center;
+
+  @include media-md {
+    font-size: map-get($font-size, s);
+  }
+
+  @include media-sm {
+    font-size: map-get($font-size, xs);
+  }
+
+  @include media-2sm {
+    font-size: map-get($font-size, s);
+  }
+}

@@ -447,6 +447,110 @@ template {
   background-image: url("../assets/icons/service-hover.svg");
 }
 
+/* ============ About Us =========== */
+.icon--market-leader {
+  height: 11rem;
+  width: 11rem;
+  background-image: url("../assets/icons/market-leader.svg");
+}
+@media (max-width: 768px) {
+  .icon--market-leader {
+    height: 9rem;
+    width: 9rem;
+  }
+}
+@media (max-width: 576px) {
+  .icon--market-leader {
+    height: 7rem;
+    width: 7rem;
+  }
+}
+.icon--handshake {
+  height: 11rem;
+  width: 11rem;
+  background-image: url("../assets/icons/handshake.svg");
+}
+@media (max-width: 768px) {
+  .icon--handshake {
+    height: 9rem;
+    width: 9rem;
+  }
+}
+@media (max-width: 576px) {
+  .icon--handshake {
+    height: 7rem;
+    width: 7rem;
+  }
+}
+.icon--pay-party {
+  height: 11rem;
+  width: 11rem;
+  background-image: url("../assets/icons/pay-party.svg");
+}
+@media (max-width: 768px) {
+  .icon--pay-party {
+    height: 9rem;
+    width: 9rem;
+  }
+}
+@media (max-width: 576px) {
+  .icon--pay-party {
+    height: 7rem;
+    width: 7rem;
+  }
+}
+.icon--unique-offers {
+  height: 11rem;
+  width: 11rem;
+  background-image: url("../assets/icons/unique-offers.svg");
+}
+@media (max-width: 768px) {
+  .icon--unique-offers {
+    height: 9rem;
+    width: 9rem;
+  }
+}
+@media (max-width: 576px) {
+  .icon--unique-offers {
+    height: 7rem;
+    width: 7rem;
+  }
+}
+.icon--service-common {
+  height: 11rem;
+  width: 11rem;
+  background-image: url("../assets/icons/service-common.svg");
+}
+@media (max-width: 768px) {
+  .icon--service-common {
+    height: 9rem;
+    width: 9rem;
+  }
+}
+@media (max-width: 576px) {
+  .icon--service-common {
+    height: 7rem;
+    width: 7rem;
+  }
+}
+.icon--sign-to-service {
+  height: 11rem;
+  width: 11rem;
+  background-image: url("../assets/icons/sign-to-service.svg");
+}
+@media (max-width: 768px) {
+  .icon--sign-to-service {
+    height: 9rem;
+    width: 9rem;
+  }
+}
+@media (max-width: 576px) {
+  .icon--sign-to-service {
+    height: 7rem;
+    width: 7rem;
+  }
+}
+
 /* ============ RS School ========== */
 .icon--github {
   width: 4rem;
@@ -621,6 +725,121 @@ template {
   justify-content: center;
   align-items: center;
   background-color: #565656;
+}
+
+.about-us {
+  padding: 10rem 0;
+  background-color: #f5f5f5;
+  transition: 0.4s;
+}
+@media (max-width: 768px) {
+  .about-us {
+    padding: 5rem 0;
+  }
+}
+
+.about-us__header {
+  font-family: roboto-latin, Verdana, sans-serif;
+  font-size: 3.2rem;
+  line-height: 125%;
+  font-style: normal;
+  font-weight: bold;
+  margin: 0 0 5rem 0;
+  text-align: center;
+  color: #b3b3b4;
+  transition: 0.4s;
+}
+@media (max-width: 768px) {
+  .about-us__header {
+    font-size: 2.4rem;
+    margin-bottom: 2.5rem;
+  }
+}
+@media (max-width: 414px) {
+  .about-us__header {
+    font-size: 1.8rem;
+  }
+}
+
+.about-us__list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+}
+
+.about-us__item {
+  width: 33%;
+  margin: 5rem 0;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .about-us__item {
+    width: 50%;
+    margin: 2.5rem 0;
+  }
+}
+@media (max-width: 414px) {
+  .about-us__item {
+    width: 100%;
+  }
+}
+
+.about-us__title {
+  font-family: roboto-latin, Verdana, sans-serif;
+  font-size: 2.4rem;
+  line-height: 100%;
+  font-style: normal;
+  font-weight: bold;
+  width: 100%;
+  max-width: 30rem;
+  margin: 1.5rem auto;
+  color: #0167cd;
+}
+@media (max-width: 768px) {
+  .about-us__title {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 576px) {
+  .about-us__title {
+    font-size: 1.6rem;
+  }
+}
+@media (max-width: 414px) {
+  .about-us__title {
+    font-size: 1.8rem;
+  }
+}
+
+.about-us__description {
+  font-family: roboto-latin, Verdana, sans-serif;
+  font-size: 1.8rem;
+  line-height: 100%;
+  font-style: normal;
+  font-weight: 400;
+  width: 100%;
+  max-width: 30rem;
+  margin: 0 auto;
+  color: #b3b3b4;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .about-us__description {
+    font-size: 1.6rem;
+  }
+}
+@media (max-width: 576px) {
+  .about-us__description {
+    font-size: 1.4rem;
+  }
+}
+@media (max-width: 414px) {
+  .about-us__description {
+    font-size: 1.6rem;
+  }
 }
 
 .footer {

@@ -61,6 +61,34 @@ $navigation-icons: (
   }
 }
 
+/* ============ About Us =========== */
+
+$about-us-icons: (
+  market-leader: "../assets/icons/market-leader.svg",
+  handshake: "../assets/icons/handshake.svg",
+  pay-party: "../assets/icons/pay-party.svg",
+  unique-offers: "../assets/icons/unique-offers.svg",
+  service-common: "../assets/icons/service-common.svg",
+  sign-to-service: "../assets/icons/sign-to-service.svg",
+);
+
+.icon {
+  @each $modificator, $url in $about-us-icons {
+    &--#{$modificator} {
+      @include square-size(11rem);
+      background-image: url($url);
+
+      @include media-md {
+        @include square-size(9rem);
+      }
+
+      @include media-sm {
+        @include square-size(7rem);
+      }
+    }
+  }
+}
+
 /* ============ RS School ========== */
 
 .icon--github {

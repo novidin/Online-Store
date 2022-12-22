@@ -22,7 +22,7 @@
 }
 
 .navigation__item {
-  padding: 0 5rem;
+  padding: 0 $indent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,11 +42,11 @@
   }
 
   @include media-md {
-    padding: 0 2rem;
+    padding: 0 $indent*0.5;
   }
 
-  @include media-2sm {
-    padding: 0 1rem;
+  @include media-sm {
+    padding: 0 $indent*0.25;
   }
 }
 

@@ -1,28 +1,9 @@
 .about-us {
-  padding: 10rem 0;
-  background-color: $color-background-page;
-  transition: $delay*2;
-
-  @include media-md {
-    padding: 5rem 0;
-  }
+  @extend %layout;
 }
 
 .about-us__header {
-  @include font($font-family-base, map-get($font-size, xl), 125%, bold);
-  margin: 0 0 5rem 0;
-  text-align: center;
-  color: $color-font-regular;
-  transition: $delay*2;
-
-  @include media-md {
-    font-size: map-get($font-size, l);
-    margin-bottom: 2.5rem;
-  }
-
-  @include media-2sm {
-    font-size: map-get($font-size, m);
-  }
+  @extend %layout-header;
 }
 
 .about-us__list {
@@ -36,12 +17,12 @@
 
 .about-us__item {
   width: 33%;
-  margin: 5rem 0;
+  margin: $indent 0;
   text-align: center;
 
   @include media-md {
     width: 50%;
-    margin: 2.5rem 0;
+    margin: $indent*0.5 0;
   }
 
   @include media-2sm {
@@ -53,7 +34,7 @@
   @include font($font-family-base, map-get($font-size, l), 100%, bold);
   width: 100%;
   max-width: 30rem;
-  margin: 1.5rem auto;
+  margin: $indent*0.5 auto;
   color: $color-accent;
 
   @include media-md {
@@ -70,7 +51,7 @@
 }
 
 .about-us__description {
-  @include font($font-family-base, map-get($font-size, m), 150%);
+  @include font($font-family-base, map-get($font-size, m), 125%);
   width: 100%;
   max-width: 30rem;
   margin: 0 auto;

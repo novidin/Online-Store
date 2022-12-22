@@ -1,0 +1,26 @@
+%layout {
+  margin: $indent $indent*0.5;
+  padding: $indent 0;
+  background-color: $color-background-element;
+  border-radius: $border-radius-layout;
+  transition: $delay*2;
+  box-shadow: $box-shadow-layout;
+  cursor: default;
+}
+
+%layout-header {
+  @include font($font-family-base, map-get($font-size, xl), 125%, bold);
+  margin: 0;
+  text-align: center;
+  color: $color-font-regular;
+  transition: $delay*2;
+
+  @include media-md {
+    font-size: map-get($font-size, l);
+    margin-bottom: $indent*0.5;
+  }
+
+  @include media-2sm {
+    font-size: map-get($font-size, m);
+  }
+}

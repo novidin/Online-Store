@@ -55,9 +55,11 @@ $media-breakpoints: (
 /* ============ Border ============= */
 
 $border-radius-button: 0.6rem;
-$border-radius-element: 0.8rem;
+$border-radius-layout: 0.8rem;
 
 /* ================================= */
 
 $font-family-base: roboto-latin, Verdana, sans-serif;
 $delay: 0.2s;
+$indent: 4rem;
+$box-shadow-layout: 0 0 1.2rem 0 rgba(34, 60, 80, 0.2);

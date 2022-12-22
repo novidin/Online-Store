@@ -21,3 +21,9 @@ a {
 img {
 	max-width: 100%;
 }
+
+@include media-sm {
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+}

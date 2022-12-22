@@ -70,7 +70,7 @@
 }
 
 .about-us__description {
-  @include font($font-family-base, map-get($font-size, m), 100%);
+  @include font($font-family-base, map-get($font-size, m), 150%);
   width: 100%;
   max-width: 30rem;
   margin: 0 auto;

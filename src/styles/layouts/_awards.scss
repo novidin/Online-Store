@@ -1,0 +1,74 @@
+.awards {
+  padding: 10rem 0;
+  background-color: $color-background-page;
+  transition: $delay*2;
+
+  @include media-md {
+    padding: 5rem 0;
+  }
+}
+
+.awards__header {
+  @include font($font-family-base, map-get($font-size, xl), 100%, bold);
+  margin: 0 0 5rem 0;
+  color: $color-font-regular;
+  text-align: center;
+  transition: $delay*2;
+
+  @include media-md {
+    font-size: map-get($font-size, l);
+  }
+
+  @include media-2sm {
+    font-size: map-get($font-size, m);
+  }
+}
+
+.awards__container {
+  margin: 5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+
+  @include media-md {
+    flex-direction: column;
+    margin: 2.5rem 0;
+  }
+}
+
+.awards__image {
+  width: 40rem;
+  height: 10rem;
+  transition: $delay*2;
+
+  @include media-lg {
+    width: 36rem;
+    height: 8rem;
+  }
+
+  @include media-md {
+    width: 30rem;
+    height: 6rem;
+  }
+
+  @include media-2sm {
+    width: 75%;
+    height: auto;
+  }
+}
+
+.awards__description {
+  @include font($font-family-base, map-get($font-size, m), 150%);
+  margin: 0;
+  padding: 0;
+  color: $color-font-regular;
+
+  @include media-lg {
+    text-align: center;
+  }
+
+  @include media-md {
+    font-size: map-get($font-size, s);
+  }
+}

@@ -16,6 +16,7 @@ $color-font-regular-light: #ffffff;
 $color-font-card: #666666;
 $color-font-input: #747474;
 $color-font-link: #ffffff;
+$color-font-message: #bdbcdb;
 $color-font-chapter: #000000;
 $color-font-button: #ffffff;
 $color-font-link-hover: $color-primary-hover;
@@ -54,6 +55,7 @@ $media-breakpoints: (
 
 /* ============ Border ============= */
 
+$border-radius-element: 0.6rem;
 $border-radius-button: 0.6rem;
 $border-radius-layout: 0.8rem;
 

@@ -3,8 +3,4 @@
   margin: 0 auto;
   padding: 0 $indent*0.5;
   transition: $delay*2;
-
-  @include media-2sm {
-    padding: 0 $indent*0.25;
-  }
 }

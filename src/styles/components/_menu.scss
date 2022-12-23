@@ -2,20 +2,24 @@
   padding: 0;
   display: flex;
   list-style: none;
-
-  @include media-md {
-    display: none;
-  }
+  transition: $delay*2;
 }
 
 .menu__item {
   margin-left: $indent*0.5;
   display: flex;
   align-items: center;
+  transition: $delay*2;
   cursor: pointer;
 
   &--not-allowed {
     cursor: not-allowed;
+  }
+
+  &--minor {
+    @include media-md {
+      display: none;
+    }
   }
 
   &:hover {
@@ -34,15 +38,20 @@
   color: $color-font-link;
   transition: $delay*2;
 
-  @include media-md {
-    @include font($font-family-base, map-get($font-size, s));
+  @include media-2sm {
+    display: none;
   }
 }
 
-.menu__button {
-  display: none;
-
-  @include media-md {
-    display: inline-block;
-  }
+.menu__count {
+  @include font($font-family-base, map-get($font-size, xs));
+  @include square-size(2rem);
+  margin: 0 $indent*0.125;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-font-regular-light;
+  background-color: $color-primary;
+  border-radius: 50%;
+  border: 0.2rem solid #ffffff;
 }

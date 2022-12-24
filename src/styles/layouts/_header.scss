@@ -4,13 +4,9 @@
 }
 
 .header__main {
-  height: 8rem;
+  height: 6rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: $delay*2;
-
-  @include media-2sm {
-    height: 6rem;
-  }
 }

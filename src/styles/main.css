@@ -838,16 +838,11 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .navigation {
-  height: 8rem;
+  height: 6rem;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-}
-@media (max-width: 768px) {
-  .navigation {
-    height: 6rem;
-  }
 }
 @media (max-width: 414px) {
   .navigation {
@@ -1355,16 +1350,11 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .header__main {
-  height: 8rem;
+  height: 6rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: 0.4s;
-}
-@media (max-width: 414px) {
-  .header__main {
-    height: 6rem;
-  }
 }
 
 .not-found {

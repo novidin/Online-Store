@@ -1,13 +1,9 @@
 .navigation {
-  height: 8rem;
+  height: 6rem;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: $color-background-element;
-
-  @include media-md {
-    height: 6rem;
-  }
 
   @include media-2sm {
     height: 4rem;

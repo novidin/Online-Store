@@ -37,6 +37,7 @@ module.exports = (options) => {
       hot: true,
       open: true,
       port: 3003,
+      historyApiFallback: true
     },
     plugins: [
       new ESLintPlugin({ extensions: ['ts', 'js'] }),

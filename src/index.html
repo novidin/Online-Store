@@ -34,7 +34,7 @@
   </div>
   <nav class="navigation">
     <ul class="navigation__list">
-      <li class="navigation__item">
+      <li id="tires" class="navigation__item">
         <span class="icon icon--tire"></span>
         <span class="navigation__title">Шины</span>
       </li>
@@ -92,7 +92,9 @@
       <h2 class="awards__header">Награды</h2>
       <div class="awards__container">
         <img class="awards__image" src="./assets/icons/masmi.svg" alt="Masmi awards image">
-        <p class="awards__description">Автосеть – самый популярный продавец легковых шин, по данным исследовательского центра MASMI. Опрос проводился в марте 2022 года среди городского населения Беларуси в возрасте от 18 до 64 лет.</p>
+        <p class="awards__description">Автосеть – самый популярный продавец легковых шин, по данным исследовательского
+          центра MASMI. Опрос проводился в марте 2022 года среди городского населения Беларуси в возрасте от 18 до 64
+          лет.</p>
       </div>
     </div>
   </section>
@@ -242,5 +244,119 @@
   </div>
 </footer>
 <div id="shadow" class="shadow"></div>
+
+<template id="filters">
+  <div class="filters">
+    <div class="wrapper wrapper--medium">
+      <div class="filters__line">
+        <div class="select">
+          <span class="select__title">Ширина / Профиль / Диаметр</span>
+          <select id="sizeSelect" class="select__select">
+            <option hidden>Выберите размеры</option>
+            <option value="all" class="select__option">Все</option>
+            <option value="215/45 R17" class="select__option">215/45 R17</option>
+            <option value="205/55 R16" class="select__option">205/55 R16</option>
+            <option value="195/50 R15" class="select__option">195/50 R15</option>
+          </select>
+        </div>
+        <div class="select">
+          <span class="select__title">Производитель</span>
+          <select id="brandSelect" class="select__select">
+            <option hidden>Выберите производителя</option>
+            <option value="all" class="select__option">Все</option>
+            <option value="Michelin" class="select__option">Michelin</option>
+            <option value="Nokian" class="select__option">Nokian</option>
+            <option value="Toyo" class="select__option">Toyo</option>
+            <option value="Viatti" class="select__option">Viatti</option>
+            <option value="Yokohama" class="select__option">Yokohama</option>
+          </select>
+        </div>
+        <div class="season">
+          <ul id="seasonList" class="season__list">
+            <li class="season__item">
+              <span class="season__title">Летние</span>
+              <div class="season__control">
+                <input id="summer" class="season__check" value="summer" type="checkbox">
+              <label class="season__label" for="summer">
+                <span class="icon icon--summer"></span>
+              </label>
+              </div>
+            </li>
+            <li class="season__item">
+              <span class="season__title">Зимние</span>
+              <div class="season__control">
+                <input id="winter" class="season__check" value="winter" type="checkbox">
+              <label class="season__label" for="winter">
+                <span class="icon icon--winter"></span>
+              </label>
+              </div>
+            </li>
+            <li class="season__item">
+              <span class="season__title">Всесезонные</span>
+              <div class="season__control">
+                <input id="allYear" class="season__check" value="all year" type="checkbox">
+              <label class="season__label" for="allYear">
+                <span class="icon icon--all-year"></span>
+              </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="filters__line">
+        <div class="multi-range">
+          <span class="multi-range__header">Цена</span>
+          <div class="multi-range__fields">
+            <input id="rangeValueMin" class="multi-range__value" type="number" placeholder="Мин" value="2500">
+            <span class="multi-range__separator">—</span>
+            <input id="rangeValueMax" class="multi-range__value" type="number" placeholder="Макс" value="7500">
+          </div>
+          <div class="multi-range__slider">
+            <div class="multi-range__progress"></div>
+          </div>
+          <div class="multi-range__ranges">
+            <input id="rangeMin" class="multi-range__range" type="range" min="0" max="10000" value="2500" step="100">
+            <input id="rangeMax" class="multi-range__range range-max" type="range" min="0" max="10000" value="7500" step="100">
+          </div>
+        </div>
+        <div class="multi-range">
+          <span class="multi-range__header">Кол-во</span>
+          <div class="multi-range__fields">
+            <input class="multi-range__value input-min" type="number" placeholder="Мин" value="2500">
+            <span class="multi-range__separator">—</span>
+            <input class="multi-range__value input-max" type="number" placeholder="Макс" value="7500">
+          </div>
+          <div class="multi-range__slider">
+            <div class="multi-range__progress"></div>
+          </div>
+          <div class="multi-range__ranges">
+            <input class="multi-range__range range-min" type="range" min="0" max="10000" value="2500" step="100">
+            <input class="multi-range__range range-max" type="range" min="0" max="10000" value="7500" step="100">
+          </div>
+        </div>
+        <div class="filters__cell">
+          <button id="resetButton" class="button filters__button button--accent">Сброс</button>
+        </div>
+      </div>
+      <div class="filters__line">
+        <div class="search">
+          <span class="search__header">Поиск</span>
+          <div class="search__container">
+            <input id="searchInput"
+                   class="search__input"
+                   type="search"
+                   placeholder="Поиск по бренду и модели"
+                   autocomplete="off">
+            <div class="filters__cell">
+              <button id="searchButton" class="button filters__button">Найти</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 </body>
 </html>

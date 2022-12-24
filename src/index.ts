@@ -10,6 +10,7 @@ app.start();
 window.onload = ():void => {
   const addressesDOM = document.getElementById('addresses') as HTMLElement;
   const mainDOM = document.querySelector('.main') as HTMLElement;
+  const tiresDOM = document.getElementById('tires') as HTMLElement;
 
   const renderNotFoundPage = ():void => {
     addressesDOM.addEventListener('click', ():void => {
@@ -23,6 +24,17 @@ window.onload = ():void => {
     });
   }
 
+  const renderTiresPage = ():void => {
+    tiresDOM.addEventListener('click', ():void => {
+      deleteChildsInMain();
+
+      const filtersTemplateDOM = document.getElementById('filters') as HTMLTemplateElement;
+
+      const filters = filtersTemplateDOM.content.cloneNode(true) as DocumentFragment;
+      mainDOM.append(filters);
+    })
+  }
+
   const deleteChildsInMain = ():void => {
     while (mainDOM.firstChild) {
       mainDOM.removeChild(mainDOM.firstChild);
@@ -30,4 +42,5 @@ window.onload = ():void => {
   };
 
   renderNotFoundPage();
+  renderTiresPage();
 }

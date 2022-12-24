@@ -1,4 +1,5 @@
 %layout {
+  max-width: $content-max-width;
   margin: $indent $indent*0.5;
   padding: $indent 0;
   background-color: $color-background-element;
@@ -23,4 +24,18 @@
   @include media-2sm {
     font-size: map-get($font-size, m);
   }
+}
+
+%filter-header {
+  @include font($font-family-base, map-get($font-size, xs), 100%, normal);
+  margin: 0;
+  padding-bottom: $indent*0.25;
+  color: $color-font-title;
+  cursor: default;
+}
+
+%filter-border {
+  border: 1px solid $color-border-input;
+  border-radius: $border-radius-element;
+  outline: none;
 }

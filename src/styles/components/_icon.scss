@@ -114,3 +114,21 @@ $about-us-icons: (
 .icon--rsschool:hover {
   filter: $filter-rsschool-icon-hover;
 }
+
+/* ============== Season =========== */
+
+$season-icons: (
+  summer: "../assets/icons/season/summer.svg",
+  winter: "../assets/icons/season/winter.svg",
+  all-year: "../assets/icons/season/all-year.svg",
+);
+
+.icon {
+  @each $modificator, $url in $season-icons {
+    &--#{$modificator} {
+      @include square-size(3.2rem);
+      margin: 0 $indent*0.125;
+      background-image: url($url);
+    }
+  }
+}

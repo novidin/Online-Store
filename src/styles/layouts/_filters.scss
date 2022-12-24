@@ -1,0 +1,23 @@
+.filters {
+  margin: $indent*0.5;
+  padding: $indent*0.5 0;
+  transition: $delay*2;
+}
+
+.filters__line {
+  margin: $indent*0.5 0;
+  display: flex;
+  justify-content: space-between;
+  gap: $indent;
+}
+
+.filters__cell {
+  width: 30%;
+  display: flex;
+  align-self: flex-end;
+}
+
+.filters__button {
+  width: 100%;
+  height: $height-filter-element;
+}

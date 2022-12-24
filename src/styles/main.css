@@ -5,6 +5,7 @@
 /* ============ Border ============= */
 /* ================================= */
 .awards, .about-us {
+  max-width: 1400px;
   margin: 4rem 2rem;
   padding: 4rem 0;
   background-color: #ffffff;
@@ -35,6 +36,24 @@
   .awards__header, .about-us__header {
     font-size: 1.8rem;
   }
+}
+
+.select__title, .season__title, .search__header, .multi-range__header {
+  font-family: roboto-latin, Verdana, sans-serif;
+  font-size: 1.4rem;
+  line-height: 100%;
+  font-style: normal;
+  font-weight: normal;
+  margin: 0;
+  padding-bottom: 1rem;
+  color: #000000;
+  cursor: default;
+}
+
+.select__select, .season__control, .search__input {
+  border: 1px solid #e5e5e5;
+  border-radius: 0.6rem;
+  outline: none;
 }
 
 *,
@@ -387,13 +406,20 @@ template {
   font-weight: 400;
   padding: 0.75rem;
   color: #ffffff;
-  background-color: #0167cd;
+  background-color: #e2001a;
   border-radius: 0.6rem;
   border: none;
   transition: 0.4s;
+  outline: none;
   cursor: pointer;
 }
 .button:hover {
+  background-color: #ff0020;
+}
+.button--accent {
+  background-color: #0167cd;
+}
+.button--accent:hover {
   background-color: #024b95;
 }
 @media (max-width: 768px) {
@@ -619,6 +645,26 @@ template {
   filter: brightness(0) saturate(100%) invert(13%) sepia(0%) saturate(179%) hue-rotate(159deg) brightness(94%) contrast(83%);
 }
 
+/* ============== Season =========== */
+.icon--summer {
+  height: 3.2rem;
+  width: 3.2rem;
+  margin: 0 0.5rem;
+  background-image: url("../assets/icons/season/summer.svg");
+}
+.icon--winter {
+  height: 3.2rem;
+  width: 3.2rem;
+  margin: 0 0.5rem;
+  background-image: url("../assets/icons/season/winter.svg");
+}
+.icon--all-year {
+  height: 3.2rem;
+  width: 3.2rem;
+  margin: 0 0.5rem;
+  background-image: url("../assets/icons/season/all-year.svg");
+}
+
 .logo {
   width: 25rem;
   transition: 0.4s;
@@ -695,6 +741,100 @@ template {
   background-color: #e2001a;
   border-radius: 50%;
   border: 0.2rem solid #ffffff;
+}
+
+.multi-range {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.multi-range__fields {
+  width: 100%;
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.multi-range__separator {
+  font-family: roboto-latin, Verdana, sans-serif;
+  font-size: 2.4rem;
+  line-height: 100%;
+  font-style: normal;
+  font-weight: 400;
+  width: 16rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multi-range__value {
+  font-family: roboto-latin, Verdana, sans-serif;
+  font-size: 1.6rem;
+  line-height: 100%;
+  font-style: normal;
+  font-weight: 400;
+  height: 2.5rem;
+  width: 100%;
+  text-align: center;
+  color: #3d3d3d;
+  border: 1px solid #e5e5e5;
+  border-radius: 0.6rem;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.multi-range__slider {
+  height: 5px;
+  position: relative;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+.multi-range__progress {
+  height: 100%;
+  left: 25%;
+  right: 25%;
+  position: absolute;
+  border-radius: 0.5rem;
+  background: #e2001a;
+}
+
+.multi-range__ranges {
+  position: relative;
+}
+
+.multi-range__range {
+  position: absolute;
+  width: 100%;
+  height: 0.5rem;
+  top: -0.5rem;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.multi-range__range::-moz-range-thumb {
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background: #e2001a;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}
+.multi-range__range::-webkit-slider-thumb {
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background: #e2001a;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
 }
 
 .navigation {
@@ -782,6 +922,93 @@ template {
   justify-content: center;
   align-items: center;
   background-color: #565656;
+}
+
+.search {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search__input {
+  font-family: roboto-latin, Verdana, sans-serif;
+  font-size: 1.8rem;
+  line-height: 100%;
+  font-style: normal;
+  font-weight: 400;
+  height: 5rem;
+  width: 65%;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.season {
+  width: 30%;
+}
+
+.season__list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  gap: 0 2rem;
+  list-style: none;
+}
+
+.season__item {
+  width: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.season__control {
+  height: 5rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.season__check {
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+}
+
+.season__label {
+  cursor: pointer;
+}
+
+.select {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.select__select {
+  font-family: roboto-latin, Verdana, sans-serif;
+  font-size: 1.8rem;
+  line-height: 100%;
+  font-style: normal;
+  font-weight: 400;
+  height: 5rem;
+  padding: 1rem;
+  color: #3d3d3d;
+  cursor: pointer;
+}
+
+.select__option {
+  padding: 1rem;
+  font-size: 1.8rem;
+}
+.select__option:checked {
+  color: #e2001a;
 }
 
 .about-us__list {
@@ -912,6 +1139,12 @@ template {
     font-size: 1.6rem;
     text-align: center;
   }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .footer {
@@ -1092,6 +1325,30 @@ template {
   cursor: pointer;
 }
 
+.filters {
+  margin: 2rem;
+  padding: 2rem 0;
+  transition: 0.4s;
+}
+
+.filters__line {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+.filters__cell {
+  width: 30%;
+  display: flex;
+  align-self: flex-end;
+}
+
+.filters__button {
+  width: 100%;
+  height: 5rem;
+}
+
 .header {
   background-color: #303030;
   box-shadow: 0 0 1.2rem 0 rgba(34, 60, 80, 0.2);
@@ -1163,6 +1420,9 @@ template {
   margin: 0 auto;
   padding: 0 2rem;
   transition: 0.4s;
+}
+.wrapper--medium {
+  max-width: 992px;
 }
 
 /*# sourceMappingURL=main.css.map */

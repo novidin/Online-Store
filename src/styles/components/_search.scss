@@ -1,0 +1,23 @@
+.search {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search__header {
+  @extend %filter-header;
+}
+
+.search__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search__input {
+  @include font($font-family-base, map-get($font-size, m));
+  @extend %filter-border;
+  height: $height-filter-element;
+  width: 65%;
+  padding: $indent*0.25;
+  cursor: pointer;
+}

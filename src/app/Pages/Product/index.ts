@@ -5,6 +5,7 @@ import dataStorage from "../../Storage/index";
 class ProductPage {
 
   render(reqParams: IReqParams): void {
+
     if (!reqParams.id) {
       router.goTo('/404');
     }

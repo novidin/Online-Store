@@ -15,7 +15,7 @@ class FilterCheckbox extends HTMLElement {
     shadowRoot.appendChild(this.wrapper);
   }
 
-  render() {
+  private render() {
     this.wrapper.innerHTML = '<h2>Seasons</h2>';
 
     for (const el in this.seasons) {
@@ -25,8 +25,7 @@ class FilterCheckbox extends HTMLElement {
       input.id = el;
       input.value = el;
       input.name = 'season';
-      // if (this.allCategories[el].curr === 0) input.disabled = true;
-      if (this.isChecked(el)) input.checked = true;
+      if (FilterCheckbox.isChecked(el)) input.checked = true;
       itemWrapper.appendChild(input);
       const label = document.createElement('label');
       label.setAttribute('for', el);
@@ -42,18 +41,18 @@ class FilterCheckbox extends HTMLElement {
     }
   }
 
-  getChecked() {
+  private getChecked(): string[] {
     const selected = this.wrapper.querySelectorAll<HTMLInputElement>('input:checked');
-    return [...selected].map((el) => el.value);
+    return [...selected].map((input) => input.value);
   }
 
-  isChecked(val: string) {
+  private static isChecked(val: string): boolean {
     const reqParams = router.getReqParamsAll()['season'];
     if (!reqParams) return false
     return reqParams.includes(val);
   }
 
-  route() {
+  private route(): void {
     router.setReqParams('season', this.getChecked().join(','));
   }
 }

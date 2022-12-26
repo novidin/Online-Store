@@ -5,12 +5,13 @@ class Nav extends HTMLElement {
   constructor() {
     super();
     const shadowRoot = this.attachShadow({ mode: 'open' });
-
     const ul = document.createElement('ul');
+
     routes.forEach((route) => {
-      if (route.addToMenu) {
+      if (route.isMenuItem) {
         const li = document.createElement('li');
         const link = document.createElement('a');
+
         link.href = route.path;
         link.textContent = route.title;
         link.setAttribute('data-local-link', 'data-local-link');

@@ -15,7 +15,6 @@ class Router {
     const urlPathname = location.pathname;
     const correctRoutes = routes.filter((route) => route.path === urlPathname);
     const reqParams = this.getReqParamsAll();
-    console.log('all', reqParams)
 
     console.log('goTO', location.pathname);
     if (correctRoutes.length < 1) {
@@ -33,13 +32,8 @@ class Router {
     this.loadPage();
   }
 
-  // getReqParams(name: string) {
-  //   const newURL = new URL(location.toString())
-  //   return newURL.searchParams.get(name);
-  // }
-
   getReqParamsAll() {
-    const newURL = new URL(location.toString())
+    const newURL = new URL(location.toString());
     return this.convertReqParamsToObj(newURL.searchParams);
   }
 
@@ -52,13 +46,14 @@ class Router {
       reqParams.append(name, value)
     }
     this.reqParams = reqParams;
-    const newURL = new URL(location.toString())
-    newURL.search = reqParams.toString()
-    this.goTo(newURL.toString())
+    const newURL = new URL(location.toString());
+    newURL.search = reqParams.toString();
+    this.goTo(newURL.toString());
   }
 
   private convertReqParamsToObj(reqParams: URLSearchParams) {
     const reqParamsObj: IReqParams = {};
+
     reqParams.forEach((param, i) => {
       if (param.split(',').filter((param) => param).length > 0) {
         reqParamsObj[i] = param.split(',');

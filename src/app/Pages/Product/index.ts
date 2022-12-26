@@ -1,8 +1,8 @@
 class ProductPage {
   render() {
-
     document.body.innerHTML = `
-        <h1>Product Page</h1>
+      <nav-links></nav-links>
+      <h1>Product Page</h1>
     `
   }
 }

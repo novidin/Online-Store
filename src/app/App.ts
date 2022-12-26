@@ -1,4 +1,5 @@
 import router from './Router/index';
+import './Components';
 import './app.scss';
 
 class App {

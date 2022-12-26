@@ -1,5 +1,12 @@
+import { IReqParams } from "../../Types/index";
+import router from "../../Router/index";
+
 class CatalogPage {
-  render() {
+
+  render(reqParams: IReqParams): void {
+    if (reqParams.length) {
+      router.goTo('/catalog');
+    }
     document.body.innerHTML = `
       <nav-links></nav-links>
       <h1>Catalog Page</h1>

@@ -1,5 +1,13 @@
+import { IReqParams } from "../../Types/index";
+import router from "../../Router/index";
+
 class MainPage {
-  render() {
+
+  render(reqParams: IReqParams): void {
+    if (reqParams.length) {
+      router.goTo('/');
+    }
+
     document.body.innerHTML = `
       <nav-links></nav-links>
       <h1>Main Page</h1>

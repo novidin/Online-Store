@@ -1,5 +1,6 @@
 import { IReqParams } from "../../Types/index";
 import router from "../../Router/index";
+import dataStorage from "../../Storage/index";
 
 class ProductPage {
 
@@ -7,11 +8,28 @@ class ProductPage {
     if (!reqParams.id) {
       router.goTo('/404');
     }
-    document.title = `Product ${reqParams.id}`;
+
+    const product = dataStorage.getProductById(reqParams.id[0]);
+
+    document.title = `Product ${product?.name || 'not found'}`;
     document.body.innerHTML = `
       <nav-links></nav-links>
-      <h1>Product ${reqParams.id} Page</h1>
-    `
+    `;
+
+    const wrapper = document.createElement('div');
+
+    if (product) {
+      wrapper.innerHTML = `
+        <h1>Product ${product.name} Page</h1>
+        <p>Price: ${product.price}</p>
+        <img src="${product.imageUrl[0]}"></img>
+      `
+    } else {
+      wrapper.innerHTML = `
+      <h1>Product not found</h1>
+      `
+    }
+    document.body.appendChild(wrapper);
   }
 }
 

@@ -1,9 +1,16 @@
+import router from './Router/index';
 import './app.scss';
 
 class App {
 
+  private router;
+
+  constructor() {
+    this.router = router;
+  }
+
   start():void {
-    console.log('app start');
+    this.router.start();
   }
 }
 

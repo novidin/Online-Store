@@ -1,23 +1,62 @@
 .filters {
-  margin: $indent*0.5;
-  padding: $indent*0.5 0;
+  width: $content-medium-width;
+  margin: $indent*0.5 0;
+  padding: $indent*0.5;
   transition: $delay*2;
+
+  @include media-lg {
+    width: 100%;
+  }
 }
 
-.filters__line {
-  margin: $indent*0.5 0;
+.filters__grid {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: $indent;
+  row-gap: $indent*0.5;
+  transition: $delay*2;
 }
 
 .filters__cell {
   width: 30%;
-  display: flex;
-  align-self: flex-end;
+
+  @include media-md {
+    width: 47%;
+  }
+
+  @include media-sm {
+    width: 100%;
+  }
+
+  &--button {
+    width: 30%;
+    height: $height-filter-element;
+    align-self: flex-end;
+
+    @include media-md {
+      width: 47%;
+    }
+
+    @include media-2sm {
+      width: 100%;
+    }
+  }
+
+  &--v2 {
+    @include media-sm {
+      width: 47%;
+    }
+
+    @include media-2sm {
+      width: 100%;
+    }
+  }
 }
 
 .filters__button {
-  width: 100%;
-  height: $height-filter-element;
+  display: none;
+
+  //@include media-sm {
+  //  display: inline;
+  //}
 }

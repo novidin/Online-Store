@@ -126,9 +126,21 @@ $season-icons: (
 .icon {
   @each $modificator, $url in $season-icons {
     &--#{$modificator} {
-      @include square-size(3.2rem);
+      @include square-size(3rem);
       margin: 0 $indent*0.125;
       background-image: url($url);
+
+      @include media-lg {
+        @include square-size(2.6rem);
+      }
+
+      @include media-sm {
+        @include square-size(1.8rem);
+      }
+
+      @include media-2sm {
+        @include square-size(3.2rem);
+      }
     }
   }
 }

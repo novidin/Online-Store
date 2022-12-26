@@ -11,13 +11,39 @@
 .search__container {
   display: flex;
   justify-content: space-between;
+
+  @include media-2sm {
+    flex-direction: column;
+    gap: $indent*0.5;
+  }
 }
 
 .search__input {
   @include font($font-family-base, map-get($font-size, m));
   @extend %filter-border;
   height: $height-filter-element;
-  width: 65%;
+  width: 66%;
   padding: $indent*0.25;
   cursor: pointer;
+
+  @include media-md {
+    width: 47%;
+  }
+
+  @include media-2sm {
+    width: 100%;
+  }
+}
+
+.search__button {
+  width: 30%;
+  height: 100%;
+
+  @include media-md {
+    width: 47%;
+  }
+
+  @include media-2sm {
+    width: 100%;
+  }
 }

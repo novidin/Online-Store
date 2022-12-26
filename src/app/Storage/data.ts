@@ -22,7 +22,7 @@ export const products = {
     id: "2",
     brand: "Viatti",
     model: "Strada Asimmetrico V-130",
-    season: "summer",
+    season: "allseason",
     count: "20",
     protector: "8.0",
     price: "200",

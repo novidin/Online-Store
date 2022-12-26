@@ -2,9 +2,8 @@ export interface IReqParams {
   [key: string]: string[]
 }
 
-export interface IProduct {
+export interface IProductsItem {
   id: string;
-  name?: string;
   brand: string;
   model: string;
   season: string;
@@ -23,6 +22,14 @@ export interface IProduct {
   }
 }
 
+export interface IProduct extends IProductsItem {
+  name: string;
+}
+
 export interface IProducts {
-  [key: string]: IProduct
+  [key: string]: IProductsItem
+}
+
+export interface IFilterItems {
+  [key: string]: {curr: number, total: number};
 }

@@ -334,19 +334,39 @@
         </div>
       </div>
       <button id="resetButton" class="filters__cell--button button button--accent">Сброс</button>
-      <div class="search">
-        <span class="search__header">Поиск</span>
-        <div class="search__container">
-          <input id="searchInput"
-                 class="search__input"
-                 type="search"
-                 placeholder="Поиск по бренду и модели"
-                 autocomplete="off">
-          <button id="searchButton" class="button search__button">Найти</button>
-        </div>
+    </div>
+    <div class="search">
+      <span class="search__header">Поиск</span>
+      <div class="search__container">
+        <input id="searchInput"
+               class="search__input"
+               type="search"
+               placeholder="Поиск по бренду и модели"
+               autocomplete="off">
+        <button id="searchButton" class="button search__button">Найти</button>
       </div>
     </div>
   </div>
+</template>
+
+<template id="catalog">
+  <section class="catalog">
+    <div class="catalog__info">
+      <img class="catalog__image" src="./assets/icons/card-view.svg" alt="Change view style">
+      <div class="catalog__select select">
+        <select id="sortSelect" class="select__select">
+          <option hidden>Сортировка</option>
+          <option value="alphabetAsc" class="select__option">Алфавит ▲</option>
+          <option value="alphabetDesc" class="select__option">Алфавит ▼</option>
+          <option value="ratingAsc" class="select__option">Рейтинг ▲</option>
+          <option value="ratingDesc" class="select__option">Рейтинг ▼</option>
+          <option value="priceAsc" class="select__option">Цена ▲</option>
+          <option value="priceDesc" class="select__option">Цена ▼</option>
+        </select>
+      </div>
+    </div>
+    <p class="catalog__title">Найдено: <span class="catalog__count">101</span></p>
+  </section>
 </template>
 
 </body>

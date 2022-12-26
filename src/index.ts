@@ -29,9 +29,13 @@ window.onload = ():void => {
       deleteChildsInMain();
 
       const filtersTemplateDOM = document.getElementById('filters') as HTMLTemplateElement;
+      const catalogTemplateDOM = document.getElementById('catalog') as HTMLTemplateElement;
 
       const filters = filtersTemplateDOM.content.cloneNode(true) as DocumentFragment;
+      const catalog = catalogTemplateDOM.content.cloneNode(true) as DocumentFragment;
+
       mainDOM.append(filters);
+      mainDOM.append(catalog);
     })
   }
 

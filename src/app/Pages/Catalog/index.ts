@@ -7,6 +7,7 @@ class CatalogPage {
     if (reqParams.length) {
       router.goTo('/catalog');
     }
+    document.title = `Catalog`;
     document.body.innerHTML = `
       <nav-links></nav-links>
       <h1>Catalog Page</h1>

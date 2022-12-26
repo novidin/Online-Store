@@ -7,7 +7,7 @@ class Error404Page {
     if (reqParams.length) {
       router.goTo('/404');
     }
-
+    document.title = `Page not found`;
     document.body.innerHTML = `
       <h1>Error 404</h1>
       <a href="/" data-local-link="data-local-link">Home</a>

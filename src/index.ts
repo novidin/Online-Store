@@ -38,6 +38,7 @@ window.onload = ():void => {
       mainDOM.append(filters);
       mainDOM.append(catalog);
 
+      showFilters();
       multiRange();
     })
   }
@@ -56,6 +57,18 @@ window.onload = ():void => {
     const multiRangeCountInputRangeDOM = document.querySelectorAll('#multiRangeCount .multi-range__range') as NodeListOf<HTMLInputElement>
     const multiRangeCount = new MultiRange(multiRangeCountDOM, multiRangeCountInputValueDOM, multiRangeCountInputRangeDOM, multiRangeCountProgressDOM);
     multiRangeCount.start();
+  }
+
+  const showFilters = ():void => {
+    const filtersButtonDOM = document.getElementById('filtersButton') as HTMLButtonElement;
+    const filtersGridDOM = document.querySelector('.filters__grid') as HTMLDivElement;
+    const filtersButtonIconDOM = document.querySelector('.icon--arrow-down') as HTMLElement;
+
+    filtersButtonDOM.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      filtersGridDOM.style.display = filtersGridDOM.style.display !== 'flex' ? 'flex' : '';
+      filtersButtonIconDOM.style.transform = filtersButtonIconDOM.style.transform === '' ? 'rotate(-180deg)' : '';
+    })
   }
 
   const deleteChildsInMain = ():void => {

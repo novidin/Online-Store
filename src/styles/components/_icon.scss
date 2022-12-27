@@ -153,7 +153,7 @@ $season-icons: (
   background-image: url("../assets/icons/star.svg");
 }
 
-/* ============== Rating =========== */
+/* ============== Offers =========== */
 
 $offers-icons: (
   guarantee: "../assets/icons/offers/guarantee.svg",
@@ -169,4 +169,12 @@ $offers-icons: (
       background-image: url($url);
     }
   }
+}
+
+/* ============== Buttons =========== */
+
+.icon--arrow-down {
+  @include square-size(1.6rem);
+  margin: 0 $indent*0.125;
+  background-image: url("../assets/icons/arrow-down.svg");
 }

@@ -144,3 +144,29 @@ $season-icons: (
     }
   }
 }
+
+/* ============== Rating =========== */
+
+.icon--star {
+  @include square-size(1.8rem);
+  margin: 0 $indent*0.25;
+  background-image: url("../assets/icons/star.svg");
+}
+
+/* ============== Rating =========== */
+
+$offers-icons: (
+  guarantee: "../assets/icons/offers/guarantee.svg",
+  pay: "../assets/icons/offers/pay.svg",
+  shipping: "../assets/icons/offers/shipping.svg",
+);
+
+.icon {
+  @each $modificator, $url in $offers-icons {
+    &--#{$modificator} {
+      @include square-size(3.6rem);
+      margin: 0 $indent*0.125;
+      background-image: url($url);
+    }
+  }
+}

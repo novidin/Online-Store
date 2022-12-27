@@ -32,6 +32,7 @@
   border-radius: $border-radius-element;
   outline: none;
   cursor: pointer;
+  -moz-appearance: textfield;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -65,27 +66,27 @@ input[type="number"]::-webkit-inner-spin-button {
   height: 0.5rem;
   top: -0.5rem;
   background: none;
+  cursor: pointer;
   pointer-events: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+}
 
-  &::-moz-range-thumb {
-    height: 1.6rem;
-    width: 1.6rem;
-    border-radius: 50%;
-    background: $color-primary;
-    pointer-events: auto;
-    -webkit-appearance: none;
-    box-shadow: 0 0 6px rgba(0,0,0,0.05);
-  }
-
-  &::-webkit-slider-thumb {
-    height: 1.6rem;
-    width: 1.6rem;
-    border-radius: 50%;
-    background: $color-primary;
-    pointer-events: auto;
-    -webkit-appearance: none;
-    box-shadow: 0 0 6px rgba(0,0,0,0.05);
-  }
+input[type="range"]::-moz-range-thumb {
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background: $color-primary;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  box-shadow: 0 0 6px rgba(0,0,0,0.05);
+}
+input[type="range"]::-webkit-slider-thumb {
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background: $color-primary;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  box-shadow: 0 0 6px rgba(0,0,0,0.05);
 }

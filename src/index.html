@@ -302,23 +302,23 @@
           </li>
         </ul>
       </div>
-      <div class="multi-range filters__cell filters__cell--v2">
+      <div id="multiRangePrice" class="multi-range filters__cell filters__cell--v2">
         <span class="multi-range__header">Цена</span>
         <div class="multi-range__fields">
-          <input id="rangeValueMin" class="multi-range__value" type="number" placeholder="Мин" value="2500">
+          <input class="multi-range__value input-min" type="number" placeholder="Мин" value="2500">
           <span class="multi-range__separator">—</span>
-          <input id="rangeValueMax" class="multi-range__value" type="number" placeholder="Макс" value="7500">
+          <input class="multi-range__value input-max" type="number" placeholder="Макс" value="7500">
         </div>
         <div class="multi-range__slider">
-          <div class="multi-range__progress"></div>
+          <div id="multiRangePriceProgress" class="multi-range__progress"></div>
         </div>
         <div class="multi-range__ranges">
-          <input id="rangeMin" class="multi-range__range" type="range" min="0" max="10000" value="2500" step="100">
-          <input id="rangeMax" class="multi-range__range range-max" type="range" min="0" max="10000" value="7500"
+          <input class="multi-range__range range-min" type="range" min="0" max="10000" value="2500" step="100">
+          <input class="multi-range__range range-max" type="range" min="0" max="10000" value="7500"
                  step="100">
         </div>
       </div>
-      <div class="multi-range filters__cell filters__cell--v2">
+      <div id="multiRangeCount" class="multi-range filters__cell filters__cell--v2">
         <span class="multi-range__header">Кол-во</span>
         <div class="multi-range__fields">
           <input class="multi-range__value input-min" type="number" placeholder="Мин" value="2500">
@@ -326,7 +326,7 @@
           <input class="multi-range__value input-max" type="number" placeholder="Макс" value="7500">
         </div>
         <div class="multi-range__slider">
-          <div class="multi-range__progress"></div>
+          <div id="multiRangeCountProgress" class="multi-range__progress"></div>
         </div>
         <div class="multi-range__ranges">
           <input class="multi-range__range range-min" type="range" min="0" max="10000" value="2500" step="100">
@@ -366,6 +366,86 @@
       </div>
     </div>
     <p class="catalog__title">Найдено: <span class="catalog__count">101</span></p>
+    <div class="catalog__container">
+      <article class="product">
+        <div class="product__column product__column--main">
+          <div class="product__title">
+            <h3 class="product__brand">Imperial</h3>
+            <span class="product__model">Snowdragon HP</span>
+            <span class="product__sizes">145/70 R13</span>
+          </div>
+          <img class="product__image"
+                 src="https://autoset.by/upload/resize_cache/uf/722/500_685_1/7221d4a1f25fdfd0cab90fb97623455a.jpg"
+                 alt="Imperail Snowdragon HP">
+        </div>
+        <div class="product__column product__column--short">
+          <ul class="product__labels-list">
+            <li class="product__labels-item">
+              <span class="product__season icon icon--winter"></span>
+              <span class="product__labels-title">Зимние</span>
+            </li>
+            <li class="product__labels-item">
+              <p class="product__rating">
+                <span class="icon icon--star rating rating--good"></span>
+                <span class="rating__value rating--good">5.0</span>
+              </p>
+              <span class="product__labels-title">Рейтинг</span>
+            </li>
+            <li class="product__labels-item">
+              <span class="product__comments">1</span>
+              <span class="product__labels-title">Комент</span>
+            </li>
+          </ul>
+          <ul class="product__features-list">
+            <li class="product__features-item">
+              <span class="product__features-title">Глубина протектора</span>
+              <span class="product__features-value">9.0 мм</span>
+            </li>
+            <li class="product__features-item">
+              <span class="product__features-title">Вес</span>
+              <span class="product__features-value">5.3 кг</span>
+            </li>
+            <li class="product__features-item">
+              <span class="product__features-title">Эксплуатация</span>
+              <span class="product__features-value">Снег и слякоть</span>
+            </li>
+            <li class="product__features-item">
+              <span class="product__features-title">Защита диска</span>
+              <span class="product__features-value">Нет</span>
+            </li>
+            <li class="product__features-item">
+              <span class="product__features-title">Индекс нагрузки</span>
+              <span class="product__features-value">71 (до 345 кг)</span>
+            </li>
+            <li class="product__features-item">
+              <span class="product__features-title">Индекс скорости</span>
+              <span class="product__features-value">Т (до 190 км/ч)</span>
+            </li>
+          </ul>
+        </div>
+        <div class="product__column">
+          <p class="product__price">400 руб</p>
+          <div>
+            <p class="product__count">В наличии: 14 шт.</p>
+            <ul class="product__offers-list">
+              <li class="product__offers-item">
+                <span class="product__offers-icon icon icon--pay"></span>
+                <p class="product__offers-title">Оплата частями</p>
+              </li>
+              <li class="product__offers-item">
+                <span class="product__offers-icon icon icon--guarantee"></span>
+                <p class="product__offers-title">Официальная гарантия</p>
+              </li>
+              <li class="product__offers-item">
+                <span class="product__offers-icon icon icon--shipping"></span>
+                <p class="product__offers-title">Доставка по РБ</p>
+              </li>
+            </ul>
+            <button class="product__button button">В корзину</button>
+          </div>
+        </div>
+      </article>
+    </div>
   </section>
 </template>
 

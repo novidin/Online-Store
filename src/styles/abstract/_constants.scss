@@ -13,6 +13,7 @@ $color-background-filters: #ead2d3;
 
 $color-font-regular: #b3b3b4;
 $color-font-regular-light: #ffffff;
+$color-font-regular-dark: #3d3d3d;
 $color-font-card: #666666;
 $color-font-input: #3d3d3d;
 $color-font-title: #000000;
@@ -25,6 +26,12 @@ $color-font-link-hover: $color-primary-hover;
 $color-border-input: #e5e5e5;
 
 /* ========= Filter (SVG) ========= */
+
+$filter-rating-good: brightness(0) saturate(100%) invert(67%) sepia(69%) saturate(496%) hue-rotate(63deg) brightness(86%) contrast(84%);
+
+$filter-rating-medium: brightness(0) saturate(100%) invert(89%) sepia(22%) saturate(6115%) hue-rotate(345deg) brightness(103%) contrast(94%);
+
+$filter-rating-bad: brightness(0) saturate(100%) invert(8%) sepia(69%) saturate(5764%) hue-rotate(345deg) brightness(143%) contrast(102%);
 
 $filter-rsschool-icon-hover: brightness(0) saturate(100%) invert(13%) sepia(0%) saturate(179%) hue-rotate(159deg) brightness(94%) contrast(83%);
 

@@ -40,7 +40,10 @@
   }
 }
 
-.search__button {
+.search__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 30%;
 
   @include media-md {
@@ -54,4 +57,14 @@
   @include media-2sm {
     width: 100%;
   }
+}
+
+.search__button-search {
+  width: 75%;
+  height: 100%;
+}
+
+.search__button-copy {
+  width: 20%;
+  height: 100%;
 }

@@ -1,7 +1,6 @@
 %layout {
-  max-width: $content-max-width;
-  margin: $indent $indent*0.5;
-  padding: $indent 0;
+  margin: $indent*0.5 0;
+  padding: $indent $indent*0.5;
   background-color: $color-background-element;
   border-radius: $border-radius-layout;
   transition: $delay*2;

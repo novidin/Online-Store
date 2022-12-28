@@ -178,3 +178,15 @@ $offers-icons: (
   margin: 0 $indent*0.125;
   background-image: url("../assets/icons/arrow-down.svg");
 }
+
+/* ============= Link Nav ========== */
+
+.icon--link-navigation {
+  @include square-size(1.6rem);
+  background-image: url("../assets/icons/arrow-next.svg");
+}
+
+.icon--copy {
+  @include square-size(2.4rem);
+  background-image: url("../assets/icons/copy.svg");
+}

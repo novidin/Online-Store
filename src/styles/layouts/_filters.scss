@@ -1,10 +1,9 @@
 .filters {
-  width: $content-medium-width;
-  margin: $indent*0.5 0;
+  width: $content-max-width;
   padding: $indent*0.5;
   transition: $delay*2;
 
-  @include media-lg {
+  @include media-xl {
     width: 100%;
   }
 }

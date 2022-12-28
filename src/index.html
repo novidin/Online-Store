@@ -50,8 +50,8 @@
   </nav>
 </header>
 <main class="main">
-  <section class="about-us">
-    <div class="wrapper">
+  <div class="wrapper">
+    <section class="about-us">
       <h1 class="about-us__header">Нам доверяют более 500 000 клиентов</h1>
       <ul class="about-us__list">
         <li class="about-us__item">
@@ -85,10 +85,8 @@
           <p class="about-us__description">Обслуживание в удобное для вас время</p>
         </li>
       </ul>
-    </div>
-  </section>
-  <section class="awards">
-    <div class="wrapper">
+    </section>
+    <section class="awards">
       <h2 class="awards__header">Награды</h2>
       <div class="awards__container">
         <img class="awards__image" src="./assets/icons/masmi.svg" alt="Masmi awards image">
@@ -96,8 +94,8 @@
           центра MASMI. Опрос проводился в марте 2022 года среди городского населения Беларуси в возрасте от 18 до 64
           лет.</p>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </main>
 <footer class="footer">
   <div class="footer__container">
@@ -247,7 +245,8 @@
 
 <template id="filters">
   <div class="filters">
-    <button id="filtersButton" class="button button--accent filters__button">Фильтры <span class="icon icon--arrow-down"></span></button>
+    <button id="filtersButton" class="button button--accent filters__button">Фильтры <span
+      class="icon icon--arrow-down"></span></button>
     <div class="filters__grid">
       <div class="select filters__cell">
         <span class="select__title">Ширина / Профиль / Диаметр</span>
@@ -343,7 +342,12 @@
                type="search"
                placeholder="Поиск по бренду и модели"
                autocomplete="off">
-        <button id="searchButton" class="button search__button">Найти</button>
+        <div class="search__buttons">
+          <button id="searchButton" class="button search__button-search">Найти</button>
+          <button id="copyButton" class="button search__button-copy">
+            <span class="icon icon--copy"></span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -367,16 +371,16 @@
     </div>
     <p class="catalog__title">Найдено: <span class="catalog__count">101</span></p>
     <div class="catalog__container">
-      <article class="product">
+      <article class="product product--list-view">
         <div class="product__column product__column--main">
-          <div class="product__title">
+          <div id="productTitle" class="product__title">
             <h3 class="product__brand">Imperial</h3>
             <span class="product__model">Snowdragon HP</span>
             <span class="product__sizes">145/70 R13</span>
           </div>
           <img class="product__image"
-                 src="https://autoset.by/upload/resize_cache/uf/722/500_685_1/7221d4a1f25fdfd0cab90fb97623455a.jpg"
-                 alt="Imperail Snowdragon HP">
+               src="https://autoset.by/upload/resize_cache/uf/722/500_685_1/7221d4a1f25fdfd0cab90fb97623455a.jpg"
+               alt="Imperail Snowdragon HP">
         </div>
         <div class="product__column product__column--short">
           <ul class="product__labels-list">
@@ -423,11 +427,12 @@
             </li>
           </ul>
         </div>
-        <div class="product__column">
-          <p class="product__price">400 руб</p>
-          <div>
+        <div class="product__column product__column--price">
+          <div class="product__subtitle">
+            <p class="product__price">400 руб</p>
             <p class="product__count">В наличии: 14 шт.</p>
-            <ul class="product__offers-list">
+          </div>
+          <ul class="product__offers-list">
               <li class="product__offers-item">
                 <span class="product__offers-icon icon icon--pay"></span>
                 <p class="product__offers-title">Оплата частями</p>
@@ -441,12 +446,119 @@
                 <p class="product__offers-title">Доставка по РБ</p>
               </li>
             </ul>
-            <button class="product__button button">В корзину</button>
-          </div>
+          <button class="product__button button">В корзину</button>
         </div>
       </article>
     </div>
   </section>
+</template>
+
+<template id="product">
+  <div class="link-navigation">
+    <ul class="link-navigation__list">
+      <li class="link-navigation__item">
+        <span class="link-navigation__title">Шины</span>
+        <span class="icon icon--link-navigation"></span>
+      </li>
+      <li class="link-navigation__item">
+        <span class="link-navigation__title">Летние</span>
+        <span class="icon icon--link-navigation"></span>
+      </li>
+      <li class="link-navigation__item">
+        <span class="link-navigation__title">Imperial</span>
+        <span class="icon icon--link-navigation"></span>
+      </li>
+      <li class="link-navigation__item">
+        <span class="link-navigation__title link-navigation__title--active">Snowdragon HP</span>
+      </li>
+    </ul>
+  </div>
+  <div class="catalog">
+    <div class="product product--page-view">
+      <div class="product__column product__column--main">
+        <div class="product__header">
+          <div class="product__title">
+            <h3 class="product__brand">Imperial</h3>
+            <span class="product__model">Snowdragon HP</span>
+            <span class="product__sizes">145/70 R13</span>
+          </div>
+          <div class="product__subtitle--top">
+            <p class="product__price">400 руб</p>
+            <p class="product__count">В наличии: 14 шт.</p>
+          </div>
+        </div>
+        <img class="product__image"
+             src="https://autoset.by/upload/resize_cache/uf/722/500_685_1/7221d4a1f25fdfd0cab90fb97623455a.jpg"
+             alt="Imperail Snowdragon HP">
+      </div>
+      <div class="product__column">
+        <ul class="product__labels-list">
+          <li class="product__labels-item">
+            <span class="product__season icon icon--winter"></span>
+            <span class="product__labels-title">Зимние</span>
+          </li>
+          <li class="product__labels-item">
+            <p class="product__rating">
+              <span class="icon icon--star rating rating--good"></span>
+              <span class="rating__value rating--good">5.0</span>
+            </p>
+            <span class="product__labels-title">Рейтинг</span>
+          </li>
+          <li class="product__labels-item">
+            <span class="product__comments">1</span>
+            <span class="product__labels-title">Комент</span>
+          </li>
+        </ul>
+        <ul class="product__features-list">
+          <li class="product__features-item">
+            <span class="product__features-title">Глубина протектора</span>
+            <span class="product__features-value">9.0 мм</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Вес</span>
+            <span class="product__features-value">5.3 кг</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Эксплуатация</span>
+            <span class="product__features-value">Снег и слякоть</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Защита диска</span>
+            <span class="product__features-value">Нет</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Индекс нагрузки</span>
+            <span class="product__features-value">71 (до 345 кг)</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Индекс скорости</span>
+            <span class="product__features-value">Т (до 190 км/ч)</span>
+          </li>
+        </ul>
+      </div>
+      <div class="product__column product__column--price">
+        <div class="product__subtitle">
+          <p class="product__price">400 руб</p>
+          <p class="product__count">В наличии: 14 шт.</p>
+        </div>
+        <ul class="product__offers-list">
+          <li class="product__offers-item">
+            <span class="product__offers-icon icon icon--pay"></span>
+            <p class="product__offers-title">Оплата частями</p>
+          </li>
+          <li class="product__offers-item">
+            <span class="product__offers-icon icon icon--guarantee"></span>
+            <p class="product__offers-title">Официальная гарантия</p>
+          </li>
+          <li class="product__offers-item">
+            <span class="product__offers-icon icon icon--shipping"></span>
+            <p class="product__offers-title">Доставка по РБ</p>
+          </li>
+        </ul>
+        <button class="product__button button">В корзину</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 </body>

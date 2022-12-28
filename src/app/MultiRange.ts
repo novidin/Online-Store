@@ -7,6 +7,8 @@ class MultiRange {
   }
 
   start():void {
+
+    // TODO Fix multi range start method
 /*    const gap = 1000;
 
     this.rangeInputsDOM.forEach((element: HTMLInputElement):void => {

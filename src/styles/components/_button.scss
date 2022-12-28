@@ -1,0 +1,27 @@
+.button {
+  @include font($font-family-base, map-get($font-size, m));
+  padding: 0.75rem;
+  color: $color-font-button;
+  background-color: $color-primary;
+  border-radius: $border-radius-button;
+  border: none;
+  transition: $delay*2;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-primary-hover;
+  }
+
+  &--accent {
+    background-color: $color-accent;
+
+    &:hover {
+      background-color: $color-accent-hover;
+    }
+  }
+
+  @include media-md {
+    @include font($font-family-base, map-get($font-size, s));
+  }
+}

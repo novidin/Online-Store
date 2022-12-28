@@ -1,0 +1,27 @@
+.select {
+  display: flex;
+  flex-direction: column;
+  transition: $delay*2;
+}
+
+.select__title {
+  @extend %filter-header;
+}
+
+.select__select {
+  @include font($font-family-base, map-get($font-size, m));
+  @extend %filter-border;
+  height: $height-filter-element;
+  padding: $indent*0.25;
+  color: $color-font-input;
+  cursor: pointer;
+}
+
+.select__option {
+  padding: $indent*0.25;
+  font-size: map-get($font-size, m);
+
+  &:checked {
+    color: $color-primary;
+  }
+}

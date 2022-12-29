@@ -1,5 +1,5 @@
 import { IProducts, IProduct, IFilterItems, IReqParams } from "../Types/index";
-import { products } from "./data";
+import products from "./data.json";
 
 class DataStorage {
 
@@ -15,38 +15,88 @@ class DataStorage {
     const array: IProduct[] = [];
 
     for (const key in products) {
-      const newObjProduct: IProduct = Object.assign({name: key}, products[key]);
+      const newObjParams = {
+        name: key,
+        size: `${products[key].sizes.width}/${products[key].sizes.profile} R${products[key].sizes.radius}`
+      }
+      const newObjProduct: IProduct = Object.assign(newObjParams, products[key]);
       array.push(newObjProduct);
     }
-
+    console.log(array)
     return array;
   }
 
-  getSeasons(): IFilterItems {
+  // getSeasons(): IFilterItems {
+  //   const result: IFilterItems = {};
+
+  //   this.products.forEach((product) => {
+  //     if(product.season in result) {
+  //       result[product.season].total += 1;
+  //     } else {
+  //       result[product.season] = {curr: 0, total: 1};
+  //     }
+  //   })
+
+  //   return result;
+  // }
+
+  // getCurrSeasons(): IFilterItems {
+  //   const result: IFilterItems = Object.assign({}, this.getSeasons());
+
+  //   this.currentProducts.forEach((product) => {
+  //     if(product.season in result) {
+  //       result[product.season].curr += 1;
+  //     }
+  //   })
+
+  //   return result;
+  // }
+
+  // getBrands(): IFilterItems {
+  //   const result: IFilterItems = {};
+
+  //   this.products.forEach((product) => {
+  //     if(product.brand in result) {
+  //       result[product.brand].total += 1;
+  //     } else {
+  //       result[product.brand] = {curr: 0, total: 1};
+  //     }
+  //   })
+
+  //   return result;
+  // }
+
+  // getSizes(): IFilterItems {
+  //   const result: IFilterItems = {};
+
+  //   this.products.forEach((product) => {
+  //     if(product.size in result) {
+  //       result[product.size].total += 1;
+  //     } else {
+  //       result[product.size] = {curr: 0, total: 1};
+  //     }
+  //   })
+
+  //   return result;
+  // }
+/*********************************TEST */
+  getValuesByKey(key: string) {
     const result: IFilterItems = {};
-
+    const prodKey = key as keyof IProduct;
     this.products.forEach((product) => {
-      if(product.season in result) {
-        result[product.season].total += 1;
+      const value = product[prodKey].toString();
+
+      if(value in result) {
+        result[value].total += 1;
       } else {
-        result[product.season] = {curr: 0, total: 1};
+        result[value] = {curr: 0, total: 1};
       }
     })
 
     return result;
   }
 
-  getCurrSeasons(): IFilterItems {
-    const result: IFilterItems = Object.assign({}, this.getSeasons());
-
-    this.currentProducts.forEach((product) => {
-      if(product.season in result) {
-        result[product.season].curr += 1;
-      }
-    })
-
-    return result;
-  }
+/**TEST**************************************/
 
   getCurrProducts() {
     return this.currentProducts;

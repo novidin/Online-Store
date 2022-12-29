@@ -1,0 +1,60 @@
+<button id="filtersButton" class="button button--accent filters__button">Фильтры <span
+  class="icon icon--arrow-down"></span></button>
+<div class="filters__grid">
+  <div id="sizeSelect" class="select filters__cell">
+    <span class="select__title">Ширина / Профиль / Диаметр</span>
+  </div>
+  <div id="brandSelect" class="select filters__cell">
+    <span class="select__title">Производитель</span>
+  </div>
+  <div id="seasonList" class="season filters__cell filters__cell--v2">
+  </div>
+  <div id="multiRangePrice" class="multi-range filters__cell filters__cell--v2">
+    <span class="multi-range__header">Цена</span>
+    <div class="multi-range__fields">
+      <input class="multi-range__value input-min" type="number" placeholder="Мин" value="2500">
+      <span class="multi-range__separator">—</span>
+      <input class="multi-range__value input-max" type="number" placeholder="Макс" value="7500">
+    </div>
+    <div class="multi-range__slider">
+      <div id="multiRangePriceProgress" class="multi-range__progress"></div>
+    </div>
+    <div class="multi-range__ranges">
+      <input class="multi-range__range range-min" type="range" min="0" max="10000" value="2500" step="100">
+      <input class="multi-range__range range-max" type="range" min="0" max="10000" value="7500"
+             step="100">
+    </div>
+  </div>
+  <div id="multiRangeCount" class="multi-range filters__cell filters__cell--v2">
+    <span class="multi-range__header">Кол-во</span>
+    <div class="multi-range__fields">
+      <input class="multi-range__value input-min" type="number" placeholder="Мин" value="2500">
+      <span class="multi-range__separator">—</span>
+      <input class="multi-range__value input-max" type="number" placeholder="Макс" value="7500">
+    </div>
+    <div class="multi-range__slider">
+      <div id="multiRangeCountProgress" class="multi-range__progress"></div>
+    </div>
+    <div class="multi-range__ranges">
+      <input class="multi-range__range range-min" type="range" min="0" max="10000" value="2500" step="100">
+      <input class="multi-range__range range-max" type="range" min="0" max="10000" value="7500" step="100">
+    </div>
+  </div>
+  <button id="resetButton" class="filters__cell--button button button--accent">Сброс</button>
+</div>
+<div class="search">
+  <span class="search__header">Поиск</span>
+  <div class="search__container">
+    <input id="searchInput"
+           class="search__input"
+           type="search"
+           placeholder="Поиск по бренду и модели"
+           autocomplete="off">
+    <div class="search__buttons">
+      <button id="searchButton" class="button search__button-search">Найти</button>
+      <button id="copyButton" class="button search__button-copy">
+        <span class="icon icon--copy"></span>
+      </button>
+    </div>
+  </div>
+</div>

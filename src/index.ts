@@ -1,5 +1,5 @@
 import App from './app/App';
-import MultiRange from './app/MultiRange';
+// import MultiRange from './app/MultiRange';
 import './styles/main.scss';
 
 const app = new App();
@@ -7,7 +7,7 @@ app.start();
 
 
 /* ===================================================== */
-
+/*
 window.onload = ():void => {
   // Хедер, адресс магазинов (для показа 404)
   const addressesDOM = document.getElementById('addresses') as HTMLElement;
@@ -98,3 +98,4 @@ window.onload = ():void => {
   renderNotFoundPage();
   renderTiresPage();
 }
+*/

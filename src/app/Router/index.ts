@@ -69,10 +69,11 @@ class Router {
     window.addEventListener('DOMContentLoaded', this.loadPage.bind(this));
     window.addEventListener('click', (e) => {
       if (!e.target) return;
-      const target = e.composedPath()[0] as HTMLAnchorElement;
-      if (target.matches('[data-local-link')) {
+      const target = e.composedPath()[0]  as HTMLElement;
+      const link = target.closest('a');
+      if (link?.matches('[data-local-link')) {
         e.preventDefault();
-        this.goTo(target.href);
+        this.goTo(link.href);
       }
     })
   }

@@ -1,9 +1,9 @@
-import App from './app/App';
+// import App from './app/App';
 import MultiRange from './app/MultiRange';
 import './styles/main.scss';
 
-const app = new App();
-app.start();
+// const app = new App();
+// app.start();
 
 
 /* ===================================================== */
@@ -14,6 +14,7 @@ window.onload = ():void => {
   const mainDOM = document.querySelector('.main') as HTMLElement;
   // Вкладка шины
   const tiresDOM = document.getElementById('tires') as HTMLElement;
+  const cartLinkDOM = document.getElementById('cartLink') as HTMLElement;
 
   const renderNotFoundPage = ():void => {
     addressesDOM.addEventListener('click', ():void => {
@@ -89,6 +90,27 @@ window.onload = ():void => {
     });
   }
 
+  const renderCartPage = (): void => {
+    cartLinkDOM.addEventListener('click', () => {
+      deleteChildsInMain();
+
+      const isCartEmpty = true;
+
+      if (isCartEmpty) {
+        const cartTemplateDOM = document.getElementById('cart') as HTMLTemplateElement;
+        const cart = cartTemplateDOM.content.cloneNode(true) as DocumentFragment;
+
+        mainDOM.append(cart);
+      } else {
+        const emptyCartMessageDOM = document.createElement('div') as HTMLElement;
+        emptyCartMessageDOM.classList.add('cart__empty');
+        emptyCartMessageDOM.innerHTML = `<div class="wrapper"><p class="cart__empty-title">Увы, но ваша корзина пуста</p></div>`;
+
+        mainDOM.append(emptyCartMessageDOM);
+      }
+    });
+  }
+
   const deleteChildsInMain = ():void => {
     while (mainDOM.firstChild) {
       mainDOM.removeChild(mainDOM.firstChild);
@@ -97,4 +119,5 @@ window.onload = ():void => {
 
   renderNotFoundPage();
   renderTiresPage();
+  renderCartPage();
 }

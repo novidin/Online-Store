@@ -23,7 +23,7 @@
             <span class="icon icon--phone"></span>
             <span class="menu__title">686-86-86</span>
           </li>
-          <li class="menu__item">
+          <li id="cartLink" class="menu__item">
             <span class="icon icon--basket"></span>
             <span class="menu__title">Корзина</span>
             <span id="basketCount" class="menu__count">2</span>
@@ -433,19 +433,19 @@
             <p class="product__count">В наличии: 14 шт.</p>
           </div>
           <ul class="product__offers-list">
-              <li class="product__offers-item">
-                <span class="product__offers-icon icon icon--pay"></span>
-                <p class="product__offers-title">Оплата частями</p>
-              </li>
-              <li class="product__offers-item">
-                <span class="product__offers-icon icon icon--guarantee"></span>
-                <p class="product__offers-title">Официальная гарантия</p>
-              </li>
-              <li class="product__offers-item">
-                <span class="product__offers-icon icon icon--shipping"></span>
-                <p class="product__offers-title">Доставка по РБ</p>
-              </li>
-            </ul>
+            <li class="product__offers-item">
+              <span class="product__offers-icon icon icon--pay"></span>
+              <p class="product__offers-title">Оплата частями</p>
+            </li>
+            <li class="product__offers-item">
+              <span class="product__offers-icon icon icon--guarantee"></span>
+              <p class="product__offers-title">Официальная гарантия</p>
+            </li>
+            <li class="product__offers-item">
+              <span class="product__offers-icon icon icon--shipping"></span>
+              <p class="product__offers-title">Доставка по РБ</p>
+            </li>
+          </ul>
           <button class="product__button button">В корзину</button>
         </div>
       </article>
@@ -558,6 +558,139 @@
         <button class="product__button button">В корзину</button>
       </div>
     </div>
+  </div>
+</template>
+
+<template id="cart">
+  <div class="pagination"></div>
+  <div class="catalog">
+    <article class="product product--cart-view">
+      <div class="product__column product__column--main">
+        <div class="product__title">
+          <h3 class="product__brand">Imperial</h3>
+          <span class="product__model">Snowdragon HP</span>
+          <span class="product__sizes">145/70 R13</span>
+        </div>
+        <img class="product__image"
+             src="https://autoset.by/upload/resize_cache/uf/722/500_685_1/7221d4a1f25fdfd0cab90fb97623455a.jpg"
+             alt="Imperail Snowdragon HP">
+      </div>
+      <div class="product__column product__column--short">
+        <ul class="product__labels-list">
+          <li class="product__labels-item">
+            <span class="product__season icon icon--winter"></span>
+            <span class="product__labels-title">Зимние</span>
+          </li>
+          <li class="product__labels-item">
+            <p class="product__rating">
+              <span class="icon icon--star rating rating--good"></span>
+              <span class="rating__value rating--good">5.0</span>
+            </p>
+            <span class="product__labels-title">Рейтинг</span>
+          </li>
+          <li class="product__labels-item">
+            <span class="product__comments">1</span>
+            <span class="product__labels-title">Комент</span>
+          </li>
+        </ul>
+        <ul class="product__features-list">
+          <li class="product__features-item">
+            <span class="product__features-title">Глубина протектора</span>
+            <span class="product__features-value">9.0 мм</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Вес</span>
+            <span class="product__features-value">5.3 кг</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Эксплуатация</span>
+            <span class="product__features-value">Снег и слякоть</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Защита диска</span>
+            <span class="product__features-value">Нет</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Индекс нагрузки</span>
+            <span class="product__features-value">71 (до 345 кг)</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Индекс скорости</span>
+            <span class="product__features-value">Т (до 190 км/ч)</span>
+          </li>
+        </ul>
+      </div>
+      <div class="product__column product__column--price">
+        <div class="product__delete-container">
+          <span class="product__delete">Удалить</span>
+        </div>
+        <ul class="product__summary-list">
+          <li class="product__summary-item">
+            <span class="product__summary-title">Цена за шт.</span>
+            <span class="product__summary-value">400 руб</span>
+          </li>
+          <li class="product__summary-item">
+            <span class="product__summary-title">Количество</span>
+            <div class="product__summary-count">
+              <button class="button button--accent product__summary-button">+</button>
+              <span class="product__summary-value">1</span>
+              <button class="button button--accent product__summary-button">-</button>
+            </div>
+          </li>
+          <li class="product__summary-item">
+            <span class="product__summary-title">Стоимость</span>
+            <span class="product__summary-value product__summary-value--accent">400 руб</span>
+          </li>
+        </ul>
+        <button class="button button--accent product__details-button">Детали <span
+          class="icon icon--arrow-down"></span></button>
+      </div>
+      <div class="product__column product__column--short-reserve">
+        <ul class="product__labels-list">
+          <li class="product__labels-item">
+            <span class="product__season icon icon--winter"></span>
+            <span class="product__labels-title">Зимние</span>
+          </li>
+          <li class="product__labels-item">
+            <p class="product__rating">
+              <span class="icon icon--star rating rating--good"></span>
+              <span class="rating__value rating--good">5.0</span>
+            </p>
+            <span class="product__labels-title">Рейтинг</span>
+          </li>
+          <li class="product__labels-item">
+            <span class="product__comments">1</span>
+            <span class="product__labels-title">Комент</span>
+          </li>
+        </ul>
+        <ul class="product__features-list">
+          <li class="product__features-item">
+            <span class="product__features-title">Глубина протектора</span>
+            <span class="product__features-value">9.0 мм</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Вес</span>
+            <span class="product__features-value">5.3 кг</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Эксплуатация</span>
+            <span class="product__features-value">Снег и слякоть</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Защита диска</span>
+            <span class="product__features-value">Нет</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Индекс нагрузки</span>
+            <span class="product__features-value">71 (до 345 кг)</span>
+          </li>
+          <li class="product__features-item">
+            <span class="product__features-title">Индекс скорости</span>
+            <span class="product__features-value">Т (до 190 км/ч)</span>
+          </li>
+        </ul>
+      </div>
+    </article>
   </div>
 </template>
 

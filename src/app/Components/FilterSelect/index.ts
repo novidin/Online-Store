@@ -4,34 +4,45 @@ import dataStorage from "../../Storage";
 
 class FilterSelect {
 
-  private keySearch;
-  private title;
+  private keySearch: string;
+  private title: string;
+  private select: HTMLSelectElement;
+  private updateCallback: <T>(thisObj: T) => void;
 
-  constructor(keySearch: string, title: string) {
+  constructor(keySearch: string, title: string, updateCallback: <T>(thisObj: T) => void) {
     this.keySearch = keySearch;
     this.title = title;
+    this.updateCallback = updateCallback;
+    this.select = document.createElement('select');
+    this.select.className = 'select__select';
   }
 
   getFilterDOM() {
-    const sizesValues = dataStorage.getValuesByKey(this.keySearch);
-    const select = document.createElement('select');
-    select.className = 'select__select';
+    this.update();
+    return this.select;
+  }
+
+  update() {
+    const sizesValues = dataStorage.getValuesByKey(this.keySearch, true);
+    //this.select.remove()
+    this.select.innerHTML = ``;
+
     const defaultOption = document.createElement('option');
     defaultOption.hidden = true;
     defaultOption.textContent = this.title;
-    select.appendChild(defaultOption);
+    this.select.appendChild(defaultOption);
     const optionAll = document.createElement('option');
     optionAll.textContent = 'Все';
     optionAll.value = '';
     optionAll.className = 'select__option';
-    select.appendChild(optionAll);
+    this.select.appendChild(optionAll);
 
     for (const key in sizesValues) {
       const option = document.createElement('option');
-      option.textContent = key;
+      option.textContent = `${key}(${sizesValues[key].curr}/${sizesValues[key].total})`;
       option.value = key;
       option.className = 'select__option';
-      select.appendChild(option);
+      this.select.appendChild(option);
     }
 
     let value = '';
@@ -42,18 +53,17 @@ class FilterSelect {
       if (routerParams) {
         value = routerParams[this.keySearch][0];
       }
-      select.value = value
+      this.select.value = value
     }
 
-    select.onchange = () => {
-      this.route(select.value)
+    this.select.onchange = () => {
+      this.route(this.select.value)
     }
-
-    return select;
   }
 
   route(param: string): void {
     router.setReqParams(this.keySearch, param)
+    this.updateCallback(this);
   }
 }
 

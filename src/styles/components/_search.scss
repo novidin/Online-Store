@@ -45,6 +45,7 @@
   justify-content: space-between;
   align-items: center;
   width: 30%;
+  position: relative;
 
   @include media-md {
     width: 47%;
@@ -67,4 +68,17 @@
 .search__button-copy {
   width: 20%;
   height: 100%;
+  transition: $delay*2;
+
+  &_active {
+    position: absolute;
+    right: 0;
+    top: 0;
+    box-shadow: 2px 2px 0px #e8fff7, -2px -2px 0px white;
+  }
+
+  &_enlarged {
+    width: 50%;
+    transform: scale(1.1);
+  }
 }

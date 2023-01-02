@@ -20,6 +20,13 @@ class Products extends HTMLElement {
   render() {
     this.wrapper.innerHTML = `<p>Found ${this.products.length} </p>`;
 
+    // const infoWrapper = document.createElement('div');
+    // infoWrapper.className = 'catalog__info';
+    // this.wrapper.appendChild(infoWrapper);
+    // const switchCardViewButton = document.createElement('button');
+    // infoWrapper.appendChild(switchCardViewButton);
+
+
     this.products.forEach((product) => {
       const itemWrapper = document.createElement('div');
       const title = document.createElement('h3');

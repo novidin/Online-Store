@@ -5,13 +5,15 @@ class Router {
 
   private routes;
   private reqParams;
+  // private currentR;
 
   constructor() {
     this.routes = routes;
+    // this.currentPage = null;
     this.reqParams = {};
   }
 
-  private loadPage(): void {
+  private loadPage(refresh?: boolean): void {
     const urlPathname = location.pathname;
     const correctRoutes = routes.filter((route) => route.path === urlPathname);
     const reqParams = this.getReqParamsAll();
@@ -21,15 +23,27 @@ class Router {
       this.goTo('/404');
     } else {
       const currRoute = correctRoutes[0];
-
-      document.body.innerHTML = '';
-      currRoute.page.render(reqParams);
+      if (refresh && Object.keys(reqParams).length) {
+        console.log('reqParams', Object.keys(reqParams).length)
+        currRoute.page.update(reqParams);
+      } else {
+        document.body.innerHTML = '';
+        currRoute.page.render(reqParams);
+      }
+      // document.body.innerHTML = '';
+      // currRoute.page.render(reqParams);
     }
   }
 
   goTo(href: string): void {
+    const currPath = location.pathname;
     history.pushState('', '', href);
-    this.loadPage();
+    const newPath = location.pathname;
+    if (newPath !== currPath) {
+      this.loadPage();
+    } else {
+      this.loadPage(true);
+    }
   }
 
   getReqParamsAll() {
@@ -51,13 +65,18 @@ class Router {
     this.goTo(newURL.toString());
   }
 
+  resetReqParams() {
+    this.reqParams = {};
+    this.goTo(location.pathname);
+  }
+
   private convertReqParamsToObj(reqParams: URLSearchParams) {
     const reqParamsObj: IReqParams = {};
 
     reqParams.forEach((param, i) => {
       if (param.split(',').filter((param) => param).length > 0) {
         reqParamsObj[i] = param.split(',');
-        }
+      }
     })
     return reqParamsObj;
   }
@@ -65,11 +84,16 @@ class Router {
 
 
   start(): void {
-    window.addEventListener('popstate', this.loadPage.bind(this));
-    window.addEventListener('DOMContentLoaded', this.loadPage.bind(this));
+    window.addEventListener('popstate', () => (
+      this.loadPage()
+    ));
+    window.addEventListener('DOMContentLoaded', () => (
+      this.loadPage()
+    ));
+
     window.addEventListener('click', (e) => {
       if (!e.target) return;
-      const target = e.composedPath()[0]  as HTMLElement;
+      const target = e.composedPath()[0] as HTMLElement;
       const link = target.closest('a');
       if (link?.matches('[data-local-link')) {
         e.preventDefault();

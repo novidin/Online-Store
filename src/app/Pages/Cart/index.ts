@@ -13,6 +13,10 @@ class CartPage {
       <h1>Cart Page</h1>
     `
   }
+
+  update(reqParams: IReqParams) {
+    this.render(reqParams)
+  }
 }
 
 export default CartPage;

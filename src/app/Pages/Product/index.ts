@@ -32,6 +32,10 @@ class ProductPage {
     }
     document.body.appendChild(wrapper);
   }
+
+  update(reqParams: IReqParams) {
+    this.render(reqParams)
+  }
 }
 
 export default ProductPage;

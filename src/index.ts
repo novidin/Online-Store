@@ -1,5 +1,5 @@
 import App from './app/App';
-// import MultiRange from './app/MultiRange';
+
 import './styles/main.scss';
 
 const app = new App();

@@ -1,6 +1,8 @@
 import dataStorage from "../../Storage";
 import { seasonNames } from "../../Storage/consts";
 import { IProduct } from "../../Types";
+import cardViewIcon from '../../../assets/icons/card-view.svg';
+import SortSelect from "../SortSelect";
 
 
 class SectionProducts {
@@ -16,6 +18,16 @@ class SectionProducts {
     title.className = 'catalog__title';
     title.innerHTML = `Найдено: <span class="catalog__count">${productsData.length}</span>`;
     section.appendChild(title);
+
+    const infoWrapper = document.createElement('div');
+    infoWrapper.className = 'catalog__info';
+    section.appendChild(infoWrapper);
+    const switchCardViewButton = document.createElement('button');
+    switchCardViewButton.className = 'button';
+    switchCardViewButton.innerHTML = `<img class="catalog__image" src="${cardViewIcon}" alt="Change view style">`;
+    infoWrapper.appendChild(switchCardViewButton);
+    const sortSelect = new SortSelect();
+    infoWrapper.appendChild(sortSelect.getHTML());
 
     const productsContainer = document.createElement('div');
     productsContainer.className = 'catalog__container';
@@ -120,6 +132,4 @@ class SectionProducts {
 
 }
 
-const sectionProducts = new SectionProducts();
-
-export default sectionProducts;
+export default SectionProducts;

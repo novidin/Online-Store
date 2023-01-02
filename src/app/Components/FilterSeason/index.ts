@@ -7,14 +7,22 @@ class FilterSeason {
 
   private seasonsVals: IFilterItems;
   private ul: HTMLUListElement;
+  private updateCallback: <T>(thisObj: T) => void;
 
-  constructor() {
+  constructor(updateCallback: <T>(thisObj: T) => void) {
     this.seasonsVals = dataStorage.getValuesByKey('season');
     this.ul = document.createElement('ul');
     this.ul.className = 'season__list';
+    this.updateCallback = updateCallback;
   }
 
   getFilterDOM(): HTMLUListElement {
+    this.update();
+    return this.ul;
+  }
+
+  update() {
+    this.seasonsVals = dataStorage.getValuesByKey('season');
     this.ul.innerHTML = '';
 
     for (const seasonKey in this.seasonsVals) {
@@ -52,7 +60,6 @@ class FilterSeason {
 
       this.ul.appendChild(li)
     }
-    return this.ul;
   }
 
    private getChecked(): string[] {
@@ -68,9 +75,10 @@ class FilterSeason {
 
   private route(): void {
     router.setReqParams('season', this.getChecked().join(','));
+    this.updateCallback(this);
   }
 }
 
-const filterSeason = new FilterSeason()
 
-export default filterSeason;
+
+export default FilterSeason;

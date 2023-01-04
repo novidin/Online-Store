@@ -31,51 +31,6 @@
 }
 
 
-// Navigation
-.footer-navigation {
-  display: flex;
-  justify-content: space-between;
-  row-gap: $indent*0.5;
-
-  @include media-md {
-    flex-wrap: wrap;
-  }
-}
-
-.footer-navigation__column {
-  @include media-md {
-    width: 50%;
-    text-align: center;
-  }
-}
-
-.footer-navigation__list {
-  padding: 0;
-  margin: $indent*0.5 0 0 0;
-  list-style: none;
-}
-
-.footer-navigation__link {
-  @include font($font-family-base, map-get($font-size, s), 140%);
-  color: $color-font-link;
-  transition: $delay*2;
-  text-decoration: none;
-  cursor: not-allowed;
-
-  &:hover {
-    color: $color-primary-hover;
-  }
-
-  @include media-sm {
-    font-size: map-get($font-size, xs);
-  }
-
-  @include media-2sm {
-    font-size: map-get($font-size, 2xs);
-  }
-}
-
-
 // Info
 .footer-info__text {
   @include font($font-family-base, map-get($font-size, m), 125%);

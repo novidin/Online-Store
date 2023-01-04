@@ -26,19 +26,14 @@
 }
 
 .cart__empty {
-  margin: $indent*2 auto;
-  text-align: center;
-  transition: $delay*2;
-}
-
-.cart__empty-title {
   @include font($font-family-base, map-get($font-size, xl), 100%, bold);
-  margin: $indent 0;
+  margin: $indent*3 auto;
+  text-align: center;
   color: $color-font-message;
   transition: $delay*2;
 
   @include media-md {
     font-size: map-get($font-size, l);
-    margin: $indent*0.5 0;
+    margin: $indent*2 auto;
   }
 }

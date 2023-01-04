@@ -123,8 +123,8 @@ window.onload = ():void => {
 
       } else {
         const emptyCartMessageDOM = document.createElement('div') as HTMLElement;
-        emptyCartMessageDOM.classList.add('cart__empty');
-        emptyCartMessageDOM.innerHTML = `<div class="wrapper"><p class="cart__empty-title">Увы, но ваша корзина пуста</p></div>`;
+        emptyCartMessageDOM.classList.add('cart');
+        emptyCartMessageDOM.innerHTML = `<p class="cart__empty">Ваша корзина пуста</p>`;
 
         mainDOM.append(emptyCartMessageDOM);
       }

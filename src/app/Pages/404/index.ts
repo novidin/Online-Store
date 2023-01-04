@@ -9,7 +9,7 @@ class Error404Page {
     if (reqParams.length) {
       router.goTo('/404');
     }
-    document.title = `Page not found`;
+    document.title = `Страница не найдена`;
 
     const main = document.createElement('main');
 

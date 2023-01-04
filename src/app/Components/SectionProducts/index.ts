@@ -3,25 +3,32 @@ import { seasonNames } from "../../Storage/consts";
 import { IProduct } from "../../Types";
 import cardViewIcon from '../../../assets/icons/card-view.svg';
 import SortSelect from "../SortSelect";
+import cartStorage from "../../Storage/Cart";
 
 
 class SectionProducts {
-  getSectionHTML() {
+
+  private section: HTMLElement;
+
+  constructor() {
+    this.section = document.createElement('section');
+  }
+
+  buildHTML() {
     const productsData = dataStorage.getCurrProducts()
-    const section = document.createElement('section');
-    section.innerHTML = '';
-    section.className = 'catalog';
+    this.section.innerHTML = '';
+    this.section.className = 'catalog';
     /**
      * TODO: insert views buttons and sort list
      */
     const title = document.createElement('p');
     title.className = 'catalog__title';
     title.innerHTML = `Найдено: <span class="catalog__count">${productsData.length}</span>`;
-    section.appendChild(title);
+    this.section.appendChild(title);
 
     const infoWrapper = document.createElement('div');
     infoWrapper.className = 'catalog__info';
-    section.appendChild(infoWrapper);
+    this.section.appendChild(infoWrapper);
     const switchCardViewButton = document.createElement('button');
     switchCardViewButton.className = 'button';
     switchCardViewButton.innerHTML = `<img class="catalog__image" src="${cardViewIcon}" alt="Change view style">`;
@@ -31,14 +38,17 @@ class SectionProducts {
 
     const productsContainer = document.createElement('div');
     productsContainer.className = 'catalog__container';
-    section.appendChild(productsContainer);
+    this.section.appendChild(productsContainer);
 
     productsData.forEach((product) => {
       const productCard = this.getProductCardHTML(product);
       productsContainer.appendChild(productCard);
     })
+  }
 
-    return section;
+  getSectionHTML() {
+    this.buildHTML();
+    return this.section;
   }
 
   getProductCardHTML(product: IProduct): HTMLElement {
@@ -123,11 +133,23 @@ class SectionProducts {
     </div>
     `;
     const cartButton = wrapper.querySelector('.button') as HTMLButtonElement;
+    if (cartStorage.isProductInCart(product.id)) {
+      cartButton.textContent = 'В корзине';
+      cartButton.style.backgroundColor = '#747b8f';
+    }
     cartButton.onclick = () => {
-      console.log('add to cart id: ' + product.id);
+      if (cartStorage.isProductInCart(product.id)) {
+        cartStorage.removeProduct(product.id);
+      } else {
+        cartStorage.addProduct(product.id);
+      }
+      const addToCartEvent = new Event('addedToCard', {bubbles: true});
+      cartButton.dispatchEvent(addToCartEvent);
+      this.buildHTML();
     }
     return wrapper;
   }
+
 
 
 }

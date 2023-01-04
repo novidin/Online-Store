@@ -53,4 +53,7 @@ export interface IFilterItems {
   [key: string]: { curr: number, total: number };
 }
 
-
+export interface ICartProduct {
+  id: string;
+  count: number;
+}

@@ -31,7 +31,6 @@ $menu-icons: (
 $navigation-icons: (
   tire: "../assets/icons/navigation/tire.svg",
   rim: "../assets/icons/navigation/rim.svg",
-  service: "../assets/icons/navigation/service.svg",
 );
 
 .icon {
@@ -54,8 +53,7 @@ $navigation-icons: (
 %navigation-icons-hover {
   $navigation-icons-hover: (
     tire: "../assets/icons/navigation/tire-hover.svg",
-    rim: "../assets/icons/navigation/rim-hover.svg",
-    service: "../assets/icons/navigation/service-hover.svg",
+    rim: "../assets/icons/navigation/rim-hover.svg"
   );
 
   .icon {

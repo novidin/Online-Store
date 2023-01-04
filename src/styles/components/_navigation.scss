@@ -40,10 +40,6 @@
   @include media-md {
     padding: 0 $indent*0.5;
   }
-
-  @include media-sm {
-    padding: 0 $indent*0.25;
-  }
 }
 
 .navigation__title {

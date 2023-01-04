@@ -10,22 +10,22 @@
   display: flex;
   align-items: center;
   transition: $delay*2;
-  cursor: pointer;
-
-  &--not-allowed {
-    cursor: not-allowed;
-  }
+  cursor: default;
 
   &--minor {
-    @include media-md {
+    @include media-sm {
       display: none;
     }
   }
 
-  &:hover {
-    @extend %basket-icon-hover;
-    .menu__title {
-      color: $color-font-link-hover;
+  &--active {
+    cursor: pointer;
+
+    &:hover {
+      @extend %basket-icon-hover;
+      .menu__title {
+        color: $color-font-link-hover;
+      }
     }
   }
 }

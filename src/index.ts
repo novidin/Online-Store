@@ -9,24 +9,10 @@ import './styles/main.scss';
 /* ===================================================== */
 
 window.onload = ():void => {
-  // Хедер, адресс магазинов (для показа 404)
-  const addressesDOM = document.getElementById('addresses') as HTMLElement;
   const mainDOM = document.querySelector('.main') as HTMLElement;
   // Вкладка шины
   const tiresDOM = document.getElementById('tires') as HTMLElement;
   const cartLinkDOM = document.getElementById('cartLink') as HTMLElement;
-
-  const renderNotFoundPage = ():void => {
-    addressesDOM.addEventListener('click', ():void => {
-      deleteChildsInMain();
-
-      const notFoundDOM = document.createElement('div') as HTMLElement;
-      notFoundDOM.classList.add('not-found');
-      notFoundDOM.innerHTML = `<div class="wrapper"><span class="not-found__image"></span><p class="not-found__title">Ой! Что-то пошло не так...</p></div>`;
-
-      mainDOM.append(notFoundDOM);
-    });
-  }
 
   const renderTiresPage = ():void => {
     tiresDOM.addEventListener('click', ():void => {
@@ -136,8 +122,7 @@ window.onload = ():void => {
       mainDOM.removeChild(mainDOM.firstChild);
     }
   };
-
-  renderNotFoundPage();
+  
   renderTiresPage();
   renderCartPage();
 }

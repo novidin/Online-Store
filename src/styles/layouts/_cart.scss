@@ -1,3 +1,30 @@
+.cart {
+  width: $content-max-width;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: $indent*0.5;
+  transition: $delay*2;
+
+  @include media-xl {
+    width: 100%;
+  }
+
+  @include media-md {
+    flex-direction: column-reverse;
+    gap: $indent;
+  }
+}
+
+.cart__catalog {
+  width: 66%;
+  transition: $delay*2;
+
+  @include media-md {
+    width: 100%;
+  }
+}
+
 .cart__empty {
   margin: $indent*2 auto;
   text-align: center;

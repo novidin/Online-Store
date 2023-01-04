@@ -101,6 +101,26 @@ window.onload = ():void => {
         const cart = cartTemplateDOM.content.cloneNode(true) as DocumentFragment;
 
         mainDOM.append(cart);
+
+        const orderingTemplateDOM = document.getElementById('ordering') as HTMLTemplateElement;
+        const ordering = orderingTemplateDOM.content.cloneNode(true) as DocumentFragment;
+
+        mainDOM.append(ordering);
+
+        const orderingButtonDOM = document.getElementById('orderingButton') as HTMLButtonElement;
+        const orderingDOM = document.querySelector('.ordering') as HTMLElement;
+        const shadowDOM = document.querySelector('.shadow') as HTMLElement;
+
+        orderingButtonDOM.addEventListener('click', () => {
+          orderingDOM.classList.add('ordering--active');
+          shadowDOM.classList.add('shadow--active');
+        });
+
+        shadowDOM.addEventListener('click', () => {
+          orderingDOM.classList.remove('ordering--active');
+          shadowDOM.classList.remove('shadow--active');
+        })
+
       } else {
         const emptyCartMessageDOM = document.createElement('div') as HTMLElement;
         emptyCartMessageDOM.classList.add('cart__empty');

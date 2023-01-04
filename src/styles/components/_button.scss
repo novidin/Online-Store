@@ -21,6 +21,17 @@
     }
   }
 
+  &--special {
+    color: $color-accent;
+    background-color: $color-background-element;
+    border: 2px solid $color-accent;
+
+    &:hover {
+      color: $color-background-element;
+      background-color: $color-accent;
+    }
+  }
+
   @include media-md {
     @include font($font-family-base, map-get($font-size, s));
   }

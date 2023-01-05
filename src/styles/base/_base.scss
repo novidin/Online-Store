@@ -19,6 +19,13 @@ body {
   height: 100vh;
 }
 
+h1 {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+}
+
 a {
 	text-decoration: none;
 }

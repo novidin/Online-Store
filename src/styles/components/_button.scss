@@ -1,5 +1,5 @@
 .button {
-  @include font($font-family-base, map-get($font-size, m));
+  @extend %media-control-element;
   padding: 0.75rem;
   color: $color-font-button;
   background-color: $color-primary;
@@ -21,7 +21,14 @@
     }
   }
 
-  @include media-md {
-    @include font($font-family-base, map-get($font-size, s));
+  &--special {
+    color: $color-accent;
+    background-color: $color-background-element;
+    border: 2px solid $color-accent;
+
+    &:hover {
+      color: $color-background-element;
+      background-color: $color-accent;
+    }
   }
 }

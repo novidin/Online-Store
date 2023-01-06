@@ -5,7 +5,7 @@
 }
 
 .multi-range__header {
-  @extend %filter-header;
+  @extend %subheader;
 }
 
 .multi-range__fields {
@@ -24,20 +24,18 @@
 
 .multi-range__value {
   @include font($font-family-base, map-get($font-size, s));
+  @extend %border-element;
   height: 2.5rem;
   width: 100%;
   text-align: center;
   color: $color-font-input;
-  border: 1px solid $color-border-input;
-  border-radius: $border-radius-element;
-  outline: none;
   cursor: pointer;
   -moz-appearance: textfield;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+  -webkit-appearance: textfield;
 }
 
 .multi-range__slider {

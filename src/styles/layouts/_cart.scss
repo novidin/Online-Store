@@ -1,0 +1,34 @@
+.cart {
+  @extend %block-width;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  @include media-md {
+    flex-direction: column;
+    gap: $indent;
+  }
+}
+
+.cart__catalog {
+  width: 66%;
+  transition: $delay*2;
+
+  @include media-md {
+    order: 3;
+    width: 100%;
+  }
+}
+
+.cart__empty {
+  @include font($font-family-base, map-get($font-size, xl), 100%, bold);
+  margin: $indent*3 auto;
+  text-align: center;
+  color: $color-font-message;
+  transition: $delay*2;
+
+  @include media-md {
+    font-size: map-get($font-size, l);
+    margin: $indent*2 auto;
+  }
+}

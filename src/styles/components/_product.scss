@@ -1,7 +1,6 @@
-/* ============= General ============ */
+/* ================= General ================= */
 
 .product {
-  width: 100%;
   padding: $indent*0.5 $indent*0.5 0 $indent*0.5;
   display: flex;
   flex-wrap: wrap;
@@ -19,28 +18,32 @@
   overflow: hidden;
   transition: $delay*2;
 
-  @include media-md {
-    width: 47%;
-    height: 25rem;
+  &--main {
+    position: relative;
   }
 
-  @include media-sm {
-    width: 100%;
-    height: 14rem;
+  &--short,
+  &--price {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: $indent*0.5;
   }
 }
 
-// Left column
+
+// ---------- Main column ----------
+
+.product__header {
+  margin: 0;
+}
+
 .product__title {
   display: flex;
   flex-direction: column;
   gap: $indent*0.25;
-  transition: $delay*2;
+  color: $color-font-regular-dark;
   cursor: default;
-
-  @include media-md {
-    gap: $indent*0.2;
-  }
 }
 
 .product__brand {
@@ -48,28 +51,25 @@
   font-weight: bold;
   margin: 0;
   text-transform: uppercase;
-
-  @include media-md {
-    font-size: map-get($font-size, m);
-  }
 }
 
 .product__model {
   @include font($font-family-base, map-get($font-size, m));
   margin: 0;
   color: $color-accent;
-  transition: $delay*2;
-
-  @include media-md {
-    font-size: map-get($font-size, s);
-  }
 }
 
 .product__sizes {
-  @include font($font-family-base, map-get($font-size, m), initial);
+  @include font($font-family-base, map-get($font-size, m));
+}
 
-  @include media-md {
-    font-size: map-get($font-size, s);
+.product__subtitle {
+  display: flex;
+  flex-direction: column;
+  gap: $indent*0.25;
+
+  &--top {
+    display: none;
   }
 }
 
@@ -77,8 +77,31 @@
   margin-top: $indent*0.5;
 }
 
+.product__miniatures-list {
+  margin: $indent*0.5 0 0 0;
+  padding: 0;
+  display: flex;
+  gap: $indent*0.25;
+  list-style: none;
+}
 
-// Center column
+.product__miniatures-item {
+  @include square-size(8rem);
+  padding: $indent*0.0625;
+  background-color: $color-background-element;
+  border: 1px solid $color-border-input;
+  border-radius: $border-radius-element;
+  transition: $delay*2;
+  overflow: hidden;
+  cursor: pointer;
+
+  &--active {
+    border: 1px solid $color-primary-hover;
+  }
+}
+
+// ---------- Short column ----------
+
 .product__labels-list {
   margin: 0;
   padding: 0;
@@ -91,6 +114,7 @@
 .product__labels-item {
   padding: $indent*0.25;
   width: 30%;
+  max-width: 8rem;
   height: 8rem;
   display: flex;
   flex-direction: column;
@@ -99,13 +123,10 @@
   border: 1px solid $color-border-input;
   border-radius: $border-radius-element;
   transition: $delay*2;
+  cursor: default;
 
   &:hover {
     border: 1px solid $color-primary-hover;
-  }
-
-  @include media-md {
-    @include square-size(7rem);
   }
 }
 
@@ -131,31 +152,24 @@
 }
 
 .product__features-list {
-  margin: $indent*0.5 0 0 0;
+  margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: $indent*0.25;
+  gap: $indent*0.125;
   list-style: none;
   cursor: default;
-
-  &--reserve {
-    display: none;
-  }
 }
 
 .product__features-item {
   @include font($font-family-base, map-get($font-size, xs));
   display: flex;
   justify-content: space-between;
-  transition: $delay*2;
+  padding: $indent*0.0625;
+  border-radius: $border-radius-element;
 
-  @include media-lg {
-    font-size: map-get($font-size, 2xs);
-  }
-
-  @include media-md {
-    font-size: map-get($font-size, xs);
+  &:nth-child(odd) {
+    background-color: #f5f5f5;
   }
 }
 
@@ -164,31 +178,20 @@
 }
 
 
-// Right column
+// ---------- Price column ----------
+
 .product__price {
   @include font($font-family-base, map-get($font-size, xl), initial, bold);
   margin: 0;
   text-align: right;
   color: $color-accent;
   cursor: default;
-
-  @include media-md {
-    font-size: map-get($font-size, l)
-  }
 }
 
 .product__count {
   @include font($font-family-base, map-get($font-size, s));
   text-align: right;
   cursor: default;
-
-  @include media-md {
-    font-size: map-get($font-size, xs);
-  }
-
-  @include media-sm {
-    font-size: map-get($font-size, 2xs);
-  }
 }
 
 .product__offers-list {
@@ -209,72 +212,130 @@
 }
 
 .product__offers-title {
-  @include font($font-family-base, map-get($font-size, sm));
+  @include font($font-family-base, map-get($font-size, 2xs));
   margin: $indent*0.125;
 }
 
 .product__button {
   width: 100%;
-  height: 4rem;
+}
+
+.product__delete-container {
+  display: none;
+}
+
+.product__summary-list {
+  display: none;
+}
+
+.product__details-button {
+  display: none;
 }
 
 
-/* ============ List View =========== */
+/* ================= List View =============== */
 
 .product--list-view {
+  width: 100%;
 
   .product__column {
-    &--main {
-      @include media-md {
-        width: 30%;
-      }
+    @include media-md {
+      width: 47%;
+      height: 30rem;
+    }
 
+    &--main {
       @include media-sm {
-        width: 60%;
-        height: 25rem;
-        margin-bottom: $indent*0.5;
+        width: 50%;
       }
     }
 
     &--short {
       @include media-md {
-        width: 17%;
+        padding-bottom: 0;
+        justify-content: flex-start;
+        gap: $indent*0.5;
       }
 
       @include media-sm {
         width: 40%;
-        height: 25rem;
       }
     }
 
     &--price {
-      @include media-sm {
-        height: 12rem;
+      @include media-md {
+        width: 100%;
+        margin-top: $indent*0.5;
+        height: 6rem;
       }
     }
   }
+
+  // ---------- Main column ----------
 
   .product__title {
     cursor: pointer;
 
     &:hover {
+      transition: $delay*2;
       color: $color-primary-hover;
 
       .product__model {
-          color: $color-primary-hover;
-        }
+        transition: $delay*2;
+        color: $color-primary-hover;
+      }
+    }
+
+    @include media-md {
+      gap: $indent*0.2;
     }
   }
 
-  .product__features-list {
+  .product__brand {
+    @include media-md {
+      font-size: map-get($font-size, m);
+    }
+  }
+
+  .product__model,
+  .product__sizes {
+    @include media-md {
+      font-size: map-get($font-size, s);
+    }
+  }
+
+  .product__subtitle {
     @include media-md {
       display: none;
     }
+
+    @include media-2sm {
+      gap: $indent*0.125;
+    }
+
+    &--top {
+      @include media-md {
+        display: flex;
+      }
+    }
   }
+
+  .product__miniatures-list {
+    display: none;
+  }
+
+  .product__image {
+    @include media-2sm {
+      margin-top: $indent*1.25;
+    }
+  }
+
+  // ---------- Short column ----------
 
   .product__labels-list {
     @include media-md {
-      flex-direction: column;
+      justify-content: flex-end;
+      flex-wrap: wrap;
       gap: $indent*0.25;
     }
 
@@ -286,49 +347,234 @@
     }
   }
 
-  .product__offers-list {
+  .product__labels-item {
+    @include media-md {
+      @include square-size(6rem);
+      padding: $indent*0.125;
+    }
+  }
+
+  .product__features-list {
     @include media-sm {
       display: none;
     }
   }
 
-  .product__subtitle {
+  .product__features-item {
+    @include media-lg {
+      font-size: map-get($font-size, 2xs);
+    }
+  }
+
+
+  // ---------- Price column ----------
+
+  .product__price {
+    @include media-md {
+      font-size: map-get($font-size, l)
+    }
+  }
+
+  .product__count {
+    @include media-md {
+      font-size: map-get($font-size, xs);
+    }
+
     @include media-sm {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: row-reverse;
-      margin-bottom: $indent*0.5;
+      font-size: map-get($font-size, 2 xs);
+    }
+  }
+
+  .product__offers-list {
+    @include media-md {
+      display: none;
     }
   }
 }
+
 
 /* ============ Tile View =========== */
 
 .product--tile-view {
+  width: 48%;
 
+  @include media-md {
+    width: 100%;
+  }
+
+  .product__column {
+    width: 47%;
+    height: 30rem;
+
+    &--main {
+      @include media-xl {
+        width: 45%;
+      }
+
+      @include media-lg {
+        width: 47%;
+      }
+
+      @include media-sm {
+        width: 50%;
+      }
+    }
+
+    &--short {
+      padding-bottom: 0;
+      justify-content: flex-start;
+      gap: $indent*0.5;
+
+      @include media-xl {
+        width: 50%;
+      }
+
+      @include media-lg {
+        width: 47%;
+      }
+
+      @include media-sm {
+        width: 40%;
+      }
+    }
+
+    &--price {
+      width: 100%;
+      margin-top: $indent*0.5;
+      height: 6rem;
+    }
+  }
+
+  // ---------- Main column ----------
+
+  .product__title {
+    gap: $indent*0.2;
+    cursor: pointer;
+
+    &:hover {
+      transition: $delay*2;
+      color: $color-primary-hover;
+
+      .product__model {
+        transition: $delay*2;
+        color: $color-primary-hover;
+      }
+    }
+  }
+
+  .product__brand {
+    @include media-md {
+      font-size: map-get($font-size, m);
+    }
+  }
+
+  .product__model,
+  .product__sizes {
+    @include media-md {
+      font-size: map-get($font-size, s);
+    }
+  }
+
+  .product__subtitle {
+    display: none;
+
+    &--top {
+      display: flex;
+    }
+
+    @include media-2sm {
+      gap: $indent*0.125;
+    }
+  }
+
+  .product__miniatures-list {
+    display: none;
+  }
+
+  .product__image {
+    @include media-2sm {
+      margin-top: $indent*1.25;
+    }
+  }
+
+  // ---------- Short column ----------
+
+  .product__labels-list {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: $indent*0.25;
+
+    @include media-md {
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+  }
+
+  .product__labels-item {
+    @include square-size(6rem);
+    padding: $indent*0.125;
+  }
+
+  .product__features-list {
+    @include media-lg {
+      display: none;
+    }
+
+    @include media-md {
+      display: flex;
+    }
+
+    @include media-sm {
+      display: none;
+    }
+  }
+
+  .product__features-item {
+    font-size: map-get($font-size, 2xs);
+  }
+
+  // ---------- Price column ----------
+
+  .product__price {
+    font-size: map-get($font-size, l)
+  }
+
+  .product__count {
+    font-size: map-get($font-size, xs);
+
+    @include media-sm {
+      font-size: map-get($font-size, 2 xs);
+    }
+  }
+
+  .product__offers-list {
+    display: none;
+  }
 }
+
 
 /* ============ Page View =========== */
 
 .product--page-view {
-  @include media-md {
-    justify-content: flex-end;
-    overflow: hidden;
+  justify-content: flex-end;
+  overflow: hidden;
+
+  @include media-sm {
+    position: relative;
+    justify-content: space-between;
   }
 
   .product__column {
+    width: 47%;
+
     @include media-sm {
       width: 100%;
-      height: 25rem;
     }
 
     &--main {
-      @include media-md {
-        display: flex;
-        flex-direction: column;
-        overflow: initial;
-        flex-grow: 2;
-      }
+      flex-grow: 2;
+      overflow: unset;
 
       @include media-sm {
         height: 35rem;
@@ -337,54 +583,333 @@
       }
     }
 
-    &--price {
+    &--short {
+      height: 40rem;
+
+      @include media-md {
+        height: 33rem;
+      }
+
       @include media-sm {
-        height: 19rem;
+        height: 26rem;
+      }
+    }
+
+    &--price {
+      height: 20rem;
+
+      @include media-md {
+        height: 18rem;
+      }
+
+      @include media-sm {
+
       }
     }
   }
 
-  .product__header {
-    display: flex;
-    justify-content: space-between;
+  // ---------- Main column ----------
+
+  .product__brand {
+    @include media-2sm {
+      font-size: map-get($font-size, m);
+    }
+  }
+
+  .product__model {
+    @include media-2sm {
+      font-size: map-get($font-size, s);
+    }
+  }
+
+  .product__sizes {
+    @include media-2sm {
+      font-size: map-get($font-size, s);
+    }
+  }
+
+  .product__miniatures-list {
+    @include media-sm {
+      flex-direction: column;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
+
+  .product__miniatures-item {
+    @include media-2sm {
+      @include square-size(6rem);
+    }
   }
 
   .product__image {
-    @include media-md {
-      margin-top: $indent*2.5;
-      width: 95%;
-    }
+    width: 90%;
+    margin-top: $indent;
 
     @include media-sm {
-      margin-top: $indent;
       width: 70%;
-    }
-  }
-
-  .product__labels-list {
-    transition: $delay*2;
-
-    @include media-sm {
-      justify-content: center;
-      gap: $indent*0.75;
+      margin-top: $indent*0.5;
     }
 
     @include media-2sm {
-      gap: $indent*0.25;
+      width: 70%;
+      margin-top: $indent*1.25;
     }
   }
 
   .product__subtitle {
-    @include media-sm {
-      display: none;
-    }
+    display: none;
 
     &--top {
-      display: none;
+      display: flex;
+    }
+
+    @include media-sm {
+      position: absolute;
+      top: $indent*0.5;
+      right: $indent*0.5;
+    }
+
+    @include media-2sm {
+      gap: $indent*0.125;
+    }
+  }
+
+  // ---------- Short column ----------
+
+  .product__labels-list {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: $indent*0.25;
+
+    @include media-sm {
+      justify-content: center;
+    }
+  }
+
+  .product__labels-item {
+    @include media-md {
+      height: 7rem;
+    }
+  }
+
+  .product__features-list {
+    gap: $indent*0.25;
+
+    @include media-md {
+      gap: $indent*0.125;
+    }
+  }
+
+  .product__features-item {
+    font-size: map-get($font-size, m);
+
+    @include media-md {
+      font-size: map-get($font-size, xs);
+    }
+
+    @include media-sm {
+      font-size: map-get($font-size, s);
+    }
+
+    @include media-2sm {
+      font-size: map-get($font-size, xs);
+    }
+  }
+
+  // ---------- Price column ----------
+
+  .product__offers-title {
+    @include font($font-family-base, map-get($font-size, xs));
+    margin: $indent*0.125;
+
+    @include media-md {
+      font-size: map-get($font-size, 2xs);
+    }
+
+    @include media-sm {
+      font-size: map-get($font-size, xs);
+    }
+
+    @include media-2sm {
+      font-size: map-get($font-size, 2xs);
+    }
+  }
+
+  .product__price {
+    @include media-2sm {
+      font-size: map-get($font-size, l);
+    }
+  }
+
+  .product__count {
+    @include media-2sm {
+      font-size: map-get($font-size, 2xs);
+    }
+  }
+}
+
+/* ============ Cart View =========== */
+
+.product--cart-view {
+
+  .product__column {
+    width: 47%;
+
+    @include media-sm {
+      height: 32rem;
+    }
+
+    &--short {
+      order: 2;
+      margin-top: $indent*0.5;
+      width: 100%;
 
       @include media-sm {
-        display: block;
+        height: 26rem;
       }
+    }
+
+    &--price {
+      order: 1;
+    }
+  }
+
+  // ---------- Main column ----------
+
+  .product__brand {
+    @include media-2sm {
+      font-size: map-get($font-size, m);
+    }
+  }
+
+  .product__model {
+    @include media-2sm {
+      font-size: map-get($font-size, s);
+    }
+  }
+
+  .product__sizes {
+    @include media-2sm {
+      font-size: map-get($font-size, s);
+    }
+  }
+
+  .product__image {
+    @include media-sm {
+      margin-top: $indent;
+    }
+
+    @include media-sm {
+      margin-top: $indent*2;
+    }
+  }
+
+  // ---------- Short column ----------
+
+  .product__labels-list {
+    justify-content: center;
+    gap: $indent*0.25;
+
+    @include media-sm {
+      justify-content: center;
+    }
+  }
+
+  .product__features-item {
+    font-size: map-get($font-size, m);
+
+    @include media-md {
+      font-size: map-get($font-size, xs);
+    }
+
+    @include media-sm {
+      font-size: map-get($font-size, s);
+    }
+
+    @include media-2sm {
+      font-size: map-get($font-size, xs);
+    }
+  }
+
+  // ---------- Price column ----------
+
+  .product__summary-list {
+    @include font($font-family-base, map-get($font-size, m));
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $indent*0.25;
+    color: $color-font-regular-dark;
+    list-style: none;
+    cursor: default;
+
+    @include media-2sm {
+      font-size: map-get($font-size, s);
+    }
+  }
+
+  .product__summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include media-sm {
+      flex-direction: column;
+      align-items: end;
+      gap: $indent*0.25;
+    }
+  }
+
+  .product__summary-value {
+    @include font($font-family-base, map-get($font-size, m), 100%, bold);
+
+    @include media-2sm {
+      font-size: map-get($font-size, s);
+    }
+
+    &--accent {
+      color: $color-accent;
+    }
+  }
+
+  .product__summary-count {
+    display: flex;
+    align-items: center;
+    gap: $indent*0.25;
+  }
+
+  .product__summary-button {
+    @include font($font-family-base, map-get($font-size, m), 100%, bold);
+    @include square-size(3.2rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $border-radius-element;
+  }
+
+  .product__details-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .product__delete-container {
+    display: block;
+    text-align: right;
+  }
+
+  .product__delete {
+    @include font($font-family-base, map-get($font-size, s));
+    color: $color-font-regular;
+    transition: $delay*2;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-primary-hover;
     }
   }
 }

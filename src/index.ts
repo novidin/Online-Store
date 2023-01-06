@@ -1,31 +1,18 @@
-import App from './app/App';
+// import App from './app/App';
 import MultiRange from './app/MultiRange';
 import './styles/main.scss';
 
-const app = new App();
-app.start();
+// const app = new App();
+// app.start();
 
 
 /* ===================================================== */
 
 window.onload = ():void => {
-  // Хедер, адресс магазинов (для показа 404)
-  const addressesDOM = document.getElementById('addresses') as HTMLElement;
   const mainDOM = document.querySelector('.main') as HTMLElement;
   // Вкладка шины
   const tiresDOM = document.getElementById('tires') as HTMLElement;
-
-  const renderNotFoundPage = ():void => {
-    addressesDOM.addEventListener('click', ():void => {
-      deleteChildsInMain();
-
-      const notFoundDOM = document.createElement('div') as HTMLElement;
-      notFoundDOM.classList.add('not-found');
-      notFoundDOM.innerHTML = `<div class="wrapper"><span class="not-found__image"></span><p class="not-found__title">Ой! Что-то пошло не так...</p></div>`;
-
-      mainDOM.append(notFoundDOM);
-    });
-  }
+  const cartLinkDOM = document.getElementById('cartLink') as HTMLElement;
 
   const renderTiresPage = ():void => {
     tiresDOM.addEventListener('click', ():void => {
@@ -77,7 +64,7 @@ window.onload = ():void => {
   }
 
   const renderProductPage = (): void => {
-    const productTitleDOM = document.getElementById('productTitle') as HTMLDivElement;
+    const productTitleDOM = document.querySelector('.product__title') as HTMLDivElement;
 
     productTitleDOM.addEventListener('click', ():void => {
       deleteChildsInMain();
@@ -89,12 +76,53 @@ window.onload = ():void => {
     });
   }
 
+  const renderCartPage = (): void => {
+    cartLinkDOM.addEventListener('click', () => {
+      deleteChildsInMain();
+
+      const isCartEmpty = true;
+
+      if (isCartEmpty) {
+        const cartTemplateDOM = document.getElementById('cart') as HTMLTemplateElement;
+        const cart = cartTemplateDOM.content.cloneNode(true) as DocumentFragment;
+
+        mainDOM.append(cart);
+
+        const orderingTemplateDOM = document.getElementById('ordering') as HTMLTemplateElement;
+        const ordering = orderingTemplateDOM.content.cloneNode(true) as DocumentFragment;
+
+        mainDOM.append(ordering);
+
+        const orderingButtonDOM = document.getElementById('orderingButton') as HTMLButtonElement;
+        const orderingDOM = document.querySelector('.ordering') as HTMLElement;
+        const shadowDOM = document.querySelector('.shadow') as HTMLElement;
+
+        orderingButtonDOM.addEventListener('click', () => {
+          orderingDOM.classList.add('ordering--active');
+          shadowDOM.classList.add('shadow--active');
+        });
+
+        shadowDOM.addEventListener('click', () => {
+          orderingDOM.classList.remove('ordering--active');
+          shadowDOM.classList.remove('shadow--active');
+        })
+
+      } else {
+        const emptyCartMessageDOM = document.createElement('div') as HTMLElement;
+        emptyCartMessageDOM.classList.add('cart');
+        emptyCartMessageDOM.innerHTML = `<p class="cart__empty">Ваша корзина пуста</p>`;
+
+        mainDOM.append(emptyCartMessageDOM);
+      }
+    });
+  }
+
   const deleteChildsInMain = ():void => {
     while (mainDOM.firstChild) {
       mainDOM.removeChild(mainDOM.firstChild);
     }
   };
 
-  renderNotFoundPage();
   renderTiresPage();
+  renderCartPage();
 }

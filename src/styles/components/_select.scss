@@ -5,21 +5,27 @@
 }
 
 .select__title {
-  @extend %filter-header;
+  @extend %subheader;
 }
 
 .select__select {
   @include font($font-family-base, map-get($font-size, m));
-  @extend %filter-border;
-  height: $height-filter-element;
+  @extend %border-element;
+  height: 5rem;
   padding: $indent*0.25;
   color: $color-font-input;
   cursor: pointer;
+
+  @include media-md {
+    @include font($font-family-base, map-get($font-size, s));
+    padding: $indent*0.125;
+    height: 4rem;
+  }
 }
 
 .select__option {
+  @extend %media-control-element;
   padding: $indent*0.25;
-  font-size: map-get($font-size, m);
 
   &:checked {
     color: $color-primary;

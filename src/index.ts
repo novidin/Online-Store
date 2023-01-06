@@ -64,7 +64,7 @@ window.onload = ():void => {
   }
 
   const renderProductPage = (): void => {
-    const productTitleDOM = document.getElementById('productTitle') as HTMLDivElement;
+    const productTitleDOM = document.querySelector('.product__title') as HTMLDivElement;
 
     productTitleDOM.addEventListener('click', ():void => {
       deleteChildsInMain();
@@ -122,7 +122,7 @@ window.onload = ():void => {
       mainDOM.removeChild(mainDOM.firstChild);
     }
   };
-  
+
   renderTiresPage();
   renderCartPage();
 }

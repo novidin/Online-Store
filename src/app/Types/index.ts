@@ -54,6 +54,11 @@ export interface IFilterItems {
 }
 
 export interface ICartProduct {
+  num?: number;
   id: string;
   count: number;
 }
+
+// export interface ICartOrderedProduct extends ICartProduct {
+//   num: number
+// }

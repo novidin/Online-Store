@@ -1,13 +1,25 @@
 import dataStorage from '.';
-import { ICartProduct } from '../Types';
+import { ICartProduct} from '../Types';
+import Paginator from './Paginator';
 
 
 class CartStorage {
 
-  private cartProducts: ICartProduct[]
+  private cartProducts: ICartProduct[];
+  private paginator: Paginator;
 
   constructor() {
-    this.cartProducts = [];
+    this.cartProducts = [
+      { id: '1', count: 2 },
+      { id: '7', count: 1 },
+      { id: '4', count: 1 },
+      { id: '13', count: 1 },
+      { id: '15', count: 1 },
+      { id: '18', count: 2 },
+
+    ];
+
+    this.paginator = new Paginator(this.cartProducts);
   }
 
   addProduct(id: string) {
@@ -38,6 +50,15 @@ class CartStorage {
     return this.cartProducts;
   }
 
+  getOrderedProducts() {
+    const orderedProducts = this.cartProducts.map((cartProd, i) => {
+      cartProd.num = i + 1;
+      return cartProd;
+    } );
+    return orderedProducts;
+  }
+
+
   getCount() {
     return this.cartProducts.length;
   }
@@ -55,6 +76,23 @@ class CartStorage {
     const productInCart = this.cartProducts.filter((cartProd) => cartProd.id === id);
     return !!productInCart.length;
   }
+
+  /* pagination */
+
+  setLimitProducts(limit: number) {
+    this.paginator.setLimit(limit);
+  }
+
+  getPagesCount() {
+    return this.paginator.getPagesCount();
+  }
+
+  getPaginatedItems(page = 1) {
+
+    this.paginator.setItems(this.getOrderedProducts());
+    return this.paginator.getPageItems(page);
+  }
+
 }
 
 const cartStorage = new CartStorage();

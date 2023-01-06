@@ -1,98 +1,89 @@
-import { IReqParams, ICartProduct } from "../../Types/index";
-import router from "../../Router/index";
+import { IReqParams } from "../../Types/index";
 import pageHeader from "../../Components/PageHeader/index";
 import pageFooter from "../../Components/PageFooter/index";
 import cartStorage from "../../Storage/Cart";
-import dataStorage from "../../Storage";
-import { seasonNames } from "../../Storage/consts";
+import PaginationControls from "../../Components/PaginationControls";
+import SectionCartProducts from "../../Components/SectionCartProducts";
+// import router from "../../Router";
 
 
 class CartPage {
 
+  private sectionCartProducts: SectionCartProducts;
+  private sectionCartProductsHTML?: HTMLDivElement;
+  private paginationSection: HTMLElement;
   private main: HTMLElement;
 
   constructor() {
+
+    this.sectionCartProducts = new SectionCartProducts();
+    this.sectionCartProductsHTML;
+    this.paginationSection = document.createElement('section')
+    // this.paginationControls = new PaginationControls(cartStorage.getPagesCount());
     this.main = document.createElement('main');
-    this.main.className = 'main'
+    this.main.className = 'main';
   }
 
   render(reqParams: IReqParams): void {
-    if (reqParams.length) {
-      router.goTo('/cart');
-    }
     document.title = `Online Store - Корзина`;
-
-
-    this.main.innerHTML = '<div class="wrapper"><h2>Корзина пуста</h2></div>';
-
-    const cartProducts = cartStorage.getCartProducts();
-    if (cartProducts.length) {
-      this.buildHTML(cartProducts);
-    }
-
+    this.buildMainHTML(reqParams);
     document.body.appendChild(pageHeader.getHeaderDOM());
     document.body.appendChild(this.main);
     document.body.appendChild(pageFooter.getFooterDOM());
   }
 
-  buildHTML(cartProducts: ICartProduct[]) {
-    const cartProductsWrapper = document.createElement('div');
+  buildMainHTML(reqParams: IReqParams) {
+    console.log(reqParams)
+    const cartProducts = cartStorage.getCartProducts();
 
-    this.main.appendChild(cartProductsWrapper)
-    let counter = 1;
-    cartProducts.forEach((cartProd) => {
-      const cartProductWrapper = document.createElement('div');
-      cartProductWrapper.className = 'product';
-      const product = dataStorage.getProductById(cartProd.id);
-      cartProductWrapper.innerHTML = `
-      <div class="product__column product__column--main">
-      <div class="product__header">
-        <div class="product__title">
-          <p class="product__brand">${counter}</>
-          <h3 class="product__brand">${product.brand}</h3>
-          <span class="product__model">${product.model}</span>
-          <span class="product__sizes">${product.size}</span>
-        </div>
-      </div>
-      <ul class="product__labels-list">
-        <li class="product__labels-item">
-          <span class="product__season icon icon--${product.season}"></span>
-          <span class="product__labels-title">${seasonNames[product.season]}</span>
-        </li>
-        <li class="product__labels-item">
-          <p class="product__rating">
-            <span class="icon icon--star rating rating--good"></span>
-            <span class="rating__value rating--good">${product.rating.overageRating}</span>
-          </p>
-          <span class="product__labels-title">Рейтинг</span>
-        </li>
-        <li class="product__labels-item">
-          <span class="product__comments">${product.rating.commentsCount}</span>
-          <span class="product__labels-title">Комент</span>
-        </li>
-      </ul>
-    </div>
-    <div class="product__column">
-      <div class="product__subtitle">
-        <p class="product__count">В наличии: ${product.count} шт.</p>
-      </div>
-      <img class="product__image"
-          src="${product.imageUrl[0]}"
-          alt="${product.brand} ${product.model}">
-    </div>
-    <div class="product__column product__column--price">
+    if (!cartProducts.length) {
+      this.main.innerHTML = '<div class="wrapper"><h2>Корзина пуста</h2></div>';
+      return;
+    }
+
+    this.main.innerHTML = '';
+    this.main.appendChild(this.paginationSection);
+    this.buildPagination();
+    this.setReqParams(reqParams);
 
 
-    </div>
-      `
-      cartProductsWrapper.appendChild(cartProductWrapper);
-      counter += 1;
-    })
+  }
+
+  buildPagination() {
+    const paginationControls = new PaginationControls(cartStorage.getPagesCount());
+    this.paginationSection.appendChild(paginationControls.getHTML());
+  }
+
+  buildProductsHTML(pageNum = 1) {
+    this.sectionCartProductsHTML?.remove();
+    this.sectionCartProductsHTML = this.sectionCartProducts.getHTML(pageNum);
+    this.paginationSection.appendChild(this.sectionCartProductsHTML);
   }
 
   update(reqParams: IReqParams) {
-    this.render(reqParams)
+
+    console.log('UPDATED', reqParams);
+    this.setReqParams(reqParams)
+
   }
+
+  setReqParams(reqParams: IReqParams) {
+    console.log('rpar', reqParams);
+    if (reqParams.limit) {
+     cartStorage.setLimitProducts(+reqParams.limit[0]);
+     this.paginationSection.innerHTML = '';
+     this.buildPagination();
+     //this.buildProductsHTML();
+     // router.setReqParams('page', '1');
+    }
+    if (reqParams.page) {
+      this.buildProductsHTML(+reqParams.page[0]);
+    } else {
+      this.buildProductsHTML();
+    }
+
+  }
+
 }
 
 export default CartPage;

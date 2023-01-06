@@ -39,12 +39,8 @@ $navigation-icons: (
       @include square-size(3rem);
       background-image: url($url);
 
-      @include media-md {
+      @include media-sm {
         @include square-size(2rem);
-      }
-
-      @include media-2sm {
-        @include square-size(1.8rem);
       }
     }
   }
@@ -183,7 +179,18 @@ $offers-icons: (
   background-image: url("../assets/icons/arrow-next.svg");
 }
 
-.icon--copy {
-  @include square-size(2.4rem);
-  background-image: url("../assets/icons/copy.svg");
+/* =========== Copy Button ========= */
+
+$copy-icons: (
+  copy: "../assets/icons/copy.svg",
+  copy-access: "../assets/icons/copy-access.svg",
+);
+
+.icon {
+  @each $modificator, $url in $copy-icons {
+    &--#{$modificator} {
+      @include square-size(2.4rem);
+      background-image: url($url);
+    }
+  }
 }

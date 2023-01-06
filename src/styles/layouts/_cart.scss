@@ -1,17 +1,11 @@
 .cart {
-  width: $content-max-width;
+  @extend %block-width;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: $indent*0.5;
-  transition: $delay*2;
-
-  @include media-xl {
-    width: 100%;
-  }
 
   @include media-md {
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: $indent;
   }
 }
@@ -21,6 +15,7 @@
   transition: $delay*2;
 
   @include media-md {
+    order: 3;
     width: 100%;
   }
 }

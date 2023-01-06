@@ -1,6 +1,5 @@
 .button {
-  @include font($font-family-base, map-get($font-size, m));
-  height: 5rem;
+  @extend %media-control-element;
   padding: 0.75rem;
   color: $color-font-button;
   background-color: $color-primary;
@@ -31,10 +30,5 @@
       color: $color-background-element;
       background-color: $color-accent;
     }
-  }
-
-  @include media-md {
-    @include font($font-family-base, map-get($font-size, s));
-    height: 4rem;
   }
 }

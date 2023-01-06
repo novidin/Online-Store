@@ -6,7 +6,7 @@
 }
 
 .search__header {
-  @extend %filter-header;
+  @extend %subheader;
 
   @include media-sm {
     display: none;
@@ -24,9 +24,8 @@
 }
 
 .search__input {
-  @include font($font-family-base, map-get($font-size, m));
-  @extend %filter-border;
-  height: $height-filter-element;
+  @extend %media-control-element;
+  @extend %border-element;
   width: 66%;
   padding: $indent*0.25;
   cursor: pointer;
@@ -50,21 +49,16 @@
     width: 47%;
   }
 
-  @include media-sm {
-    height: 5rem;
-  }
-
   @include media-2sm {
     width: 100%;
   }
 }
 
 .search__button-search {
+  @extend %media-control-element;
   width: 75%;
-  height: 100%;
 }
 
 .search__button-copy {
   width: 20%;
-  height: 100%;
 }

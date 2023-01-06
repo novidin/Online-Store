@@ -1,13 +1,14 @@
 .pagination {
-  width: $content-max-width;
-  display: flex;
-  justify-content: flex-start;
+  width: 66%;
   padding: $indent*0.5 0;
+  display: flex;
+  justify-content: space-between;
   gap: $indent;
-  transition: $delay*2;
 
-  @include media-xl {
+  @include media-md {
+    order: 2;
     width: 100%;
+    padding: 0;
   }
 }
 
@@ -22,12 +23,12 @@
 }
 
 .pagination__title {
-  @extend %filter-header;
+  @extend %subheader;
 }
 
 .pagination__input {
   @include font($font-family-base, map-get($font-size, m));
-  @extend %filter-border;
+  @extend %border-element;
   height: 4rem;
   width: 8rem;
   padding: $indent*0.25;

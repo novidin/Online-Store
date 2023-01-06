@@ -1,11 +1,5 @@
 .catalog {
-  width: $content-max-width;
-  padding: $indent*0.5;
-  transition: $delay*2;
-
-  @include media-xl {
-    width: 100%;
-  }
+  @extend %block-width;
 }
 
 .catalog__container {
@@ -21,12 +15,21 @@
   align-items: center;
 }
 
+.catalog__button {
+  border: none;
+  background-color: transparent;
+}
+
 .catalog__image {
-  @include square-size(5rem);
-  @extend %filter-border;
+  @extend %media-control-element;
+  @extend %border-element;
   background-color: $color-background-element;
   padding: $indent*0.25;
   cursor: pointer;
+
+  @include media-md {
+    padding: $indent*0.125;
+  }
 }
 
 .catalog__title {

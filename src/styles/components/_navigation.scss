@@ -4,10 +4,6 @@
   justify-content: center;
   align-items: center;
   background-color: $color-background-element;
-
-  @include media-2sm {
-    height: 4rem;
-  }
 }
 
 .navigation__list {
@@ -19,10 +15,6 @@
 
 .navigation__item {
   padding: 0 $indent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: $color-font-chapter;
   transition: $delay*2;
   cursor: pointer;
 
@@ -42,16 +34,19 @@
   }
 }
 
+.navigation__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .navigation__title {
   @include font($font-family-base, map-get($font-size, xl), 0.2rem, bold);
   padding-left: 0.5rem;
+  color: $color-font-chapter;
   transition: $delay*2;
 
-  @include media-md {
+  @include media-sm {
     @include font($font-family-base, map-get($font-size, l), 0.2rem, bold);
-  }
-
-  @include media-2sm {
-    @include font($font-family-base, map-get($font-size, m), 0.2rem, bold);
   }
 }

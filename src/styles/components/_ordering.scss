@@ -78,7 +78,7 @@
 }
 
 .ordering__form-label {
-  @extend %filter-header;
+  @extend %subheader;
 
   &--hidden {
     visibility: hidden;
@@ -87,7 +87,7 @@
 
 .ordering__form-input {
   @include font($font-family-base, map-get($font-size, m));
-  @extend %filter-border;
+  @extend %border-element;
   height: 4rem;
   width: 100%;
   padding: $indent*0.25;

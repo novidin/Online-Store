@@ -122,6 +122,9 @@
   align-items: center;
   border: 1px solid $color-border-input;
   border-radius: $border-radius-element;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   transition: $delay*2;
   cursor: default;
 
@@ -218,6 +221,10 @@
 
 .product__button {
   width: 100%;
+}
+
+.product__buy {
+  display: none;
 }
 
 .product__delete-container {
@@ -596,10 +603,10 @@
     }
 
     &--price {
-      height: 20rem;
+      height: 30rem;
 
       @include media-md {
-        height: 18rem;
+        height: 26rem;
       }
 
       @include media-sm {}
@@ -607,6 +614,12 @@
   }
 
   // ---------- Main column ----------
+
+  .product__header {
+    @include media-sm {
+      width: 60%;
+    }
+  }
 
   .product__brand {
     @include media-2sm {
@@ -644,6 +657,14 @@
   .product__image {
     width: 90%;
     margin-top: $indent;
+
+    @include media-lg {
+      margin-top: $indent*2;
+    }
+
+    @include media-md {
+      margin-top: $indent*2.5;
+    }
 
     @include media-sm {
       width: 70%;
@@ -735,6 +756,10 @@
     }
   }
 
+  .product__buy {
+    display: inline;
+  }
+
   .product__price {
     @include media-2sm {
       font-size: map-get($font-size, l);
@@ -763,6 +788,7 @@
       order: 2;
       margin-top: $indent*0.5;
       width: 100%;
+      transition: none;
 
       @include media-sm {
         height: 26rem;

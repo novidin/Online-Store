@@ -14,16 +14,23 @@
   justify-content: center;
   align-items: center;
   gap: $indent*0.25;
-  cursor: default;
 }
 
-.link-navigation__title {
+.link-navigation__link {
   @include font($font-family-base, map-get($font-size, s));
   color: $color-font-regular-dark;
   transition: $delay*2;
 
-  &--active {
+  &:hover {
     color: $color-primary-hover;
+  }
+
+  &--disable {
+    cursor: default;
+
+    &:hover {
+      color: $color-font-regular-dark;
+    }
   }
 
   @include media-sm {

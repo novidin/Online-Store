@@ -9,7 +9,7 @@ import cartStorage from "../../Storage/Cart";
 
 class SectionProducts {
 
-  private section: HTMLElement;
+  private readonly section: HTMLElement;
 
   constructor() {
     this.section = document.createElement('section');
@@ -25,26 +25,19 @@ class SectionProducts {
     const infoWrapper = document.createElement('div');
     infoWrapper.className = 'catalog__info';
     this.section.appendChild(infoWrapper);
-    /*              replace at new component with re rendering  products                       */
-    const switchCardViewButton = document.createElement('button');
-    switchCardViewButton.className = 'catalog__button catalog__button_card';
-    switchCardViewButton.innerHTML = `<img class="catalog__image " src="${cardViewIcon}" alt="Change view style">`;
-    switchCardViewButton.onclick = () => {
-      if (switchCardViewButton.classList.contains('catalog__button_card')) {
-        switchCardViewButton.classList.remove('catalog__button_card')
-        switchCardViewButton.innerHTML = `<img class="catalog__image " src="${listViewIcon}" alt="Change view style">`;
-      } else {
-        switchCardViewButton.classList.add('catalog__button_card');
-        switchCardViewButton.innerHTML = `<img class="catalog__image " src="${cardViewIcon}" alt="Change view style">`;
-      }
-      changeProductsView()
-    }
-    infoWrapper.appendChild(switchCardViewButton);
-    // const switchCardViewListButton = document.createElement('button');
-    // switchCardViewListButton.className = 'catalog__button';
-    // switchCardViewListButton.innerHTML = `<img class="catalog__image" src="${cardViewIcon}" alt="Change view style">`;
-    // infoWrapper.appendChild(switchCardViewListButton);
 
+    const switchCardViewButton = document.createElement('button');
+    switchCardViewButton.className = 'catalog__button';
+    switchCardViewButton.innerHTML = `<img class="catalog__image" src="${cardViewIcon}" alt="Change view style">`;
+
+    switchCardViewButton.onclick = () => {
+      const productCard = document.querySelector('.product') as HTMLElement;
+      const iconSrc = productCard.classList.contains('product--tile-view') ? listViewIcon : cardViewIcon;
+      switchCardViewButton.innerHTML = `<img class="catalog__image " src="${iconSrc}" alt="Change view style">`;
+      changeProductsView();
+    }
+
+    infoWrapper.appendChild(switchCardViewButton)
 
     const sortSelect = new SortSelect();
     infoWrapper.appendChild(sortSelect.getHTML());
@@ -53,8 +46,6 @@ class SectionProducts {
     title.className = 'catalog__title';
     title.innerHTML = `Найдено: <span class="catalog__count">${productsData.length}</span>`;
     this.section.appendChild(title);
-
-
 
     const productsContainer = document.createElement('div');
     productsContainer.className = 'catalog__container';
@@ -66,8 +57,19 @@ class SectionProducts {
       return productCard;
     })
 
+    // TODO Временное решение,
+    //  т.к. возможно лучше удалить все карточки и добавить карточки с новым видом,
+    //  чем менять вид карточек (класс) по живому
     const changeProductsView = () => {
-      console.log('chchchchhchc')
+      const productCardArr = document.querySelectorAll('.product') as NodeListOf<HTMLElement>;
+      const productNewViewStyle = productCardArr[0].classList.contains('product--tile-view')
+        ? 'product--list-view'
+        : 'product--tile-view';
+
+      productCardArr.forEach((item: HTMLElement): void => {
+        item.setAttribute("class", "product");
+        item.classList.add(productNewViewStyle);
+      })
     }
 
     console.log('cards', productCards)
@@ -180,9 +182,6 @@ class SectionProducts {
     }
     return wrapper;
   }
-
-
-
 }
 
 export default SectionProducts;

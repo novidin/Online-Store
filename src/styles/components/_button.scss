@@ -22,7 +22,12 @@
   }
 
   &--disable {
+    background-color: $color-disable;
+    cursor: default;
 
+    &:hover {
+      background-color: $color-disable;
+    }
   }
 
   &--special {

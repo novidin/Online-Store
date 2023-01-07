@@ -1,7 +1,7 @@
 const buttonContent = {
   ready: '<span class="icon icon--copy"></span>',
   success: '<span class="icon icon--copy-access"></span>',
-  error: 'Copy Failed!'
+  error: 'Fail!'
 };
 
 class ButtonCopyURL {
@@ -11,6 +11,7 @@ class ButtonCopyURL {
   constructor() {
     this.button = document.createElement('button');
     this.button.className = 'button search__button-copy';
+    this.button.title = 'Copy URL';
     this.button.onclick = () => {
       this.clickHandler();
     }
@@ -30,12 +31,14 @@ class ButtonCopyURL {
   private pauseButton(message: string): void {
     this.button.innerHTML = message;
     this.button.disabled = true;
+    this.button.classList.add('button--disable');
     setTimeout(() => {
       this.button.ontransitionend = () => {
         this.button.ontransitionend = () => null;
+        this.button.classList.remove('button--disable');
         this.enableButton();
       }
-    }, 400);
+    }, 600);
   }
 
   private enableButton(): void {

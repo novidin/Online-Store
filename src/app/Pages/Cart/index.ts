@@ -4,6 +4,7 @@ import pageFooter from "../../Components/PageFooter/index";
 import cartStorage from "../../Storage/Cart";
 import PaginationControls from "../../Components/PaginationControls";
 import SectionCartProducts from "../../Components/SectionCartProducts";
+import SectionCartTotal from "../../Components/SectionCartTotal";
 // import router from "../../Router";
 
 
@@ -15,6 +16,8 @@ class CartPage {
   private paginationSection: HTMLElement;
   private main: HTMLElement;
   private cartWrapper: HTMLElement;
+  private totalWrapper: HTMLElement;
+  private sectionCartTotal: SectionCartTotal;
 
   constructor() {
 
@@ -22,6 +25,7 @@ class CartPage {
     this.sectionCartProductsHTML;
 
     this.paginationSection = document.createElement('section');
+    this.paginationSection.className = 'cart__section';
     // this.paginationControls;
     // this.paginationControls = new PaginationControls(cartStorage.getPagesCount());
     this.main = document.createElement('main');
@@ -29,6 +33,11 @@ class CartPage {
 
     this.cartWrapper = document.createElement('div');
     this.cartWrapper.className = 'cart';
+
+    this.totalWrapper = document.createElement('div');
+    this.totalWrapper.className = 'promo';
+    this.totalWrapper.innerHTML = '<h3 class="promo__header">Заказ</h3>';
+    this.sectionCartTotal = new SectionCartTotal();
   }
 
   render(reqParams: IReqParams): void {
@@ -52,9 +61,13 @@ class CartPage {
     this.cartWrapper.innerHTML = '';
     this.cartWrapper.appendChild(this.paginationSection);
     this.buildPagination();
+    this.buildTotal();
     this.setReqParams(reqParams);
+  }
 
-
+  buildTotal() {
+    this.cartWrapper.appendChild(this.totalWrapper);
+    this.totalWrapper.appendChild(this.sectionCartTotal.getHTML());
   }
 
   buildPagination() {

@@ -70,6 +70,10 @@ class CartStorage {
     return this.cartProducts.length;
   }
 
+  getCountProducts() {
+    return this.cartProducts.reduce((count, cartProd) => count + +cartProd.count, 0);
+  }
+
   getTotal() {
     return this.cartProducts.reduce((sum, cartProd) => sum + (+this.getPriceById(cartProd.id) * +cartProd.count), 0);
   }

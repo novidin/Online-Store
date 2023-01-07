@@ -21,7 +21,7 @@ class PageHaeader {
   }
 
   setCartCounter(cartCounter: HTMLSpanElement): void {
-    const cartCount = cartStorage.getCount().toString();
+    const cartCount = cartStorage.getCountProducts().toString();
     const cartTotal = cartStorage.getTotal().toString();
     cartCounter.textContent = `${cartCount}шт/${cartTotal}руб`;
   }

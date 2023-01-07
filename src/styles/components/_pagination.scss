@@ -1,5 +1,5 @@
 .pagination {
-  width: 66%;
+  // width: 66%;
   padding: $indent*0.5 0;
   display: flex;
   justify-content: space-between;
@@ -43,12 +43,27 @@
 }
 
 .pagination__page {
+  all: unset;
+  max-width: 30px;
+  text-align: center;
   @include font($font-family-base, map-get($font-size, m), 100%);
   transition: $delay*2;
   cursor: default;
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
 }
 
 .pagination__button {
   @include font($font-family-base, map-get($font-size, m), 100%, bold);
   @include square-size(3.6rem);
+
+  &:disabled {
+    opacity: .7;
+  }
 }

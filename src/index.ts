@@ -1,13 +1,13 @@
-// import App from './app/App';
-import MultiRange from './app/MultiRange';
+import App from './app/App';
+
 import './styles/main.scss';
 
-// const app = new App();
-// app.start();
+const app = new App();
+app.start();
 
 
 /* ===================================================== */
-
+/*
 window.onload = ():void => {
   const mainDOM = document.querySelector('.main') as HTMLElement;
   // Вкладка шины
@@ -126,3 +126,4 @@ window.onload = ():void => {
   renderTiresPage();
   renderCartPage();
 }
+*/

@@ -45,13 +45,17 @@
 
 .menu__count {
   @include font($font-family-base, map-get($font-size, xs));
-  @include square-size(2rem);
+  // @include square-size(2rem);
   margin-left: $indent*0.125;
   display: flex;
   align-items: center;
   justify-content: center;
   color: $color-font-regular-light;
   background-color: $color-primary;
-  border-radius: 50%;
+  // border-radius: 50%;
   border: 0.2rem solid #ffffff;
+
+  //
+  padding: 5px;
+  min-width: 15rem;
 }

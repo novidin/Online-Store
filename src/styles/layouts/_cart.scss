@@ -10,14 +10,23 @@
   }
 }
 
-.cart__catalog {
+.cart__section {
   width: 66%;
-  transition: $delay*2;
 
   @include media-md {
     order: 3;
     width: 100%;
   }
+}
+
+.cart__catalog {
+  // width: 66%;
+  transition: $delay*2;
+
+  // @include media-md {
+  //   order: 3;
+  //   width: 100%;
+  // }
 }
 
 .cart__empty {

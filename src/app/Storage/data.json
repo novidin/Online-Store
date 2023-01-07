@@ -351,7 +351,7 @@
     "id": "13",
     "brand": "Nokian",
     "model": "LTSW 2",
-    "season": "all year",
+    "season": "all-year",
     "count": "15",
     "price": "300",
     "imageUrl": [
@@ -380,7 +380,7 @@
     "id": "14",
     "brand": "Nokian",
     "model": "LTSW 2",
-    "season": "all year",
+    "season": "all-year",
     "count": "18",
     "price": "276",
     "imageUrl": [
@@ -409,7 +409,7 @@
     "id": "15",
     "brand": "Nokian",
     "model": "LTSW 2",
-    "season": "all year",
+    "season": "all-year",
     "count": "12",
     "price": "258",
     "imageUrl": [
@@ -525,7 +525,7 @@
     "id": "19",
     "brand": "Michelin",
     "model": "Primacy 4+",
-    "season": "all year",
+    "season": "all-year",
     "count": "12",
     "price": "350",
     "imageUrl": [
@@ -554,7 +554,7 @@
     "id": "20",
     "brand": "Michelin",
     "model": "Primacy 4+",
-    "season": "all year",
+    "season": "all-year",
     "count": "15",
     "price": "330",
     "imageUrl": [
@@ -583,7 +583,7 @@
     "id": "21",
     "brand": "Michelin",
     "model": "Primacy 4+",
-    "season": "all year",
+    "season": "all-year",
     "count": "8",
     "price": "320",
     "imageUrl": [

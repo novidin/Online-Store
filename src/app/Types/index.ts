@@ -8,28 +8,57 @@ export interface IProductsItem {
   model: string;
   season: string;
   count: string;
-  protector: string;
   price: string;
   imageUrl: string[];
-  sizes: {
-    width: string;
-    profile: string;
-    radius: string;
-  };
-  rating: {
-    overageRating: string;
-    commentsCount: string;
-  }
+  sizes: ISizes;
+  rating: IRating,
+  features: IFeatures
 }
 
-export interface IProduct extends IProductsItem {
-  name: string;
+interface IRating {
+  overageRating: string;
+  commentsCount: string;
 }
+
+interface IFeatures {
+  protector: string;
+  weight: string;
+  exploitation: string;
+  discProtector: string;
+  loadIndex: string;
+  speedIndex: string
+}
+
+interface ISizes {
+  width: string;
+  profile: string;
+  radius: string;
+}
+
+export type IProductValue = string | string[] | IRating | IFeatures | ISizes;
+
+export interface IProduct extends IProductsItem {
+  // [key: string]: IProductValue;
+  name: string;
+  size: string;
+}
+
+
 
 export interface IProducts {
   [key: string]: IProductsItem
 }
 
 export interface IFilterItems {
-  [key: string]: {curr: number, total: number};
+  [key: string]: { curr: number, total: number };
 }
+
+export interface ICartProduct {
+  num?: number;
+  id: string;
+  count: number;
+}
+
+// export interface ICartOrderedProduct extends ICartProduct {
+//   num: number
+// }

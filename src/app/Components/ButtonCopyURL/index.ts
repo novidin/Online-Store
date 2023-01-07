@@ -1,12 +1,12 @@
 const buttonContent = {
   ready: '<span class="icon icon--copy"></span>',
-  success: 'Link Copied!',
+  success: '<span class="icon icon--copy-access"></span>',
   error: 'Copy Failed!'
 };
 
 class ButtonCopyURL {
 
-  private button: HTMLButtonElement;
+  private readonly button: HTMLButtonElement;
 
   constructor() {
     this.button = document.createElement('button');
@@ -28,18 +28,14 @@ class ButtonCopyURL {
   }
 
   private pauseButton(message: string): void {
-    this.button.textContent = message;
-    this.button.classList.add('search__button-copy_active');
-    this.button.classList.add('search__button-copy_enlarged');
+    this.button.innerHTML = message;
     this.button.disabled = true;
     setTimeout(() => {
-      this.button.classList.remove('search__button-copy_enlarged');
       this.button.ontransitionend = () => {
-        this.button.classList.remove('search__button-copy_active');
         this.button.ontransitionend = () => null;
         this.enableButton();
       }
-    }, 3000);
+    }, 400);
   }
 
   private enableButton(): void {

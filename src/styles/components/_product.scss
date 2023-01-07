@@ -602,9 +602,7 @@
         height: 18rem;
       }
 
-      @include media-sm {
-
-      }
+      @include media-sm {}
     }
   }
 
@@ -872,6 +870,20 @@
 
     &--accent {
       color: $color-accent;
+    }
+  }
+
+  .product__summary-input {
+    all: inset;
+    max-width: 30px;
+    text-align: center;
+    border: none;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
   }
 

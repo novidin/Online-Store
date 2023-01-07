@@ -29,7 +29,7 @@ class SortSelect {
   }
 
   route(param: string): void {
-    router.setReqParams('sort', param)
+    router.setReqParams('sort', param);
   }
 }
 

@@ -2,6 +2,7 @@ import dataStorage from "../../Storage";
 import { seasonNames } from "../../Storage/consts";
 import { IProduct } from "../../Types";
 import cardViewIcon from '../../../assets/icons/card-view.svg';
+import listViewIcon from '../../../assets/icons/list-view.svg';
 import SortSelect from "../SortSelect";
 import cartStorage from "../../Storage/Cart";
 
@@ -21,29 +22,55 @@ class SectionProducts {
     /**
      * TODO: insert views buttons and sort list
      */
+    const infoWrapper = document.createElement('div');
+    infoWrapper.className = 'catalog__info';
+    this.section.appendChild(infoWrapper);
+    /*              replace at new component with re rendering  products                       */
+    const switchCardViewButton = document.createElement('button');
+    switchCardViewButton.className = 'catalog__button catalog__button_card';
+    switchCardViewButton.innerHTML = `<img class="catalog__image " src="${cardViewIcon}" alt="Change view style">`;
+    switchCardViewButton.onclick = () => {
+      if (switchCardViewButton.classList.contains('catalog__button_card')) {
+        switchCardViewButton.classList.remove('catalog__button_card')
+        switchCardViewButton.innerHTML = `<img class="catalog__image " src="${listViewIcon}" alt="Change view style">`;
+      } else {
+        switchCardViewButton.classList.add('catalog__button_card');
+        switchCardViewButton.innerHTML = `<img class="catalog__image " src="${cardViewIcon}" alt="Change view style">`;
+      }
+      changeProductsView()
+    }
+    infoWrapper.appendChild(switchCardViewButton);
+    // const switchCardViewListButton = document.createElement('button');
+    // switchCardViewListButton.className = 'catalog__button';
+    // switchCardViewListButton.innerHTML = `<img class="catalog__image" src="${cardViewIcon}" alt="Change view style">`;
+    // infoWrapper.appendChild(switchCardViewListButton);
+
+
+    const sortSelect = new SortSelect();
+    infoWrapper.appendChild(sortSelect.getHTML());
+
     const title = document.createElement('p');
     title.className = 'catalog__title';
     title.innerHTML = `Найдено: <span class="catalog__count">${productsData.length}</span>`;
     this.section.appendChild(title);
 
-    const infoWrapper = document.createElement('div');
-    infoWrapper.className = 'catalog__info';
-    this.section.appendChild(infoWrapper);
-    const switchCardViewButton = document.createElement('button');
-    switchCardViewButton.className = 'button';
-    switchCardViewButton.innerHTML = `<img class="catalog__image" src="${cardViewIcon}" alt="Change view style">`;
-    infoWrapper.appendChild(switchCardViewButton);
-    const sortSelect = new SortSelect();
-    infoWrapper.appendChild(sortSelect.getHTML());
+
 
     const productsContainer = document.createElement('div');
     productsContainer.className = 'catalog__container';
     this.section.appendChild(productsContainer);
 
-    productsData.forEach((product) => {
+    const productCards = productsData.map((product) => {
       const productCard = this.getProductCardHTML(product);
       productsContainer.appendChild(productCard);
+      return productCard;
     })
+
+    const changeProductsView = () => {
+      console.log('chchchchhchc')
+    }
+
+    console.log('cards', productCards)
   }
 
   getSectionHTML() {
@@ -53,7 +80,7 @@ class SectionProducts {
 
   getProductCardHTML(product: IProduct): HTMLElement {
     const wrapper = document.createElement('article');
-    wrapper.className = 'product product--list-view';
+    wrapper.className = 'product product--tile-view'; // list
     wrapper.innerHTML = `
       <div class="product__column product__column--main">
       <a href="/product?id=${product.id}" data-local-link id="productTitle" class="product__title">
@@ -66,6 +93,10 @@ class SectionProducts {
           alt="${product.brand} ${product.model}">
     </div>
     <div class="product__column product__column--short">
+      <div class="product__subtitle product__subtitle--top">
+        <span class="product__price">${product.price} руб</span>
+        <span class="product__count">В наличии: ${product.count} шт.</span>
+      </div>
       <ul class="product__labels-list">
         <li class="product__labels-item">
           <span class="product__season icon icon--${product.season}"></span>
@@ -143,7 +174,7 @@ class SectionProducts {
       } else {
         cartStorage.addProduct(product.id);
       }
-      const addToCartEvent = new Event('addedToCard', {bubbles: true});
+      const addToCartEvent = new Event('addedToCard', { bubbles: true });
       cartButton.dispatchEvent(addToCartEvent);
       this.buildHTML();
     }

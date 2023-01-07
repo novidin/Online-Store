@@ -10,12 +10,12 @@ class CartStorage {
 
   constructor() {
     this.cartProducts = [
-      { id: '1', count: 2 },
-      { id: '7', count: 1 },
-      { id: '4', count: 1 },
-      { id: '13', count: 1 },
-      { id: '15', count: 1 },
-      { id: '18', count: 2 },
+      // { id: '1', count: 2 },
+      // { id: '7', count: 1 },
+      // { id: '4', count: 1 },
+      // { id: '13', count: 1 },
+      // { id: '15', count: 1 },
+      // { id: '18', count: 2 },
 
     ];
 
@@ -32,10 +32,18 @@ class CartStorage {
         count: 1
       })
     }
-    console.log('cart', this.cartProducts)
+    console.log(this.cartProducts)
   }
 
   removeProduct(id: string) {
+    const cartProduct = this.cartProducts.find((cartProd) => cartProd.id === id);
+    if (cartProduct) {
+      this.cartProducts = this.cartProducts.filter((cartProd) => cartProd.id !== id);
+    }
+    console.log(this.cartProducts)
+  }
+
+  decrProduct(id: string) {
     const cartProduct = this.cartProducts.find((cartProd) => cartProd.id === id);
     if (cartProduct) {
       cartProduct.count -=1;
@@ -43,7 +51,6 @@ class CartStorage {
         this.cartProducts = this.cartProducts.filter((cartProd) => cartProd.count !== 0);
       }
     }
-    console.log('cart', this.cartProducts)
   }
 
   getCartProducts() {

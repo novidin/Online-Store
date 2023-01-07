@@ -5,11 +5,9 @@ class Router {
 
   private routes;
   private reqParams;
-  // private currentR;
 
   constructor() {
     this.routes = routes;
-    // this.currentPage = null;
     this.reqParams = {};
   }
 
@@ -30,8 +28,6 @@ class Router {
         document.body.innerHTML = '';
         currRoute.page.render(reqParams);
       }
-      // document.body.innerHTML = '';
-      // currRoute.page.render(reqParams);
     }
   }
 
@@ -54,12 +50,14 @@ class Router {
   setReqParams(name: string, value: string) {
     const reqParams = new URLSearchParams(this.reqParams);
 
+    console.log('rputer', reqParams);
     if (reqParams.has(name)) {
       reqParams.set(name, value)
     } else {
       reqParams.append(name, value)
     }
     this.reqParams = reqParams;
+
     const newURL = new URL(location.toString());
     newURL.search = reqParams.toString();
     this.goTo(newURL.toString());

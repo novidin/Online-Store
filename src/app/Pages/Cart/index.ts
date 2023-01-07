@@ -11,17 +11,24 @@ class CartPage {
 
   private sectionCartProducts: SectionCartProducts;
   private sectionCartProductsHTML?: HTMLDivElement;
+  // private paginationControls?: PaginationControls;
   private paginationSection: HTMLElement;
   private main: HTMLElement;
+  private cartWrapper: HTMLElement;
 
   constructor() {
 
     this.sectionCartProducts = new SectionCartProducts();
     this.sectionCartProductsHTML;
-    this.paginationSection = document.createElement('section')
+
+    this.paginationSection = document.createElement('section');
+    // this.paginationControls;
     // this.paginationControls = new PaginationControls(cartStorage.getPagesCount());
     this.main = document.createElement('main');
     this.main.className = 'main';
+
+    this.cartWrapper = document.createElement('div');
+    this.cartWrapper.className = 'cart';
   }
 
   render(reqParams: IReqParams): void {
@@ -29,6 +36,7 @@ class CartPage {
     this.buildMainHTML(reqParams);
     document.body.appendChild(pageHeader.getHeaderDOM());
     document.body.appendChild(this.main);
+    this.main.appendChild(this.cartWrapper);
     document.body.appendChild(pageFooter.getFooterDOM());
   }
 
@@ -37,12 +45,12 @@ class CartPage {
     const cartProducts = cartStorage.getCartProducts();
 
     if (!cartProducts.length) {
-      this.main.innerHTML = '<div class="wrapper"><h2>Корзина пуста</h2></div>';
+      this.cartWrapper.innerHTML = '<h2>Корзина пуста</h2>';
       return;
     }
 
-    this.main.innerHTML = '';
-    this.main.appendChild(this.paginationSection);
+    this.cartWrapper.innerHTML = '';
+    this.cartWrapper.appendChild(this.paginationSection);
     this.buildPagination();
     this.setReqParams(reqParams);
 
@@ -50,21 +58,21 @@ class CartPage {
   }
 
   buildPagination() {
+    //this.paginationControls?.remove()
+    this.paginationSection.innerHTML = '';
     const paginationControls = new PaginationControls(cartStorage.getPagesCount());
     this.paginationSection.appendChild(paginationControls.getHTML());
   }
 
   buildProductsHTML(pageNum = 1) {
     this.sectionCartProductsHTML?.remove();
-    this.sectionCartProductsHTML = this.sectionCartProducts.getHTML(pageNum);
+    this.sectionCartProductsHTML = this.sectionCartProducts.getHTML(pageNum) as HTMLDivElement;
     this.paginationSection.appendChild(this.sectionCartProductsHTML);
   }
 
   update(reqParams: IReqParams) {
-
     console.log('UPDATED', reqParams);
     this.setReqParams(reqParams)
-
   }
 
   setReqParams(reqParams: IReqParams) {

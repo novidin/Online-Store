@@ -1,39 +1,58 @@
 import dataStorage from "../../Storage";
 import { seasonNames } from "../../Storage/consts";
 import cartStorage from "../../Storage/Cart";
+import router from "../../Router";
+
 
 class SectionCartProducts {
 
   private section: HTMLElement;
+  private cartProductsWrapper: HTMLElement;
+  private pageNum: number;
 
   constructor() {
     this.section = document.createElement('section');
+    this.pageNum = 1;
+    this.cartProductsWrapper = document.createElement('div');
+    this.cartProductsWrapper.className = 'cart__catalog';
   }
 
-  getHTML(pageNum = 1) {
-    const cartProductsWrapper = document.createElement('div');
+  buildHTML() {
 
-    console.log('pageCount', cartStorage.getPagesCount(), pageNum)
-    if (pageNum > cartStorage.getPagesCount()) {
-      cartProductsWrapper.innerHTML = `<p>товары не найдены </p>`;
-      return cartProductsWrapper;
+    const addToCartEvent = new Event('addedToCard', {bubbles: true});
+    const productsData = cartStorage.getPaginatedItems(this.pageNum);
+
+    if (!productsData) {
+      router.goTo('/cart');
+      return;
     }
-    const productsData = cartStorage.getPaginatedItems(pageNum)
+
+    if (this.pageNum > cartStorage.getPagesCount()) {
+      this.cartProductsWrapper.innerHTML = `<p>товары не найдены </p>`;
+      return this.cartProductsWrapper;
+    }
 
     productsData.forEach((cartProd) => {
-      const cartProductWrapper = document.createElement('div');
-      cartProductWrapper.className = 'product';
+      const cartProductWrapper = document.createElement('article');
+      cartProductWrapper.className = 'product product--cart-view';
       const product = dataStorage.getProductById(cartProd.id);
       cartProductWrapper.innerHTML = `
-      <div class="product__column product__column--main">
-      <div class="product__header">
-        <div class="product__title">
-          <p class="product__brand">${cartProd.num}</>
-          <h3 class="product__brand">${product.brand}</h3>
-          <span class="product__model">${product.model}</span>
-          <span class="product__sizes">${product.size}</span>
+        <div class="product__column product__column--main">
+          <div class="product__title">
+            <h3 class="product__brand">${product.brand}</h3>
+            <span class="product__model">${product.model}</span>
+            <span class="product__sizes">${product.size}</span>
+          </div>
+          <img class="product__image"
+               src="${product.imageUrl[0]}"
+               alt="${product.brand} ${product.model}">
         </div>
-      </div>
+      `
+
+      /** Features Column */
+
+      const featuresListWrapper = document.createElement('div');
+      featuresListWrapper.innerHTML = `
       <ul class="product__labels-list">
         <li class="product__labels-item">
           <span class="product__season icon icon--${product.season}"></span>
@@ -51,57 +70,156 @@ class SectionCartProducts {
           <span class="product__labels-title">Комент</span>
         </li>
       </ul>
-    </div>
-    <div class="product__column">
-      <div class="product__subtitle">
-        <p class="product__count">В наличии: ${product.count} шт.</p>
-      </div>
-      <img class="product__image"
-          src="${product.imageUrl[0]}"
-          alt="${product.brand} ${product.model}">
-    </div>
-
+      <ul class="product__features-list">
+        <li class="product__features-item">
+          <span class="product__features-title">Глубина протектора</span>
+          <span class="product__features-value">${product.features.protector} мм</span>
+        </li>
+        <li class="product__features-item">
+          <span class="product__features-title">Вес</span>
+          <span class="product__features-value">${product.features.weight} кг</span>
+        </li>
+        <li class="product__features-item">
+          <span class="product__features-title">Эксплуатация</span>
+          <span class="product__features-value">${product.features.exploitation}</span>
+        </li>
+        <li class="product__features-item">
+          <span class="product__features-title">Защита диска</span>
+          <span class="product__features-value">${product.features.discProtector}</span>
+        </li>
+        <li class="product__features-item">
+          <span class="product__features-title">Индекс нагрузки</span>
+          <span class="product__features-value">${product.features.loadIndex}</span>
+        </li>
+        <li class="product__features-item">
+          <span class="product__features-title">Индекс скорости</span>
+          <span class="product__features-value">${product.features.speedIndex}</span>
+        </li>
+      </ul>
       `
+      featuresListWrapper.className = 'product__column product__column--short is-hidden';
+
+      cartProductWrapper.appendChild(featuresListWrapper);
+
+      /** Total Column */
+
       const inputsWrapper = document.createElement('div');
       inputsWrapper.className = 'product__column product__column--price';
       cartProductWrapper.appendChild(inputsWrapper);
 
-      const counterWrapper =  document.createElement('div');
-      cartProductWrapper.appendChild(counterWrapper);
+      /** Numbering items */
+
+      const numberingWrapper = document.createElement('div');
+      numberingWrapper.className = 'product__delete-container';
+      inputsWrapper.appendChild(numberingWrapper);
+
+      const numberingSpan = document.createElement('span');
+      numberingSpan.className = 'product__delete';
+      numberingSpan.textContent = `${cartProd.num}`;
+      numberingWrapper.appendChild(numberingSpan);
+
+      /** Total calc */
+
+      const totalList = document.createElement('ul');
+      totalList.className = 'product__summary-list';
+      inputsWrapper.appendChild(totalList);
+
+      const totalCountItem = document.createElement('li');
+      totalCountItem.className = 'product__summary-item';
+      totalCountItem.innerHTML = `
+        <span class="product__summary-title">На складе</span>
+        <span class="product__summary-value">${product.count} шт</span>
+      `
+      totalList.appendChild(totalCountItem);
+
+      const priceItem = document.createElement('li');
+      priceItem.className = 'product__summary-item';
+      priceItem.innerHTML = `
+        <span class="product__summary-title">Цена за шт.</span>
+        <span class="product__summary-value">${product.price} руб</span>
+      `
+      totalList.appendChild(priceItem);
+
+      const counterItem =  document.createElement('li');
+      counterItem.className = 'product__summary-item';
+      counterItem.innerHTML = '<span class="product__summary-title">Количество</span>';
+      totalList.appendChild(counterItem);
+
+      const counterInputsWrapper = document.createElement('div');
+      counterInputsWrapper.className = 'product__summary-count';
+      counterItem.appendChild(counterInputsWrapper);
 
       const decrCountButton = document.createElement('button');
+      decrCountButton.className = 'button button--accent product__summary-button';
       decrCountButton.textContent = '-';
-      counterWrapper.appendChild(decrCountButton);
+      decrCountButton.onclick = () => {
+
+        cartStorage. decrProduct(cartProd.id) // addProduct(cartProd.id);
+        const value = +countInput.value - 1
+        countInput.value = value.toString();
+        totalValue.textContent = `${+countInput.value * +product.price} руб`;
+
+        decrCountButton.dispatchEvent(addToCartEvent);
+        if (value === 0) this.update();
+      }
+
+      counterInputsWrapper.appendChild(decrCountButton);
 
       const countInput = document.createElement('input');
+      countInput.className = 'product__summary-value product__summary-input';
       countInput.type = 'number';
       countInput.disabled = true;
       countInput.value = cartProd.count.toString();
-      counterWrapper.appendChild(countInput);
+      counterInputsWrapper.appendChild(countInput);
 
       const incrCountButton = document.createElement('button');
+      incrCountButton.className = 'button button--accent product__summary-button';
       incrCountButton.textContent = '+';
       incrCountButton.onclick = () => {
         if (+countInput.value >= +product.count) return;
-        const addToCartEvent = new Event('addedToCard', {bubbles: true});
-        incrCountButton.dispatchEvent(addToCartEvent);
+
         cartStorage.addProduct(cartProd.id);
         const value = +countInput.value + 1
         countInput.value = value.toString();
+        totalValue.textContent = `${+countInput.value * +product.price} руб`;
+
+        incrCountButton.dispatchEvent(addToCartEvent);
       }
-      counterWrapper.appendChild(incrCountButton);
+      counterInputsWrapper.appendChild(incrCountButton);
 
+      const totalItem =  document.createElement('li');
+      totalItem.className = 'product__summary-item';
+      totalItem.innerHTML = '<span class="product__summary-title">Стоимость</span>';
+      totalList.appendChild(totalItem);
 
-      cartProductsWrapper.appendChild(cartProductWrapper);
+      const totalValue = document.createElement('span');
+      totalValue.className = 'product__summary-value product__summary-value--accent';
+      totalValue.textContent = `${+countInput.value * +product.price} руб`;
+      totalItem.appendChild(totalValue);
+
+      const detailButton = document.createElement('button');
+      detailButton.className = 'button button--accent product__details-button';
+      detailButton.innerHTML = 'Детали <span class="icon icon--arrow-down"></span></button>';
+      detailButton.onclick = () => {
+        featuresListWrapper.classList.toggle('is-hidden');
+      }
+      inputsWrapper.appendChild(detailButton);
+
+      this.cartProductsWrapper.appendChild(cartProductWrapper);
     })
-
-    return cartProductsWrapper;
   }
 
-  // getCounterHTML() {
+  getHTML(pageNum: number) {
+    console.log('PPP', pageNum);
+    this.pageNum = pageNum || 1;
+    this.update();
+    return this.cartProductsWrapper;
+  }
 
-  // }
-
+  update() {
+    this.cartProductsWrapper.innerHTML = '';
+    this.buildHTML();
+  }
 }
 
 export default SectionCartProducts;

@@ -6,12 +6,12 @@ import router from "../../Router";
 
 class PaginationControls {
 
-  private pageCount: string;
-  private paginationControlsWrapper: HTMLDivElement;
-  private paginationLimitInput: HTMLInputElement;
-  private paginationPrevBtn: HTMLButtonElement;
-  private paginationPageNumInput: HTMLInputElement;
-  private paginationNextBtn: HTMLButtonElement;
+  private readonly pageCount: string;
+  private readonly paginationControlsWrapper: HTMLDivElement;
+  private readonly paginationLimitInput: HTMLInputElement;
+  private readonly paginationPrevBtn: HTMLButtonElement;
+  private readonly paginationPageNumInput: HTMLInputElement;
+  private readonly paginationNextBtn: HTMLButtonElement;
 
   constructor(pageCount: number) {
     this.pageCount = pageCount.toString()
@@ -69,7 +69,6 @@ class PaginationControls {
 
     this.paginationPageNumInput = document.createElement('input');
     this.paginationPageNumInput.className = 'pagination__page';
-    this.paginationPageNumInput.type = 'number';
     this.paginationPageNumInput.value = '1';
     this.paginationPageNumInput.disabled = true;
     paginationCounterWrapper.appendChild(this.paginationPageNumInput);

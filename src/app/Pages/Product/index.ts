@@ -1,9 +1,10 @@
-import {IReqParams} from "../../Types/index";
+import { IReqParams } from "../../Types/index";
 import router from "../../Router/index";
 import dataStorage from "../../Storage/index";
 import pageHeader from "../../Components/PageHeader/index";
 import pageFooter from "../../Components/PageFooter/index";
-import {seasonNames} from "../../Storage/consts";
+import { seasonNames } from "../../Storage/consts";
+import cartStorage from "../../Storage/Cart";
 
 class ProductPage {
 
@@ -32,7 +33,7 @@ class ProductPage {
             <span class="icon icon--link-navigation"></span>
           </li>
           <li class="link-navigation__item">
-            <a href="/catalog?season=${product.season}" class="link-navigation__link" data-local-link>${product.season}</a>
+            <a href="/catalog?season=${product.season}" class="link-navigation__link" data-local-link>${seasonNames[product.season]}</a>
             <span class="icon icon--link-navigation"></span>
           </li>
           <li class="link-navigation__item">
@@ -156,14 +157,36 @@ class ProductPage {
             </li>
           </ul>
         <button class="product__buy product__button button button--accent">Купить</button>
-        <button class="product__button button">В корзину</button>
+        <button id="cartButton" class="product__button button">В корзину</button>
       </div>
     `;
+
+      const cartButton = productWrapper.querySelector('#cartButton') as HTMLButtonElement;
+
+      if (cartStorage.isProductInCart(product.id)) {
+        cartButton.textContent = 'В корзине';
+        cartButton.classList.add('button--in-cart');
+      }
+
+      cartButton.onclick = () => {
+        if (cartStorage.isProductInCart(product.id)) {
+          cartStorage.removeProduct(product.id);
+          cartButton.textContent = 'В корзину';
+          cartButton.classList.remove('button--in-cart');
+        } else {
+          cartStorage.addProduct(product.id);
+          cartButton.textContent = 'В корзине';
+        cartButton.classList.add('button--in-cart');
+        }
+        const addToCartEvent = new Event('addedToCard', { bubbles: true });
+        cartButton.dispatchEvent(addToCartEvent);
+      }
     }
 
     document.body.appendChild(pageHeader.getHeaderDOM());
     document.body.appendChild(main);
     document.body.appendChild(pageFooter.getFooterDOM());
+
 
     // Change image in card when user click miniature
     const miniatures = document.querySelectorAll('.product__miniatures-item') as NodeListOf<HTMLElement>;

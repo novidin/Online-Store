@@ -21,6 +21,14 @@
     }
   }
 
+  &--in-cart {
+    background-color: #5fa762;
+
+    &:hover {
+      background-color: #59865c;
+    }
+  }
+
   &--disable {
     background-color: $color-disable;
     cursor: default;

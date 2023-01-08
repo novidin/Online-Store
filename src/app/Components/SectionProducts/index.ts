@@ -193,7 +193,7 @@ class SectionProducts {
 
     if (cartStorage.isProductInCart(product.id)) {
       cartButton.textContent = 'В корзине';
-      cartButton.classList.add('button--accent');
+      cartButton.classList.add('button--in-cart');
     }
 
     cartButton.onclick = () => {

@@ -155,7 +155,7 @@ class ProductPage {
               <p class="product__offers-title">Доставка по РБ</p>
             </li>
           </ul>
-        <button class="product__buy product__button button">Купить</button>
+        <button class="product__buy product__button button button--accent">Купить</button>
         <button class="product__button button">В корзину</button>
       </div>
     `;

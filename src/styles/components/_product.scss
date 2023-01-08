@@ -826,11 +826,11 @@
 
   .product__image {
     @include media-sm {
-      margin-top: $indent;
+      margin-top: $indent*1.25;
     }
 
-    @include media-sm {
-      margin-top: $indent*2;
+    @include media-2sm {
+      margin-top: $indent*1.75;
     }
   }
 
@@ -904,8 +904,7 @@
   }
 
   .product__summary-input {
-    all: inset;
-    max-width: 30px;
+    width: 2.5rem;
     text-align: center;
     border: none;
     -moz-appearance: textfield;
@@ -920,7 +919,7 @@
   .product__summary-count {
     display: flex;
     align-items: center;
-    gap: $indent*0.25;
+    gap: $indent*0.125;
   }
 
   .product__summary-button {
@@ -945,13 +944,9 @@
   }
 
   .product__delete {
-    @include font($font-family-base, map-get($font-size, s));
-    color: $color-font-regular;
+    @include font($font-family-base, map-get($font-size, m));
+    color: $color-primary;
     transition: $delay*2;
-    cursor: pointer;
-
-    &:hover {
-      color: $color-primary-hover;
-    }
+    cursor: default;
   }
 }

@@ -6,7 +6,7 @@ const buttonContent = {
 
 class ButtonCopyURL {
 
-  private readonly button: HTMLButtonElement;
+  private button: HTMLButtonElement;
 
   constructor() {
     this.button = document.createElement('button');
@@ -33,11 +33,8 @@ class ButtonCopyURL {
     this.button.disabled = true;
     this.button.classList.add('button--disable');
     setTimeout(() => {
-      this.button.ontransitionend = () => {
-        this.button.ontransitionend = () => null;
-        this.button.classList.remove('button--disable');
-        this.enableButton();
-      }
+      this.button.classList.remove('button--disable');
+      this.enableButton();
     }, 600);
   }
 

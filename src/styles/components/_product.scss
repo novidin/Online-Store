@@ -798,6 +798,10 @@
     &--price {
       order: 1;
     }
+
+    &--hidden {
+      display: none;
+    }
   }
 
   // ---------- Main column ----------

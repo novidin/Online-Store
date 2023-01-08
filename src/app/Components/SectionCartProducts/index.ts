@@ -97,7 +97,7 @@ class SectionCartProducts {
         </li>
       </ul>
       `
-      featuresListWrapper.className = 'product__column product__column--short is-hidden';
+      featuresListWrapper.className = 'product__column product__column--short product__column--hidden';
 
       cartProductWrapper.appendChild(featuresListWrapper);
 
@@ -201,7 +201,9 @@ class SectionCartProducts {
       detailButton.className = 'button button--accent product__details-button';
       detailButton.innerHTML = 'Детали <span class="icon icon--arrow-down"></span></button>';
       detailButton.onclick = () => {
-        featuresListWrapper.classList.toggle('is-hidden');
+        const detailsButtonIconDOM = detailButton.querySelector('.icon--arrow-down') as HTMLElement;
+        featuresListWrapper.classList.toggle('product__column--hidden');
+        detailsButtonIconDOM.classList.toggle('icon--rotate');
       }
       inputsWrapper.appendChild(detailButton);
 

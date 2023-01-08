@@ -23,7 +23,7 @@ class CatalogPage {
 
   render(reqParams: IReqParams): void {
     dataStorage.setFilters(reqParams);
-    document.title = `Online Store - Каталог`;
+    document.title = `Online Store — Каталог`;
     if (this.main) this.main.remove();
     this.main = document.createElement('main');
     this.main.className = 'main';

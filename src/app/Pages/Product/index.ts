@@ -14,7 +14,7 @@ class ProductPage {
     }
 
     const product = dataStorage.getProductById(reqParams.id[0]);
-    document.title = `Online Store - ${product?.model || 'not found'}`;
+    document.title = `Online Store — ${product?.model || 'not found'}`;
     const main = document.createElement('main');
     main.className = 'main';
     main.innerHTML = '<p>Товар не найден</p>';

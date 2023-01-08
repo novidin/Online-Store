@@ -41,7 +41,7 @@ class CartPage {
   }
 
   render(reqParams: IReqParams): void {
-    document.title = `Online Store - Корзина`;
+    document.title = `Online Store — Корзина`;
     this.buildMainHTML(reqParams);
     document.body.appendChild(pageHeader.getHeaderDOM());
     document.body.appendChild(this.main);

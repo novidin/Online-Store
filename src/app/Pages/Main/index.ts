@@ -10,7 +10,7 @@ class MainPage {
     if (reqParams.length) {
       router.goTo('/');
     }
-    document.title = `Online Store - Главная`;
+    document.title = `Online Store — Главная`;
     // document.body.innerHTML = `
     //   <nav-links></nav-links>
     //   <h1>Main Page</h1>

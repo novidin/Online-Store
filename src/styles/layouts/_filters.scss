@@ -13,6 +13,10 @@
     display: none;
     margin-top: $indent*0.5;
   }
+
+  &--open {
+    display: flex;
+  }
 }
 
 .filters__cell {

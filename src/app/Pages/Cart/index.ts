@@ -41,7 +41,7 @@ class CartPage {
   }
 
   render(reqParams: IReqParams): void {
-    document.title = `Online Store - Корзина`;
+    document.title = `Online Store — Корзина`;
     this.buildMainHTML(reqParams);
     document.body.appendChild(pageHeader.getHeaderDOM());
     document.body.appendChild(this.main);
@@ -53,7 +53,7 @@ class CartPage {
     const cartProducts = cartStorage.getCartProducts();
 
     if (!cartProducts.length) {
-      this.cartWrapper.innerHTML = '<h2>Корзина пуста</h2>';
+      this.cartWrapper.innerHTML = '<p class="cart__empty">Ваша корзина пуста</p>';
       return;
     }
 

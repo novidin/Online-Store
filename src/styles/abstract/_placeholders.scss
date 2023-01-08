@@ -49,6 +49,10 @@
   outline: none;
 }
 
+%container-gap {
+
+}
+
 // buttons, selects, options (for select), search
 %media-control-element {
   @include font($font-family-base, map-get($font-size, m));

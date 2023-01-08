@@ -1,5 +1,3 @@
-// import logo from '../../../assets/icons/logo.svg';
-// "./assets/icons/logo.svg"
 import template from './template.html';
 import cartStorage from '../../Storage/Cart';
 
@@ -23,7 +21,7 @@ class PageHaeader {
   setCartCounter(cartCounter: HTMLSpanElement): void {
     const cartCount = cartStorage.getCountProducts().toString();
     const cartTotal = cartStorage.getTotal().toString();
-    cartCounter.textContent = `${cartCount}шт/${cartTotal}руб`;
+    cartCounter.innerHTML = `<span>${cartCount} шт</span><span>${cartTotal} руб</span>`
   }
 }
 

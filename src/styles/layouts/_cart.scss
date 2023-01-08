@@ -20,24 +20,25 @@
 }
 
 .cart__catalog {
-  // width: 66%;
+  display: flex;
+  flex-direction: column;
+  row-gap: $indent;
   transition: $delay*2;
-
-  // @include media-md {
-  //   order: 3;
-  //   width: 100%;
-  // }
 }
 
 .cart__empty {
-  @include font($font-family-base, map-get($font-size, xl), 100%, bold);
-  margin: $indent*3 auto;
+  @include font($font-family-base, map-get($font-size, 2xl), 100%, bold);
+  margin: $indent*4 auto;
   text-align: center;
   color: $color-font-message;
   transition: $delay*2;
+  cursor: default;
 
   @include media-md {
-    font-size: map-get($font-size, l);
-    margin: $indent*2 auto;
+    font-size: map-get($font-size, xl);
+  }
+
+  @include media-2sm {
+    margin: $indent*3 auto;
   }
 }

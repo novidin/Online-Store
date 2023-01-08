@@ -21,6 +21,23 @@
     }
   }
 
+  &--in-cart {
+    background-color: #5fa762;
+
+    &:hover {
+      background-color: #59865c;
+    }
+  }
+
+  &--disable {
+    background-color: $color-disable;
+    cursor: default;
+
+    &:hover {
+      background-color: $color-disable;
+    }
+  }
+
   &--special {
     color: $color-accent;
     background-color: $color-background-element;

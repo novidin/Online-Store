@@ -48,6 +48,17 @@ class SectionCartProducts {
       /** Features Column */
 
       const featuresListWrapper = document.createElement('div');
+
+      let ratingStyleColor;
+
+      if (parseFloat(product.rating.overageRating) >= 4.8) {
+        ratingStyleColor = 'rating--good';
+      } else if (parseFloat(product.rating.overageRating) > 3.9) {
+        ratingStyleColor = 'rating--medium';
+      } else {
+        ratingStyleColor = 'rating--bad';
+      }
+
       featuresListWrapper.innerHTML = `
       <ul class="product__labels-list">
         <li class="product__labels-item">
@@ -56,8 +67,8 @@ class SectionCartProducts {
         </li>
         <li class="product__labels-item">
           <p class="product__rating">
-            <span class="icon icon--star rating rating--good"></span>
-            <span class="rating__value rating--good">${product.rating.overageRating}</span>
+              <span class="icon icon--star rating ${ratingStyleColor}"></span>
+              <span class="rating__value ${ratingStyleColor}">${product.rating.overageRating}</span>
           </p>
           <span class="product__labels-title">Рейтинг</span>
         </li>
@@ -93,7 +104,7 @@ class SectionCartProducts {
         </li>
       </ul>
       `
-      featuresListWrapper.className = 'product__column product__column--short is-hidden';
+      featuresListWrapper.className = 'product__column product__column--short product__column--hidden';
 
       cartProductWrapper.appendChild(featuresListWrapper);
 
@@ -114,19 +125,16 @@ class SectionCartProducts {
       numberingSpan.textContent = `${cartProd.num}`;
       numberingWrapper.appendChild(numberingSpan);
 
+      const productCount = document.createElement('span');
+      productCount.classList.add('product__count');
+      productCount.textContent = `В наличии: ${product.count} шт.`;
+      inputsWrapper.appendChild(productCount);
+
       /** Total calc */
 
       const totalList = document.createElement('ul');
       totalList.className = 'product__summary-list';
       inputsWrapper.appendChild(totalList);
-
-      const totalCountItem = document.createElement('li');
-      totalCountItem.className = 'product__summary-item';
-      totalCountItem.innerHTML = `
-        <span class="product__summary-title">На складе</span>
-        <span class="product__summary-value">${product.count} шт</span>
-      `
-      totalList.appendChild(totalCountItem);
 
       const priceItem = document.createElement('li');
       priceItem.className = 'product__summary-item';
@@ -200,7 +208,9 @@ class SectionCartProducts {
       detailButton.className = 'button button--accent product__details-button';
       detailButton.innerHTML = 'Детали <span class="icon icon--arrow-down"></span></button>';
       detailButton.onclick = () => {
-        featuresListWrapper.classList.toggle('is-hidden');
+        const detailsButtonIconDOM = detailButton.querySelector('.icon--arrow-down') as HTMLElement;
+        featuresListWrapper.classList.toggle('product__column--hidden');
+        detailsButtonIconDOM.classList.toggle('icon--rotate');
       }
       inputsWrapper.appendChild(detailButton);
 

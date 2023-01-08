@@ -1,4 +1,4 @@
-.menu__list {
+.menu {
   padding: 0;
   display: flex;
   list-style: none;
@@ -17,15 +17,19 @@
       display: none;
     }
   }
+}
 
-  &--active {
-    cursor: pointer;
+.menu__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: $delay*2;
 
-    &:hover {
-      @extend %basket-icon-hover;
-      .menu__title {
-        color: $color-font-link-hover;
-      }
+  &:hover {
+    @extend %basket-icon-hover;
+
+    .menu__title {
+      color: $color-font-link-hover;
     }
   }
 }
@@ -45,17 +49,18 @@
 
 .menu__count {
   @include font($font-family-base, map-get($font-size, xs));
-  // @include square-size(2rem);
   margin-left: $indent*0.125;
+  padding: $indent*0.125;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   color: $color-font-regular-light;
   background-color: $color-primary;
-  // border-radius: 50%;
+  border-radius: $border-radius-element;
   border: 0.2rem solid #ffffff;
 
-  //
-  padding: 5px;
-  min-width: 15rem;
+  @include media-md {
+    font-size: map-get($font-size, 2xs);
+  }
 }

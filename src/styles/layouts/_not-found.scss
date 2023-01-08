@@ -1,14 +1,15 @@
 .not-found {
-  margin: $indent*2 auto;
+  margin: $indent*3 auto;
   text-align: center;
   transition: $delay*2;
 
   @include media-md {
-    margin: $indent auto $indent*1.5 auto;
+    margin: $indent*2 auto;
   }
 }
 
 .not-found__image {
+  transition: $delay*2;
   @include icon-background("../assets/icons/404.svg", 16rem, 40rem);
 
   @include media-md {
@@ -16,7 +17,7 @@
   }
 
   @include media-2sm {
-    width: 28rem;
+    width: 26rem;
   }
 }
 

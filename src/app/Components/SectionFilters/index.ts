@@ -7,12 +7,12 @@ import FilterSearch from '../FilterSearch';
 
 class SectionFilters {
 
-  private filtersWrapper: HTMLElement;
-  private multiRangeCount: MultiRange;
-  private multiRangePrice: MultiRange;
-  private selectSizes: FilterSelect;
-  private selectBrands: FilterSelect
-  private filterSeasons: FilterSeasons;
+  private readonly filtersWrapper: HTMLElement;
+  private readonly multiRangeCount: MultiRange;
+  private readonly multiRangePrice: MultiRange;
+  private readonly selectSizes: FilterSelect;
+  private readonly selectBrands: FilterSelect
+  private readonly filterSeasons: FilterSeasons;
   private filtersObjects: (MultiRange | FilterSelect | FilterSeasons)[];
   private filterSearch: FilterSearch;
 
@@ -26,6 +26,15 @@ class SectionFilters {
     filterSwitcherButton.className = 'button button--accent filters__button';
     filterSwitcherButton.innerHTML = 'Фильтры <span class="icon icon--arrow-down"></span>';
     this.filtersWrapper.appendChild(filterSwitcherButton);
+
+    filterSwitcherButton.addEventListener('click', (e: Event): void => {
+      e.preventDefault();
+      const filtersGridDOM = document.querySelector('.filters__grid') as HTMLDivElement;
+      const filtersButtonIconDOM = document.querySelector('.icon--arrow-down') as HTMLElement;
+
+      filtersGridDOM.classList.toggle('filters__grid--open');
+      filtersButtonIconDOM.classList.toggle('icon--rotate');
+    })
 
     const filtersGrid = document.createElement('div');
     filtersGrid.className = 'filters__grid';

@@ -1,14 +1,11 @@
 .pagination {
-  // width: 66%;
-  padding: $indent*0.5 0;
+  margin: $indent*0.5 0 $indent 0;
   display: flex;
   justify-content: space-between;
   gap: $indent;
 
   @include media-md {
-    order: 2;
-    width: 100%;
-    padding: 0;
+    margin: 0 0 $indent 0;
   }
 }
 
@@ -30,8 +27,9 @@
   @include font($font-family-base, map-get($font-size, m));
   @extend %border-element;
   height: 4rem;
-  width: 8rem;
-  padding: $indent*0.25;
+  width: 6rem;
+  padding: $indent*0.125;
+  text-align: center;
   cursor: pointer;
 }
 
@@ -43,10 +41,10 @@
 }
 
 .pagination__page {
-  all: unset;
-  max-width: 30px;
-  text-align: center;
   @include font($font-family-base, map-get($font-size, m), 100%);
+  width: 2rem;
+  text-align: center;
+  border: none;
   transition: $delay*2;
   cursor: default;
   -moz-appearance: textfield;
@@ -56,7 +54,6 @@
     -webkit-appearance: none;
     margin: 0;
   }
-
 }
 
 .pagination__button {

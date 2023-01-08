@@ -1,8 +1,6 @@
 import router from "../../Router";
+import cartStorage from "../../Storage/Cart";
 
-/**
-*  TODO: bug in automatic swithing to last page when limit changed
-*/
 
 class PaginationControls {
 
@@ -13,8 +11,8 @@ class PaginationControls {
   private paginationPageNumInput: HTMLInputElement;
   private paginationNextBtn: HTMLButtonElement;
 
-  constructor(pageCount: number) {
-    this.pageCount = pageCount.toString()
+  constructor() {
+    this.pageCount = cartStorage.getPagesCount().toString();
     this.paginationControlsWrapper = document.createElement('div');
     this.paginationControlsWrapper.className = 'pagination';
 
@@ -35,10 +33,14 @@ class PaginationControls {
     this.paginationLimitInput.className = 'pagination__input';
     this.paginationLimitInput.type = 'number';
     this.paginationLimitInput.value = '3';
+    this.paginationLimitInput.min = '1';
     this.paginationLimitInput.onchange = () => {
-      // router.goTo(`/cart?limit=${this.paginationLimitInput.value}&page=1`)
+
+      cartStorage.setLimitProducts(+this.paginationLimitInput.value);
+      this.goToLastPage();
+      this.setButtonsState();
       this.route('limit', this.paginationLimitInput.value);
-    } //this.route('limit', this.paginationLimitInput.value);
+    }
     paginationLimitWrapper.appendChild(this.paginationLimitInput);
 
     /**
@@ -63,7 +65,6 @@ class PaginationControls {
     this.paginationPrevBtn.className = 'pagination__button button button--accent';
     this.paginationPrevBtn.textContent = '<';
 
-    // this.paginationPrevBtn.disabled = true;
     this.paginationPrevBtn.onclick = () => this.decrPageNum();
     paginationCounterWrapper.appendChild(this.paginationPrevBtn);
 
@@ -79,59 +80,49 @@ class PaginationControls {
     this.paginationNextBtn.textContent = '>';
     this.paginationNextBtn.onclick = () => this.incrPageNum()
     paginationCounterWrapper.appendChild(this.paginationNextBtn);
-    // console.log('pageCountCtrl', pageCount)
-    this.setLimitValue();
-    this.setPageValue();
+
   }
 
-  // update() {
-  //   this.pageCount = cartStorage.getPagesCount.toString();
-  // }
-
   getHTML() {
+    this.pageCount = cartStorage.getPagesCount().toString();
+    this.setButtonsState();
     return this.paginationControlsWrapper;
   }
 
-  // setLimitParam() {
-  //   cartStorage.
-  //   this.paginationLimitInput.value;
-  // }
-
-  setPageValue() {
-    const pageParam = router.getReqParamsAll()['page'];
-    if (!pageParam) return false;
-    this.paginationPageNumInput.value = pageParam[0]
-    // if (this.paginationPageNumInput.value !== pageParam[0]) {
-    //   this.paginationPageNumInput.value = pageParam[0]
-    // }
-    if (+pageParam[0] > +this.pageCount) {
-      console.log('ssssss', +pageParam[0], this.pageCount)
-      // const limitParam = router.getReqParamsAll()['limit'][0];
-      // router.goTo(`/cart?limit=${limitParam}&page=1`);
-      this.route('page', '1');
-    }
-    if (this.paginationPageNumInput.value === '1') {
-      this.paginationPrevBtn.disabled = true;
-    }
-
-    if (this.paginationPageNumInput.value === this.pageCount) {
-      this.paginationNextBtn.disabled = true;
+  goToLastPage() {
+    this.pageCount = cartStorage.getPagesCount().toString();
+    let pageValue = +this.paginationPageNumInput.value;
+    if (pageValue > +this.pageCount) {
+      pageValue = +this.pageCount;
+      this.setPageNum(pageValue);
     }
   }
 
-  setLimitValue() {
-    const limitParam = router.getReqParamsAll()['limit'];
-    if (!limitParam) return false;
-    this.paginationLimitInput.value = limitParam[0];
-    // if (this.paginationLimitInput.value !== limitParam[0]) {
-    //   this.paginationLimitInput.value = limitParam[0];
-    // }
+  goToFirstPage() {
+    this.setPageNum(1);
   }
 
-  // inputHandler(e: Event) {
-  //   const targetInput = e.target;
-  //   const pageValue = +this.paginationPageNumInput.value
-  // }
+  setValuesFromReqParams(limitVal: number) {
+    this.setLimitValue(limitVal.toString())
+  }
+
+  setLimitValue(limitVal: string) {
+    this.paginationLimitInput.value = limitVal;
+    cartStorage.setLimitProducts(+this.paginationLimitInput.value);
+    this.setButtonsState();
+  }
+
+  setButtonsState() {
+    this.pageCount = cartStorage.getPagesCount().toString();
+    this.paginationPrevBtn.disabled = (this.paginationPageNumInput.value === '1');
+    this.paginationNextBtn.disabled = (this.paginationPageNumInput.value === this.pageCount);
+  }
+
+  setPageNum(pageNum: number) {
+    this.setButtonsState();
+    this.paginationPageNumInput.value = pageNum.toString();
+    this.route('page', this.paginationPageNumInput.value);
+  }
 
   decrPageNum() {
     let pageValue = +this.paginationPageNumInput.value;
@@ -158,8 +149,6 @@ class PaginationControls {
     this.paginationPageNumInput.value = pageValue.toString();
     this.route('page', this.paginationPageNumInput.value);
   }
-
-
 
   private route(key: string, value: string): void {
     router.setReqParams(key, value);

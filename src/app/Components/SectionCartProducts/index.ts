@@ -1,7 +1,6 @@
 import dataStorage from "../../Storage";
 import { seasonNames } from "../../Storage/consts";
 import cartStorage from "../../Storage/Cart";
-import router from "../../Router";
 
 
 class SectionCartProducts {
@@ -9,10 +8,12 @@ class SectionCartProducts {
   private section: HTMLElement;
   private cartProductsWrapper: HTMLElement;
   private pageNum: number;
+  private delCallback: () => void;
 
-  constructor() {
+  constructor(delCallback: () => void) {
     this.section = document.createElement('section');
     this.pageNum = 1;
+    this.delCallback = delCallback;
     this.cartProductsWrapper = document.createElement('div');
     this.cartProductsWrapper.className = 'cart__catalog';
   }
@@ -22,14 +23,9 @@ class SectionCartProducts {
     const addToCartEvent = new Event('addedToCard', {bubbles: true});
     const productsData = cartStorage.getPaginatedItems(this.pageNum);
 
-    if (!productsData) {
-      router.goTo('/cart');
-      return;
-    }
-
     if (this.pageNum > cartStorage.getPagesCount()) {
-      this.cartProductsWrapper.innerHTML = `<p>товары не найдены </p>`;
-      return this.cartProductsWrapper;
+      this.delCallback();
+      return
     }
 
     productsData.forEach((cartProd) => {
@@ -160,7 +156,10 @@ class SectionCartProducts {
         totalValue.textContent = `${+countInput.value * +product.price} руб`;
 
         decrCountButton.dispatchEvent(addToCartEvent);
-        if (value === 0) this.update();
+        if (value === 0) {
+          this.update();
+
+        }
       }
 
       counterInputsWrapper.appendChild(decrCountButton);
@@ -210,7 +209,6 @@ class SectionCartProducts {
   }
 
   getHTML(pageNum: number) {
-    console.log('PPP', pageNum);
     this.pageNum = pageNum || 1;
     this.update();
     return this.cartProductsWrapper;

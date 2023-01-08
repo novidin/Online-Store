@@ -35,13 +35,12 @@ class ButtonCopyURL {
     setTimeout(() => {
       this.button.classList.remove('button--disable');
       this.enableButton();
-    }, 600);
+    }, 2000);
   }
 
   private enableButton(): void {
     this.button.innerHTML = buttonContent.ready;
     this.button.disabled = false;
-
   }
 
   getHTML(): HTMLButtonElement {

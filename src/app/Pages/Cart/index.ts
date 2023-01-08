@@ -5,34 +5,34 @@ import cartStorage from "../../Storage/Cart";
 import PaginationControls from "../../Components/PaginationControls";
 import SectionCartProducts from "../../Components/SectionCartProducts";
 import SectionCartTotal from "../../Components/SectionCartTotal";
-// import router from "../../Router";
 
 
 class CartPage {
 
   private sectionCartProducts: SectionCartProducts;
   private sectionCartProductsHTML?: HTMLDivElement;
-  // private paginationControls?: PaginationControls;
   private paginationSection: HTMLElement;
   private main: HTMLElement;
   private cartWrapper: HTMLElement;
   private totalWrapper: HTMLElement;
+  private paginationControls: PaginationControls;
   private sectionCartTotal: SectionCartTotal;
 
   constructor() {
-
-    this.sectionCartProducts = new SectionCartProducts();
+    this.paginationControls = new PaginationControls();
+    this.sectionCartProducts = new SectionCartProducts(this.goFirstPage.bind(this));
     this.sectionCartProductsHTML;
 
     this.paginationSection = document.createElement('section');
     this.paginationSection.className = 'cart__section';
-    // this.paginationControls;
-    // this.paginationControls = new PaginationControls(cartStorage.getPagesCount());
+
     this.main = document.createElement('main');
     this.main.className = 'main';
 
     this.cartWrapper = document.createElement('div');
     this.cartWrapper.className = 'cart';
+
+    this.paginationControls = new PaginationControls();
 
     this.totalWrapper = document.createElement('div');
     this.totalWrapper.className = 'promo';
@@ -50,7 +50,6 @@ class CartPage {
   }
 
   buildMainHTML(reqParams: IReqParams) {
-    console.log(reqParams)
     const cartProducts = cartStorage.getCartProducts();
 
     if (!cartProducts.length) {
@@ -61,8 +60,9 @@ class CartPage {
     this.cartWrapper.innerHTML = '';
     this.cartWrapper.appendChild(this.paginationSection);
     this.buildPagination();
+    this.setPaginationVals(reqParams);
     this.buildTotal();
-    this.setReqParams(reqParams);
+    this.update(reqParams);
   }
 
   buildTotal() {
@@ -71,10 +71,16 @@ class CartPage {
   }
 
   buildPagination() {
-    //this.paginationControls?.remove()
-    this.paginationSection.innerHTML = '';
-    const paginationControls = new PaginationControls(cartStorage.getPagesCount());
-    this.paginationSection.appendChild(paginationControls.getHTML());
+    this.paginationSection.appendChild(this.paginationControls.getHTML());
+  }
+
+  goFirstPage() {
+    this.paginationControls.goToFirstPage();
+  }
+
+  setPaginationVals(reqParams: IReqParams) {
+    const limitVal = (reqParams.limit && reqParams.limit[0]) ?  +reqParams.limit[0] : 3;
+    this.paginationControls.setValuesFromReqParams(limitVal)
   }
 
   buildProductsHTML(pageNum = 1) {
@@ -84,25 +90,9 @@ class CartPage {
   }
 
   update(reqParams: IReqParams) {
-    console.log('UPDATED', reqParams);
-    this.setReqParams(reqParams)
-  }
-
-  setReqParams(reqParams: IReqParams) {
-    console.log('rpar', reqParams);
-    if (reqParams.limit) {
-     cartStorage.setLimitProducts(+reqParams.limit[0]);
-     this.paginationSection.innerHTML = '';
-     this.buildPagination();
-     //this.buildProductsHTML();
-     // router.setReqParams('page', '1');
-    }
-    if (reqParams.page) {
-      this.buildProductsHTML(+reqParams.page[0]);
-    } else {
-      this.buildProductsHTML();
-    }
-
+    let pageVal = 1;
+    if (reqParams.page && reqParams.page[0]) pageVal = +reqParams.page[0]
+    this.buildProductsHTML(pageVal);
   }
 
 }

@@ -57,6 +57,9 @@ class SectionProducts {
     productsContainer.className = 'catalog__container';
     this.section.appendChild(productsContainer);
 
+    // TODO: maybe class names will be changed below...
+    if (!productsData.length) productsContainer.innerHTML = '<p class="catalog__title catalog__count">Товары не найдены</p>';
+
     productsData.forEach((product) => {
       const productCard = this.getProductCardHTML(product, viewMode);
       productsContainer.appendChild(productCard);

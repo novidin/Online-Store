@@ -5,6 +5,7 @@ import cardViewIcon from '../../../assets/icons/card-view.svg';
 import listViewIcon from '../../../assets/icons/list-view.svg';
 import SortSelect from "../SortSelect";
 import cartStorage from "../../Storage/Cart";
+import router from "../../Router";
 
 
 class SectionProducts {
@@ -19,25 +20,30 @@ class SectionProducts {
     const productsData = dataStorage.getCurrProducts()
     this.section.innerHTML = '';
     this.section.className = 'catalog';
-    /**
-     * TODO: insert views buttons and sort list
-     */
+
     const infoWrapper = document.createElement('div');
     infoWrapper.className = 'catalog__info';
     this.section.appendChild(infoWrapper);
 
+    /**
+     * Cards view
+     */
+
+    const [viewModeVal] = router.getReqParamsAll()['tile'] || ['false'];
+    const isViewModeTile = JSON.parse(viewModeVal);
+    const viewMode = isViewModeTile ? 'tile' : 'list';
+    const iconSrc = isViewModeTile ? listViewIcon : cardViewIcon;
+
+
     const switchCardViewButton = document.createElement('button');
     switchCardViewButton.className = 'catalog__button';
-    switchCardViewButton.innerHTML = `<img class="catalog__image" src="${cardViewIcon}" alt="Change view style">`;
+    switchCardViewButton.innerHTML = `<img class="catalog__image" src="${iconSrc}" alt="Change view style">`;
 
     switchCardViewButton.onclick = () => {
-      const productCard = document.querySelector('.product') as HTMLElement;
-      const iconSrc = productCard.classList.contains('product--tile-view') ? listViewIcon : cardViewIcon;
-      switchCardViewButton.innerHTML = `<img class="catalog__image " src="${iconSrc}" alt="Change view style">`;
-      changeProductsView();
+      router.setReqParams('tile', (!isViewModeTile).toString());
     }
 
-    infoWrapper.appendChild(switchCardViewButton)
+    infoWrapper.appendChild(switchCardViewButton);
 
     const sortSelect = new SortSelect();
     infoWrapper.appendChild(sortSelect.getHTML());
@@ -51,28 +57,10 @@ class SectionProducts {
     productsContainer.className = 'catalog__container';
     this.section.appendChild(productsContainer);
 
-    const productCards = productsData.map((product) => {
-      const productCard = this.getProductCardHTML(product);
+    productsData.forEach((product) => {
+      const productCard = this.getProductCardHTML(product, viewMode);
       productsContainer.appendChild(productCard);
-      return productCard;
     })
-
-    // TODO Временное решение,
-    //  т.к. возможно лучше удалить все карточки и добавить карточки с новым видом,
-    //  чем менять вид карточек (класс) по живому
-    const changeProductsView = () => {
-      const productCardArr = document.querySelectorAll('.product') as NodeListOf<HTMLElement>;
-      const productNewViewStyle = productCardArr[0].classList.contains('product--tile-view')
-        ? 'product--list-view'
-        : 'product--tile-view';
-
-      productCardArr.forEach((item: HTMLElement): void => {
-        item.setAttribute("class", "product");
-        item.classList.add(productNewViewStyle);
-      })
-    }
-
-    console.log('cards', productCards)
   }
 
   getSectionHTML() {
@@ -80,9 +68,9 @@ class SectionProducts {
     return this.section;
   }
 
-  getProductCardHTML(product: IProduct): HTMLElement {
+  getProductCardHTML(product: IProduct, viewMode: string): HTMLElement {
     const wrapper = document.createElement('article') as HTMLElement;
-    wrapper.className = 'product product--tile-view';
+    wrapper.className = `product product--${viewMode}-view`;
 
     let ratingStyleColor;
 

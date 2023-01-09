@@ -9,24 +9,19 @@ class CartStorage {
   private paginator: Paginator;
 
   constructor() {
-    this.cartProducts = [
-      // { id: '1', count: 2 },
-      // { id: '7', count: 1 },
-      // { id: '4', count: 1 },
-      // { id: '13', count: 1 },
-      // { id: '15', count: 1 },
-      // { id: '18', count: 2 },
-
-    ];
-
+    this.cartProducts = [];
     this.paginator = new Paginator(this.cartProducts);
   }
 
-  setProducts(cartProducts: ICartProduct[]) {
+  setProducts(cartProducts: ICartProduct[]): void {
     this.cartProducts = cartProducts;
   }
 
-  addProduct(id: string) {
+  clearProducts(): void {
+    this.cartProducts = [];
+  }
+
+  addProduct(id: string): void {
     if (this.isProductInCart(id)) {
       const cartProduct = this.cartProducts.find((cartProd) => cartProd.id === id);
       if (cartProduct) cartProduct.count += 1;
@@ -36,18 +31,16 @@ class CartStorage {
         count: 1
       })
     }
-    console.log(this.cartProducts)
   }
 
-  removeProduct(id: string) {
+  removeProduct(id: string): void {
     const cartProduct = this.cartProducts.find((cartProd) => cartProd.id === id);
     if (cartProduct) {
       this.cartProducts = this.cartProducts.filter((cartProd) => cartProd.id !== id);
     }
-    console.log(this.cartProducts)
   }
 
-  decrProduct(id: string) {
+  decrProduct(id: string): void {
     const cartProduct = this.cartProducts.find((cartProd) => cartProd.id === id);
     if (cartProduct) {
       cartProduct.count -=1;
@@ -57,11 +50,11 @@ class CartStorage {
     }
   }
 
-  getCartProducts() {
+  getCartProducts(): ICartProduct[] {
     return this.cartProducts;
   }
 
-  getOrderedProducts() {
+  getOrderedProducts(): ICartProduct[] {
     const orderedProducts = this.cartProducts.map((cartProd, i) => {
       cartProd.num = i + 1;
       return cartProd;
@@ -70,19 +63,19 @@ class CartStorage {
   }
 
 
-  getCount() {
+  getCount(): number {
     return this.cartProducts.length;
   }
 
-  getCountProducts() {
+  getCountProducts(): number {
     return this.cartProducts.reduce((count, cartProd) => count + +cartProd.count, 0);
   }
 
-  getTotal() {
+  getTotal(): number {
     return this.cartProducts.reduce((sum, cartProd) => sum + (+this.getPriceById(cartProd.id) * +cartProd.count), 0);
   }
 
-  getPriceById(id: string) {
+  getPriceById(id: string): number {
     const product = dataStorage.getProductById(id);
     return +product.price;
   }

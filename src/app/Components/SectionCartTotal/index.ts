@@ -58,7 +58,7 @@ class SectionCartTotal {
     `;
 
     return columnDOM;
-  };
+  }
 
   createActivateColumnDOM(): HTMLDivElement {
     const columnDOM = this.createColumnDOM() as HTMLDivElement;
@@ -77,7 +77,7 @@ class SectionCartTotal {
     `;
 
     return columnDOM;
-  };
+  }
 
   createConfirmColumnDOM(): HTMLDivElement {
     const columnDOM = this.createColumnDOM() as HTMLDivElement;

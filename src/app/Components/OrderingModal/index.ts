@@ -2,6 +2,8 @@ import imageCard from '../../../assets/icons/order/card.svg';
 import imageVisa from '../../../assets/icons/order/visa.svg';
 import imageMastercard from '../../../assets/icons/order/mastercard.svg';
 import imageBelcard from '../../../assets/icons/order/belcard.svg';
+import router from '../../Router';
+import cartStorage from '../../Storage/Cart';
 
 class OrderingModal {
 
@@ -78,7 +80,7 @@ class OrderingModal {
             <label class="ordering__form-label" for="orderingCardNumber">Номер карты</label>
             <div class="ordering__form-card-number">
               <input class="ordering__form-input" type="text" name="orderingCardNumber" id="orderingCardNumber"
-                     autocomplete="off" required>
+                     autocomplete="off" placeholder="начни с 4, 5 или 9" required>
               <span class="ordering__form-error">* Неверное значение</span>
               <div class="ordering__form-image">
                 <img src=${imageCard} alt="Неопределено">
@@ -121,7 +123,7 @@ class OrderingModal {
     const formDOM = document.querySelector('.ordering__form') as HTMLFormElement;
     const buttonDOM = document.querySelector('.ordering__button') as HTMLButtonElement;
 
-    const inputErrors = {
+    const inputErrors: {[key: string]: boolean} = {
       orderingName: false,
       orderingPhone: false,
       orderingAddress: false,
@@ -144,21 +146,19 @@ class OrderingModal {
 
       function checkValue(value: string, id: string): boolean {
 
-        const patterns = {
-          orderingName: /^[a-zA-Zа-яА-Я]{3,12}[' '][a-zA-Zа-яА-Я]{3,12}$/,
-          orderingPhone: /[+][0-9]{9,12}$/,
-          orderingAddress: /^[a-zA-Zа-яА-Я]{5,30}[' '][a-zA-Zа-яА-Я]{5,30}[' '][a-zA-Zа-яА-Я]{5,30}$/,
-          orderingEmail: /^([a-z0-9]{6,12})+@([a-z]+\.)+[a-z]{2,4}$/,
+        const patterns: {[key: string]: RegExp} = {
+          orderingName: /[a-zA-Zа-яА-Я]{3,}(\s[a-zA-Zа-яА-Я]{3,})+$/, // /^[a-zA-Zа-яА-Я]{3,12}[' '][a-zA-Zа-яА-Я]{3,12}$/,
+          orderingPhone: /[+][0-9]{9,}$/,
+          orderingAddress: /[a-zA-Zа-яА-Я]{5,}(\s[a-zA-Zа-яА-Я]{5,})+$/, // /^[a-zA-Zа-яА-Я]{5,30}[' '][a-zA-Zа-яА-Я]{5,30}[' '][a-zA-Zа-яА-Я]{5,30}$/,
+          orderingEmail: /^([a-z0-9]{3,12})+@([a-z]+\.)+[a-z]{2,4}$/,
           orderingCardNumber: /^[0-9]{16}$/,
           orderingExpirationDate: /^(0[1-9]|1[0-2])\/([0-9]{2}|[0-9]{2})$/,
           orderingCVV: /^[0-9]{3}$/
         };
 
-        // @ts-ignore
-        const regExp = new RegExp(patterns[id]);
+        const regExp = new RegExp(patterns[id]) ;
         const result = regExp.test(value);
 
-        // @ts-ignore
         if (id !== '') inputErrors[id] = result;
 
         return result
@@ -172,15 +172,18 @@ class OrderingModal {
 
       function watchExpirationDate() {
         const symbol = '/';
+        const ev = e as InputEvent
+        const inputType = ev.inputType
+        const input = e.target as HTMLInputElement;
 
-        if (target.value.length === 2) {
-          // @ts-ignore
-          e.target.value = e.inputType === 'deleteContentBackward'
-            ? target.value.split(symbol)[0]
-            : target.value + symbol
-        } else if (target.value.length > 4) {
-          // @ts-ignore
-          e.target.value = target.value.slice(0, 5);
+        if (e.target) {
+          if (target.value.length === 2) {
+            input.value = inputType === 'deleteContentBackward'
+              ? target.value.split(symbol)[0]
+              : target.value + symbol
+          } else if (target.value.length > 4) {
+            input.value = target.value.slice(0, 5);
+          }
         }
       }
 
@@ -210,6 +213,7 @@ class OrderingModal {
 
       if (errors.every(item => item)) {
         console.log('validate successful');
+        this.showSuccessMessage()
       } else if (errors.every(item => !item)) {
         // If all inputs are empty and user click button
         const errorSpanDOM = document.querySelectorAll('.ordering__form-error') as NodeListOf<HTMLElement>;
@@ -218,6 +222,21 @@ class OrderingModal {
         console.log('validate error');
       }
     });
+  }
+
+  showSuccessMessage(): void {
+    const modalContainer = this.modalDOM.querySelector('.ordering__container') as HTMLElement;
+
+    if (modalContainer) {
+      modalContainer.innerHTML = `
+        <h2 class="ordering__header">Спасибо за заказ!</h2>
+      `
+      setTimeout(() => {
+        cartStorage.clearProducts();
+        this.closeModal();
+        router.goTo('/catalog');
+      }, 3000);
+    }
   }
 }
 

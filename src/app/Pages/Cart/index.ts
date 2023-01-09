@@ -102,6 +102,13 @@ class CartPage {
   }
 
   private buildProductsHTML(pageNum = 1): void {
+    const cartProducts = cartStorage.getCartProducts();
+
+    if (!cartProducts.length) {
+      this.cartWrapper.innerHTML = '<p class="cart__empty">Ваша корзина пуста</p>';
+      return;
+    }
+
     this.sectionCartProductsHTML?.remove();
     this.sectionCartProductsHTML = this.sectionCartProducts.getHTML(pageNum) as HTMLDivElement;
     this.paginationSection.appendChild(this.sectionCartProductsHTML);

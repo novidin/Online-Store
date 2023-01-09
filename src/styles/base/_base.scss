@@ -9,9 +9,18 @@ html {
   font-size: 10px;
 }
 
+//addeв display: flex; flex-direction: column; for stretching main to full height
+
 body {
   min-width: 320px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: $color-background-page;
+}
+
+main {
+  flex-grow: 1;
 }
 
 .body--fixed {

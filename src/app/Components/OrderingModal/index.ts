@@ -2,6 +2,8 @@ import imageCard from '../../../assets/icons/order/card.svg';
 import imageVisa from '../../../assets/icons/order/visa.svg';
 import imageMastercard from '../../../assets/icons/order/mastercard.svg';
 import imageBelcard from '../../../assets/icons/order/belcard.svg';
+import router from '../../Router';
+import cartStorage from '../../Storage/Cart';
 
 class OrderingModal {
 
@@ -211,6 +213,7 @@ class OrderingModal {
 
       const errors = Object.values(inputErrors);
 
+      this.showSuccessMessage()
       if (errors.every(item => item)) {
         console.log('validate successful');
       } else if (errors.every(item => !item)) {
@@ -221,6 +224,21 @@ class OrderingModal {
         console.log('validate error');
       }
     });
+  }
+
+  showSuccessMessage(): void {
+    const modalContainer = this.modalDOM.querySelector('.ordering__container') as HTMLElement;
+
+    if (modalContainer) {
+      modalContainer.innerHTML = `
+        <h2 class="ordering__header">Спасибо за заказ!</h2>
+      `
+      setTimeout(() => {
+        cartStorage.clearProducts();
+        this.closeModal();
+        router.goTo('/catalog');
+      }, 3000);
+    }
   }
 }
 

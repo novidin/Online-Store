@@ -34,7 +34,7 @@ class CartPage {
     this.cartWrapper = document.createElement('div');
     this.cartWrapper.className = 'cart';
 
-    this.paginationControls = new PaginationControls();
+    // this.paginationControls = new PaginationControls();
 
     this.totalWrapper = document.createElement('div');
     this.totalWrapper.className = 'promo';
@@ -67,24 +67,18 @@ class CartPage {
     this.setPaginationVals(reqParams);
     this.buildTotal();
     this.update(reqParams);
-
-    // TODO Temporarily, because I think this is not the better place for addEventListener
-    this.openOrderingModal();
+    this.startListeners();
   }
 
-  openOrderingModal() {
-    const orderingButtonDOM = this.cartWrapper.querySelector('.promo__button') as HTMLButtonElement;
-
-    orderingButtonDOM.addEventListener('click', () => {
-      const orderingModalDOM = new OrderingModal();
-      orderingModalDOM.start();
-    })
+  private showOrderingModal(): void {
+    const orderingModalDOM = new OrderingModal();
+    orderingModalDOM.start();
   }
 
   private checkBuyNow(reqParams: IReqParams): void {
     if (reqParams.buy) {
-      console.log('I see popup')
       router.resetReqParams();
+      this.showOrderingModal();
     }
   }
 
@@ -111,6 +105,14 @@ class CartPage {
     this.sectionCartProductsHTML?.remove();
     this.sectionCartProductsHTML = this.sectionCartProducts.getHTML(pageNum) as HTMLDivElement;
     this.paginationSection.appendChild(this.sectionCartProductsHTML);
+  }
+
+  private startListeners(): void {
+    const orderingButtonDOM = this.cartWrapper.querySelector('.promo__button') as HTMLButtonElement;
+
+    orderingButtonDOM.addEventListener('click', () => {
+      this.showOrderingModal();
+    })
   }
 
   update(reqParams: IReqParams): void {

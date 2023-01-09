@@ -80,7 +80,7 @@ class OrderingModal {
             <label class="ordering__form-label" for="orderingCardNumber">Номер карты</label>
             <div class="ordering__form-card-number">
               <input class="ordering__form-input" type="text" name="orderingCardNumber" id="orderingCardNumber"
-                     autocomplete="off" required>
+                     autocomplete="off" placeholder="начни с 4, 5 или 9" required>
               <span class="ordering__form-error">* Неверное значение</span>
               <div class="ordering__form-image">
                 <img src=${imageCard} alt="Неопределено">
@@ -147,19 +147,17 @@ class OrderingModal {
       function checkValue(value: string, id: string): boolean {
 
         const patterns: {[key: string]: RegExp} = {
-          orderingName: /^[a-zA-Zа-яА-Я]{3,12}[' '][a-zA-Zа-яА-Я]{3,12}$/,
-          orderingPhone: /[+][0-9]{9,12}$/,
-          orderingAddress: /^[a-zA-Zа-яА-Я]{5,30}[' '][a-zA-Zа-яА-Я]{5,30}[' '][a-zA-Zа-яА-Я]{5,30}$/,
-          orderingEmail: /^([a-z0-9]{6,12})+@([a-z]+\.)+[a-z]{2,4}$/,
+          orderingName: /[a-zA-Zа-яА-Я]{3,}(\s[a-zA-Zа-яА-Я]{3,})+$/, // /^[a-zA-Zа-яА-Я]{3,12}[' '][a-zA-Zа-яА-Я]{3,12}$/,
+          orderingPhone: /[+][0-9]{9,}$/,
+          orderingAddress: /[a-zA-Zа-яА-Я]{5,}(\s[a-zA-Zа-яА-Я]{5,})+$/, // /^[a-zA-Zа-яА-Я]{5,30}[' '][a-zA-Zа-яА-Я]{5,30}[' '][a-zA-Zа-яА-Я]{5,30}$/,
+          orderingEmail: /^([a-z0-9]{3,12})+@([a-z]+\.)+[a-z]{2,4}$/,
           orderingCardNumber: /^[0-9]{16}$/,
           orderingExpirationDate: /^(0[1-9]|1[0-2])\/([0-9]{2}|[0-9]{2})$/,
           orderingCVV: /^[0-9]{3}$/
         };
 
-
         const regExp = new RegExp(patterns[id]) ;
         const result = regExp.test(value);
-
 
         if (id !== '') inputErrors[id] = result;
 
@@ -213,9 +211,9 @@ class OrderingModal {
 
       const errors = Object.values(inputErrors);
 
-      this.showSuccessMessage()
       if (errors.every(item => item)) {
         console.log('validate successful');
+        this.showSuccessMessage()
       } else if (errors.every(item => !item)) {
         // If all inputs are empty and user click button
         const errorSpanDOM = document.querySelectorAll('.ordering__form-error') as NodeListOf<HTMLElement>;

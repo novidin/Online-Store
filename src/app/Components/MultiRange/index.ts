@@ -1,6 +1,9 @@
 import dataStorage from "../../Storage";
 import router from "../../Router";
-// import { IFilterItems } from "../../Types";
+
+/**
+ * I want to be refactored
+ */
 
 class MultiRange {
 
@@ -38,8 +41,9 @@ class MultiRange {
 
   buildElements() {
     this.wrapper.innerHTML = '';
-    //console.log('valuees', priceRangestring, this.minRangeVal,  this.maxRangeVal, this.minCurrVal, this.maxCurrVal)
+
     /** FIELDS */
+
     if (this.title) {
       const titleSpan = document.createElement('span');
       titleSpan.className = 'multi-range__header';
@@ -48,6 +52,7 @@ class MultiRange {
     }
 
     const fieldsWrapper = document.createElement('div');
+
     fieldsWrapper.className = 'multi-range__fields';
     this.wrapper.appendChild(fieldsWrapper);
 
@@ -59,7 +64,6 @@ class MultiRange {
     inputMin.max = this.maxRangeVal;
     inputMin.oninput = () => {
       if ((+inputMin.value < +this.maxCurrVal) && (+inputMin.value > +this.minRangeVal)) {
-        // console.log('match', +inputMin.value < +this.maxCurrVal, +inputMin.value > +this.minRangeVal, inputMin.value, this.maxCurrVal ,this.minRangeVal)
         this.minCurrVal = inputMin.value;
         this.setValues({ rangeMin });
         this.route();
@@ -134,7 +138,6 @@ class MultiRange {
     rangeMin.step = '1';
     rangeMin.style.zIndex = '1';
     rangeMin.oninput = () => {
-      // console.log(rangeMin.value )
       if (+rangeMin.value > +this.maxCurrVal) rangeMin.value = this.maxCurrVal;
 
       this.minCurrVal = rangeMin.value;
@@ -153,19 +156,16 @@ class MultiRange {
     rangeMax.value = this.maxCurrVal;
     rangeMax.style.zIndex = '0';
     rangeMax.oninput = () => {
-      // console.log(rangeMax.value )
       if (+rangeMax.value < +this.minCurrVal) rangeMax.value = this.minCurrVal;
       this.maxCurrVal = rangeMax.value;
       this.setValues({ inputMax });
       this.route();
     }
     rangesWrapper.appendChild(rangeMax);
-    // this.fillRange();
     this.setValues({ inputMin, inputMax, rangeMin, rangeMax });
   }
 
-  setValues({ inputMin, inputMax, rangeMin, rangeMax }: { [key: string]: HTMLInputElement | null }) {
-    // console.log(inputMin, inputMax, rangeMin, rangeMax)
+  private setValues({ inputMin, inputMax, rangeMin, rangeMax }: { [key: string]: HTMLInputElement | null }): void {
     if (inputMin) inputMin.value = this.minCurrVal;
     if (inputMax) inputMax.value = this.maxCurrVal;
     if (rangeMin) rangeMin.value = this.minCurrVal;
@@ -174,11 +174,11 @@ class MultiRange {
 
   }
 
-  fillRange() {
-    // console.log('min', this.minCurrVal);
+  private fillRange(): void {
     const sliderColor = '#ddd';
     const rangeColor = '#ff0020';
     const distance = +this.maxRangeVal - +this.minRangeVal;
+
     this.rangeMax.style.background = `linear-gradient(
       to right,
       ${sliderColor} 0%,
@@ -189,11 +189,11 @@ class MultiRange {
       ${sliderColor} 100%)`;
   }
 
-  getHTML() {
+  getHTML(): HTMLDivElement {
     return this.wrapper;
   }
 
-  setDataVals() {
+  private setDataVals(): void {
     const priceRangestring = dataStorage.getValuesByKey(this.key, true);
 
     this.minRangeVal = Math.min(...Object.keys(priceRangestring).map((el) => +el)).toString();
@@ -206,13 +206,12 @@ class MultiRange {
                                     .map((el) => +el)).toString();
   }
 
-  update() {
+  update(): void {
     this.setDataVals();
     this.buildElements();
-    //this.setValues({ inputMin, inputMax, rangeMin, rangeMax });
   }
 
-  route() {
+  route(): void {
     router.setReqParams(this.key, `${this.minCurrVal},${this.maxCurrVal}`);
     this.updateCallback(this);
   }

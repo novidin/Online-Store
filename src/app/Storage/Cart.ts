@@ -10,16 +10,20 @@ class CartStorage {
 
   constructor() {
     this.cartProducts = [
-      { id: '1', count: 2 },
-      { id: '7', count: 1 },
-      { id: '4', count: 1 },
-      { id: '13', count: 1 },
+      // { id: '1', count: 2 },
+      // { id: '7', count: 1 },
+      // { id: '4', count: 1 },
+      // { id: '13', count: 1 },
       // { id: '15', count: 1 },
       // { id: '18', count: 2 },
 
     ];
 
     this.paginator = new Paginator(this.cartProducts);
+  }
+
+  setProducts(cartProducts: ICartProduct[]) {
+    this.cartProducts = cartProducts;
   }
 
   addProduct(id: string) {

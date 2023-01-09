@@ -2,12 +2,14 @@ import router from "../../Router";
 
 class SortSelect {
 
-  getHTML() {
+  getHTML(): HTMLSelectElement {
     const reqParams =  router.getReqParamsAll();
-
     const wrapper = document.createElement('div');
+
     wrapper.className = 'catalog__select select';
+
     const selectInput = document.createElement('select');
+
     selectInput.className = 'select__select';
     selectInput.innerHTML = `
       <option hidden>Сортировка</option>
@@ -18,11 +20,13 @@ class SortSelect {
       <option value="productRating-ASC" class="select__option">Рейтинг ▲</option>
       <option value="productRating-DESC" class="select__option">Рейтинг ▼</option>
     `;
+
     const sortValue = reqParams['sort'];
+
     if (sortValue) selectInput.value = sortValue[0];
 
-    selectInput.onchange = () => {
-      this.route(selectInput.value)
+    selectInput.onchange = (): void => {
+      this.route(selectInput.value);
     };
 
     return selectInput;

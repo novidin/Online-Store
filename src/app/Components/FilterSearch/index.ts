@@ -14,10 +14,11 @@ class FilterSearch {
     this.inputValue = '';
   }
 
-  getHTML() {
+  getHTML(): HTMLDivElement {
     this.wrapper.innerHTML = '';
 
     const searchInput = document.createElement('input');
+
     searchInput.className = 'search__input';
     searchInput.type = 'search';
     searchInput.placeholder = 'Поиск';
@@ -26,10 +27,12 @@ class FilterSearch {
     this.wrapper.appendChild(searchInput);
 
     const buttonsWrapper = document.createElement('div');
+
     buttonsWrapper.className = 'search__buttons';
     this.wrapper.appendChild(buttonsWrapper);
 
     const searchButton = document.createElement('button');
+
     searchButton.className = 'button search__button-search';
     searchButton.textContent = 'Найти';
     searchButton.onclick = () => {
@@ -38,7 +41,8 @@ class FilterSearch {
     }
     buttonsWrapper.appendChild(searchButton);
 
-    const buttonCopyURL = new ButtonCopyURL()
+    const buttonCopyURL = new ButtonCopyURL();
+
     buttonsWrapper.appendChild(buttonCopyURL.getHTML());
 
     return this.wrapper;

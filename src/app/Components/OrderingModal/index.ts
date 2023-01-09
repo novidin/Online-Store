@@ -121,7 +121,7 @@ class OrderingModal {
     const formDOM = document.querySelector('.ordering__form') as HTMLFormElement;
     const buttonDOM = document.querySelector('.ordering__button') as HTMLButtonElement;
 
-    const inputErrors = {
+    const inputErrors: {[key: string]: boolean} = {
       orderingName: false,
       orderingPhone: false,
       orderingAddress: false,
@@ -144,7 +144,7 @@ class OrderingModal {
 
       function checkValue(value: string, id: string): boolean {
 
-        const patterns = {
+        const patterns: {[key: string]: RegExp} = {
           orderingName: /^[a-zA-Zа-яА-Я]{3,12}[' '][a-zA-Zа-яА-Я]{3,12}$/,
           orderingPhone: /[+][0-9]{9,12}$/,
           orderingAddress: /^[a-zA-Zа-яА-Я]{5,30}[' '][a-zA-Zа-яА-Я]{5,30}[' '][a-zA-Zа-яА-Я]{5,30}$/,
@@ -154,11 +154,11 @@ class OrderingModal {
           orderingCVV: /^[0-9]{3}$/
         };
 
-        // @ts-ignore
-        const regExp = new RegExp(patterns[id]);
+
+        const regExp = new RegExp(patterns[id]) ;
         const result = regExp.test(value);
 
-        // @ts-ignore
+
         if (id !== '') inputErrors[id] = result;
 
         return result
@@ -172,15 +172,18 @@ class OrderingModal {
 
       function watchExpirationDate() {
         const symbol = '/';
+        const ev = e as InputEvent
+        const inputType = ev.inputType
+        const input = e.target as HTMLInputElement;
 
-        if (target.value.length === 2) {
-          // @ts-ignore
-          e.target.value = e.inputType === 'deleteContentBackward'
-            ? target.value.split(symbol)[0]
-            : target.value + symbol
-        } else if (target.value.length > 4) {
-          // @ts-ignore
-          e.target.value = target.value.slice(0, 5);
+        if (e.target) {
+          if (target.value.length === 2) {
+            input.value = inputType === 'deleteContentBackward'
+              ? target.value.split(symbol)[0]
+              : target.value + symbol
+          } else if (target.value.length > 4) {
+            input.value = target.value.slice(0, 5);
+          }
         }
       }
 

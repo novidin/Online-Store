@@ -4,12 +4,12 @@ import cartStorage from "../../Storage/Cart";
 
 class PaginationControls {
 
-  private readonly pageCount: string;
-  private readonly paginationControlsWrapper: HTMLDivElement;
-  private readonly paginationLimitInput: HTMLInputElement;
-  private readonly paginationPrevBtn: HTMLButtonElement;
-  private readonly paginationPageNumInput: HTMLInputElement;
-  private readonly paginationNextBtn: HTMLButtonElement;
+  private pageCount: string;
+  private paginationControlsWrapper: HTMLDivElement;
+  private paginationLimitInput: HTMLInputElement;
+  private paginationPrevBtn: HTMLButtonElement;
+  private paginationPageNumInput: HTMLInputElement;
+  private paginationNextBtn: HTMLButtonElement;
 
   constructor() {
     this.pageCount = cartStorage.getPagesCount().toString();

@@ -1,5 +1,6 @@
 import router from './Router/index';
-// import './Components';
+import cartStorage from './Storage/Cart';
+import { ICartProduct } from './Types';
 
 
 class App {
@@ -8,10 +9,28 @@ class App {
 
   constructor() {
     this.router = router;
+
+    this.getLocalStorage();
+    window.addEventListener('beforeunload', this.setLocalStorage.bind(this));
   }
 
-  start():void {
+  start(): void {
     this.router.start();
+  }
+
+  setLocalStorage(): void {
+    const cartItems = cartStorage.getCartProducts();
+
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }
+
+  getLocalStorage(): void {
+    const cartData = localStorage.getItem('cartItems');
+
+    if (cartData) {
+      const cartItems: ICartProduct[] = JSON.parse(cartData);
+      cartStorage.setProducts(cartItems);
+    }
   }
 }
 

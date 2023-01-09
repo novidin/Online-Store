@@ -6,6 +6,7 @@ import PaginationControls from "../../Components/PaginationControls";
 import SectionCartProducts from "../../Components/SectionCartProducts";
 import SectionCartTotal from "../../Components/SectionCartTotal";
 import OrderingModal from "../../Components/OrderingModal";
+import router from "../../Router";
 
 
 class CartPage {
@@ -44,13 +45,14 @@ class CartPage {
   render(reqParams: IReqParams): void {
     document.title = `Online Store — Корзина`;
     this.buildMainHTML(reqParams);
-    document.body.appendChild(pageHeader.getHeaderDOM());
+    document.body.innerHTML = '';
+    document.body.appendChild(pageHeader.getHTML());
     document.body.appendChild(this.main);
     this.main.appendChild(this.cartWrapper);
-    document.body.appendChild(pageFooter.getFooterDOM());
+    document.body.appendChild(pageFooter.getHTML());
   }
 
-  buildMainHTML(reqParams: IReqParams) {
+  private buildMainHTML(reqParams: IReqParams): void {
     const cartProducts = cartStorage.getCartProducts();
 
     if (!cartProducts.length) {
@@ -60,6 +62,7 @@ class CartPage {
 
     this.cartWrapper.innerHTML = '';
     this.cartWrapper.appendChild(this.paginationSection);
+    this.checkBuyNow(reqParams);
     this.buildPagination();
     this.setPaginationVals(reqParams);
     this.buildTotal();
@@ -78,32 +81,41 @@ class CartPage {
     })
   }
 
-  buildTotal() {
+  private checkBuyNow(reqParams: IReqParams): void {
+    if (reqParams.buy) {
+      console.log('I see popup')
+      router.resetReqParams();
+    }
+  }
+
+  private buildTotal(): void {
     this.cartWrapper.appendChild(this.totalWrapper);
     this.totalWrapper.appendChild(this.sectionCartTotal.getHTML());
   }
 
-  buildPagination() {
+  private buildPagination(): void {
     this.paginationSection.appendChild(this.paginationControls.getHTML());
   }
 
-  goFirstPage() {
+  private goFirstPage(): void {
     this.paginationControls.goToFirstPage();
   }
 
-  setPaginationVals(reqParams: IReqParams) {
+  private setPaginationVals(reqParams: IReqParams): void {
     const limitVal = (reqParams.limit && reqParams.limit[0]) ?  +reqParams.limit[0] : 3;
+
     this.paginationControls.setValuesFromReqParams(limitVal)
   }
 
-  buildProductsHTML(pageNum = 1) {
+  private buildProductsHTML(pageNum = 1): void {
     this.sectionCartProductsHTML?.remove();
     this.sectionCartProductsHTML = this.sectionCartProducts.getHTML(pageNum) as HTMLDivElement;
     this.paginationSection.appendChild(this.sectionCartProductsHTML);
   }
 
-  update(reqParams: IReqParams) {
+  update(reqParams: IReqParams): void {
     let pageVal = 1;
+
     if (reqParams.page && reqParams.page[0]) pageVal = +reqParams.page[0]
     this.buildProductsHTML(pageVal);
   }

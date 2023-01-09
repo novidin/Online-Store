@@ -13,9 +13,9 @@ class Error404Page {
 
     const main = document.createElement('main');
 
-    document.body.appendChild(pageHeader.getHeaderDOM());
+    document.body.appendChild(pageHeader.getHTML());
     document.body.appendChild(main);
-    document.body.appendChild(pageFooter.getFooterDOM());
+    document.body.appendChild(pageFooter.getHTML());
 
     const notFoundDOM = document.createElement('div') as HTMLElement;
 

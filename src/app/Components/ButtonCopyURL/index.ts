@@ -1,12 +1,8 @@
-const buttonContent = {
-  ready: '<span class="icon icon--copy"></span>',
-  success: '<span class="icon icon--copy-access"></span>',
-  error: 'Fail!'
-};
+import { buttonCopyURLContent } from '../../Storage/consts';
 
 class ButtonCopyURL {
 
-  private readonly button: HTMLButtonElement;
+  private button: HTMLButtonElement;
 
   constructor() {
     this.button = document.createElement('button');
@@ -21,9 +17,9 @@ class ButtonCopyURL {
   private clickHandler(): void {
     const currURL: string = location.toString()
     navigator.clipboard.writeText(currURL).then(() => {
-      this.pauseButton(buttonContent.success);
+      this.pauseButton(buttonCopyURLContent.success);
     }).catch((err: Error) => {
-      this.pauseButton(buttonContent.error);
+      this.pauseButton(buttonCopyURLContent.error);
       alert(err);
     })
   }
@@ -33,18 +29,14 @@ class ButtonCopyURL {
     this.button.disabled = true;
     this.button.classList.add('button--disable');
     setTimeout(() => {
-      this.button.ontransitionend = () => {
-        this.button.ontransitionend = () => null;
-        this.button.classList.remove('button--disable');
-        this.enableButton();
-      }
-    }, 600);
+      this.button.classList.remove('button--disable');
+      this.enableButton();
+    }, 2000);
   }
 
   private enableButton(): void {
-    this.button.innerHTML = buttonContent.ready;
+    this.button.innerHTML = buttonCopyURLContent.ready;
     this.button.disabled = false;
-
   }
 
   getHTML(): HTMLButtonElement {

@@ -7,7 +7,6 @@
   <title>Автосеть — Главная</title>
 </head>
 <body>
-<div id="shadow" class="shadow"></div>
 
 <template id="product">
   <div class="link-navigation">
@@ -291,66 +290,6 @@
           <button id="orderingButton" class="button promo__button">Оформить заказ</button>
         </div>
       </div>
-    </div>
-  </div>
-</template>
-
-<template id="ordering">
-  <div class="ordering">
-    <div class="ordering__container">
-      <h2 class="ordering__header">Оформление заказа</h2>
-      <form class="ordering__form">
-        <div class="ordering__form-column">
-          <div class="ordering__form-line">
-            <label class="ordering__form-label" for="orderingName">Имя и Фамилия</label>
-            <input class="ordering__form-input" type="text" name="orderingName" id="orderingName" required>
-            <span class="ordering__form-error ordering__form-error--active">* Неверное значение</span>
-          </div>
-          <div class="ordering__form-line">
-            <label class="ordering__form-label" for="orderingPhone">Номер телефона</label>
-            <input class="ordering__form-input" type="text" name="orderingPhone" id="orderingPhone" required>
-            <span class="ordering__form-error">* Неверное значение</span>
-          </div>
-          <div class="ordering__form-line">
-            <label class="ordering__form-label" for="orderingAddress">Адрес доставки</label>
-            <input class="ordering__form-input" type="text" name="orderingAddress" id="orderingAddress" required>
-            <span class="ordering__form-error">* Неверное значение</span>
-          </div>
-          <div class="ordering__form-line">
-            <label class="ordering__form-label" for="orderingEmail">Почта</label>
-            <input class="ordering__form-input" type="text" name="orderingEmail" id="orderingEmail" required>
-            <span class="ordering__form-error">* Неверное значение</span>
-          </div>
-        </div>
-        <div class="ordering__form-column">
-          <div class="ordering__form-line">
-            <label class="ordering__form-label" for="orderingCardNumber">Номер карты</label>
-            <div class="ordering__form-card-number">
-              <input class="ordering__form-input" type="text" name="orderingCardNumber" id="orderingCardNumber"
-                     required>
-              <div class="ordering__form-image">
-                <img src="./assets/icons/pay/visa.png" alt="Visa">
-              </div>
-            </div>
-            <span class="ordering__form-error">* Неверное значение</span>
-          </div>
-          <div class="ordering__form-line">
-            <label class="ordering__form-label" for="orderingExpirationDate">Срок действия</label>
-            <input class="ordering__form-input" type="text" name="orderingExpirationDate" id="orderingExpirationDate"
-                   required>
-            <span class="ordering__form-error">* Неверное значение</span>
-          </div>
-          <div class="ordering__form-line">
-            <label class="ordering__form-label" for="orderingCVV">CVV</label>
-            <input class="ordering__form-input" type="text" name="orderingCVV" id="orderingCVV" required>
-            <span class="ordering__form-error">* Неверное значение</span>
-          </div>
-          <div class="ordering__form-line">
-            <label class="ordering__form-label ordering__form-label--hidden">Подтвердить</label>
-            <button class="button ordering__button">Заказать</button>
-          </div>
-        </div>
-      </form>
     </div>
   </div>
 </template>

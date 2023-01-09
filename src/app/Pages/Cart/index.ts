@@ -5,6 +5,7 @@ import cartStorage from "../../Storage/Cart";
 import PaginationControls from "../../Components/PaginationControls";
 import SectionCartProducts from "../../Components/SectionCartProducts";
 import SectionCartTotal from "../../Components/SectionCartTotal";
+import OrderingModal from "../../Components/OrderingModal";
 import router from "../../Router";
 
 
@@ -66,6 +67,18 @@ class CartPage {
     this.setPaginationVals(reqParams);
     this.buildTotal();
     this.update(reqParams);
+
+    // TODO Temporarily, because I think this is not the better place for addEventListener
+    this.openOrderingModal();
+  }
+
+  openOrderingModal() {
+    const orderingButtonDOM = this.cartWrapper.querySelector('.promo__button') as HTMLButtonElement;
+
+    orderingButtonDOM.addEventListener('click', () => {
+      const orderingModalDOM = new OrderingModal();
+      orderingModalDOM.start();
+    })
   }
 
   private checkBuyNow(reqParams: IReqParams): void {

@@ -1,8 +1,4 @@
-const buttonContent = {
-  ready: '<span class="icon icon--copy"></span>',
-  success: '<span class="icon icon--copy-access"></span>',
-  error: 'Fail!'
-};
+import { buttonCopyURLContent } from '../../Storage/consts';
 
 class ButtonCopyURL {
 
@@ -21,9 +17,9 @@ class ButtonCopyURL {
   private clickHandler(): void {
     const currURL: string = location.toString()
     navigator.clipboard.writeText(currURL).then(() => {
-      this.pauseButton(buttonContent.success);
+      this.pauseButton(buttonCopyURLContent.success);
     }).catch((err: Error) => {
-      this.pauseButton(buttonContent.error);
+      this.pauseButton(buttonCopyURLContent.error);
       alert(err);
     })
   }
@@ -39,7 +35,7 @@ class ButtonCopyURL {
   }
 
   private enableButton(): void {
-    this.button.innerHTML = buttonContent.ready;
+    this.button.innerHTML = buttonCopyURLContent.ready;
     this.button.disabled = false;
   }
 

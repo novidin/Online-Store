@@ -17,21 +17,24 @@ class FilterSelect {
     this.select.className = 'select__select';
   }
 
-  getFilterDOM() {
+  getHTML(): HTMLSelectElement {
     this.update();
     return this.select;
   }
 
-  update() {
+  update(): void {
     const sizesValues = dataStorage.getValuesByKey(this.keySearch, true);
-    //this.select.remove()
+
     this.select.innerHTML = ``;
 
     const defaultOption = document.createElement('option');
+
     defaultOption.hidden = true;
     defaultOption.textContent = this.title;
     this.select.appendChild(defaultOption);
+
     const optionAll = document.createElement('option');
+
     optionAll.textContent = 'Все';
     optionAll.value = '';
     optionAll.className = 'select__option';
@@ -39,6 +42,7 @@ class FilterSelect {
 
     for (const key in sizesValues) {
       const option = document.createElement('option');
+
       option.textContent = `${key}(${sizesValues[key].curr}/${sizesValues[key].total})`;
       option.value = key;
       option.className = 'select__option';
@@ -48,21 +52,23 @@ class FilterSelect {
     let value = '';
 
     const reqParams =  router.getReqParamsAll();
+
     if (this.keySearch in reqParams) {
       const routerParams = router.getReqParamsAll();
+
       if (routerParams) {
         value = routerParams[this.keySearch][0];
       }
       this.select.value = value
     }
 
-    this.select.onchange = () => {
+    this.select.onchange = (): void => {
       this.route(this.select.value)
     }
   }
 
   route(param: string): void {
-    router.setReqParams(this.keySearch, param)
+    router.setReqParams(this.keySearch, param);
     this.updateCallback(this);
   }
 }

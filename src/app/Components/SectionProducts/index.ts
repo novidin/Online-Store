@@ -1,100 +1,125 @@
-import dataStorage from "../../Storage";
-import { seasonNames } from "../../Storage/consts";
-import { IProduct } from "../../Types";
+import dataStorage from '../../Storage';
+import { seasonNames } from '../../Storage/consts';
+import { IProduct } from '../../Types';
 import cardViewIcon from '../../../assets/icons/card-view.svg';
 import listViewIcon from '../../../assets/icons/list-view.svg';
-import SortSelect from "../SortSelect";
-import cartStorage from "../../Storage/Cart";
-import router from "../../Router";
+import SortSelect from '../SortSelect';
+import cartStorage from '../../Storage/Cart';
+import router from '../../Router';
+import { getRatingStyleColor } from '../../utils';
 
 
 class SectionProducts {
 
-  private readonly section: HTMLElement;
+  private section: HTMLElement;
 
   constructor() {
     this.section = document.createElement('section');
   }
 
   buildHTML() {
-    const productsData = dataStorage.getCurrProducts()
+    const productsData = dataStorage.getCurrProducts();
+
     this.section.innerHTML = '';
     this.section.className = 'catalog';
 
     const infoWrapper = document.createElement('div');
+
     infoWrapper.className = 'catalog__info';
     this.section.appendChild(infoWrapper);
 
-    /**
-     * Cards view
-     */
-
-    const [viewModeVal] = router.getReqParamsAll()['tile'] || ['false'];
-    const isViewModeTile = JSON.parse(viewModeVal);
-    const viewMode = isViewModeTile ? 'tile' : 'list';
-    const iconSrc = isViewModeTile ? listViewIcon : cardViewIcon;
-
-
-    const switchCardViewButton = document.createElement('button');
-    switchCardViewButton.className = 'catalog__button';
-    switchCardViewButton.innerHTML = `<img class="catalog__image" src="${iconSrc}" alt="Change view style">`;
-
-    switchCardViewButton.onclick = () => {
-      router.setReqParams('tile', (!isViewModeTile).toString());
-    }
-
-    infoWrapper.appendChild(switchCardViewButton);
+    infoWrapper.appendChild(this.getSwitchCardViewButtonHTML());
 
     const sortSelect = new SortSelect();
+
     infoWrapper.appendChild(sortSelect.getHTML());
 
     const title = document.createElement('p');
+
     title.className = 'catalog__title';
     title.innerHTML = `Найдено: <span class="catalog__count">${productsData.length}</span>`;
     this.section.appendChild(title);
 
     const productsContainer = document.createElement('div');
+
     productsContainer.className = 'catalog__container';
     this.section.appendChild(productsContainer);
 
-    // TODO: maybe class names will be changed below...
+    // TODO: maybe class names below will be changed...
     if (!productsData.length) productsContainer.innerHTML = '<p class="catalog__title catalog__count">Товары не найдены</p>';
+
+    const viewMode = this.isViewModeTile() ? 'tile' : 'list';
 
     productsData.forEach((product) => {
       const productCard = this.getProductCardHTML(product, viewMode);
+
       productsContainer.appendChild(productCard);
     })
   }
 
-  getSectionHTML() {
+  getHTML() {
     this.buildHTML();
     return this.section;
   }
 
-  getProductCardHTML(product: IProduct, viewMode: string): HTMLElement {
-    const wrapper = document.createElement('article') as HTMLElement;
-    wrapper.className = `product product--${viewMode}-view`;
+  private getSwitchCardViewButtonHTML() {
+    const switchCardViewButton = document.createElement('button');
+    const iconSrc = this.isViewModeTile() ? listViewIcon : cardViewIcon;
 
-    let ratingStyleColor;
+    switchCardViewButton.className = 'catalog__button';
+    switchCardViewButton.innerHTML = `<img class="catalog__image" src="${iconSrc}" alt="Change view style">`;
 
-    if (parseFloat(product.rating.overageRating) >= 4.8) {
-      ratingStyleColor = 'rating--good';
-    } else if (parseFloat(product.rating.overageRating) > 3.9) {
-      ratingStyleColor = 'rating--medium';
-    } else {
-      ratingStyleColor = 'rating--bad';
+    switchCardViewButton.onclick = () => {
+      router.setReqParams('tile', (!this.isViewModeTile()).toString());
     }
 
-    wrapper.innerHTML = `
+    return switchCardViewButton;
+  }
+
+  private isViewModeTile(): boolean {
+    const [viewModeVal] = router.getReqParamsAll()['tile'] || ['false'];
+
+    return JSON.parse(viewModeVal);
+
+  }
+
+  private getProductCardHTML(product: IProduct, viewMode: string): HTMLElement {
+    const wrapper = document.createElement('article') as HTMLElement;
+
+    wrapper.className = `product product--${viewMode}-view`;
+    wrapper.innerHTML = this.getProductCardTemplate(product);
+
+    const cartButton = wrapper.querySelector('.button') as HTMLButtonElement;
+
+    if (cartStorage.isProductInCart(product.id)) {
+      cartButton.textContent = 'В корзине';
+      cartButton.classList.add('button--in-cart');
+    }
+
+    cartButton.onclick = () => {
+      if (cartStorage.isProductInCart(product.id)) {
+        cartStorage.removeProduct(product.id);
+      } else {
+        cartStorage.addProduct(product.id);
+      }
+      const addToCartEvent = new Event('addedToCard', { bubbles: true });
+      cartButton.dispatchEvent(addToCartEvent);
+      this.buildHTML();
+    }
+    return wrapper;
+  }
+
+  private getProductCardTemplate(product: IProduct): string {
+    return `
       <div class="product__column product__column--main">
-       <h3 class="product__header">
+        <h3 class="product__header">
           <a id="productTitle" class="product__title" href="/product?id=${product.id}" data-local-link>
             <span class="product__brand">${product.brand}</span>
             <span class="product__model">${product.model}</span>
             <span class="product__sizes">${product.size}</span>
           </a>
         </h3>
-      <ul class="product__miniatures-list">
+        <ul class="product__miniatures-list">
           <li class="product__miniatures-item product__miniatures-item--active">
             <img class="product__miniatures-image"
                  src="${product.imageUrl[0]}" alt="${product.brand} ${product.model}">
@@ -104,10 +129,10 @@ class SectionProducts {
                  src="${product.imageUrl[1]}" alt="${product.brand} ${product.model}">
           </li>
         </ul>
-      <img class="product__image"
+        <img class="product__image"
           src="${product.imageUrl[0]}"
           alt="${product.brand} ${product.model}">
-    </div>
+      </div>
       <div class="product__column product__column--short">
         <div class="product__subtitle product__subtitle--top">
           <span class="product__price">${product.price} руб</span>
@@ -120,8 +145,8 @@ class SectionProducts {
           </li>
           <li class="product__labels-item">
             <p class="product__rating">
-              <span class="icon icon--star rating ${ratingStyleColor}"></span>
-              <span class="rating__value ${ratingStyleColor}">${product.rating.overageRating}</span>
+              <span class="icon icon--star rating ${getRatingStyleColor(product.rating.overageRating)}"></span>
+              <span class="rating__value ${getRatingStyleColor(product.rating.overageRating)}">${product.rating.overageRating}</span>
             </p>
             <span class="product__labels-title">Рейтинг</span>
           </li>
@@ -175,29 +200,10 @@ class SectionProducts {
               <span class="product__offers-icon icon icon--shipping"></span>
               <p class="product__offers-title">Доставка по РБ</p>
             </li>
-          </ul>
+        </ul>
         <button class="product__button button">В корзину</button>
       </div>
     `;
-
-    const cartButton = wrapper.querySelector('.button') as HTMLButtonElement;
-
-    if (cartStorage.isProductInCart(product.id)) {
-      cartButton.textContent = 'В корзине';
-      cartButton.classList.add('button--in-cart');
-    }
-
-    cartButton.onclick = () => {
-      if (cartStorage.isProductInCart(product.id)) {
-        cartStorage.removeProduct(product.id);
-      } else {
-        cartStorage.addProduct(product.id);
-      }
-      const addToCartEvent = new Event('addedToCard', { bubbles: true });
-      cartButton.dispatchEvent(addToCartEvent);
-      this.buildHTML();
-    }
-    return wrapper;
   }
 }
 

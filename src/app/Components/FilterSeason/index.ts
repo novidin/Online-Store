@@ -16,29 +16,33 @@ class FilterSeason {
     this.updateCallback = updateCallback;
   }
 
-  getFilterDOM(): HTMLUListElement {
+  getHTML(): HTMLUListElement {
     this.update();
     return this.ul;
   }
 
-  update() {
+  update(): void {
     this.seasonsVals = dataStorage.getValuesByKey('season');
     this.ul.innerHTML = '';
 
     for (const seasonKey in this.seasonsVals) {
       const li = document.createElement('li');
+
       li.className = 'season__item';
 
       const title = document.createElement('span');
+
       title.className = 'season__title';
       title.textContent = seasonNames[seasonKey];
       li.appendChild(title);
 
       const controlWrapper = document.createElement('div');
+
       controlWrapper.className = 'season__control';
       li.appendChild(controlWrapper);
 
       const input = document.createElement('input');
+
       input.type = 'checkbox';
       input.value = seasonKey;
       input.className = 'season__check';
@@ -50,11 +54,13 @@ class FilterSeason {
       controlWrapper.appendChild(input);
 
       const label = document.createElement('label');
+
       label.className = 'season__label';
       label.setAttribute('for', seasonKey);
       controlWrapper.appendChild(label);
 
       const icon = document.createElement('span');
+
       icon.className = `icon icon--${seasonKey}`;
       label.appendChild(icon);
 
@@ -64,12 +70,15 @@ class FilterSeason {
 
    private getChecked(): string[] {
     const selected = this.ul.querySelectorAll<HTMLInputElement>('input:checked');
+
     return [...selected].map((input) => input.value);
   }
 
   private static isChecked(val: string): boolean {
     const reqParams = router.getReqParamsAll()['season'];
+
     if (!reqParams) return false;
+
     return reqParams.includes(val);
   }
 

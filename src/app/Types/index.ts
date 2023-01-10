@@ -59,6 +59,11 @@ export interface ICartProduct {
   count: number;
 }
 
+export interface IPromoCodes {
+  name: string;
+  percent: number;
+}
+
 // export interface ICartOrderedProduct extends ICartProduct {
 //   num: number
 // }

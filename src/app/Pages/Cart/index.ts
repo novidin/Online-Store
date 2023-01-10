@@ -50,6 +50,8 @@ class CartPage {
     document.body.appendChild(this.main);
     this.main.appendChild(this.cartWrapper);
     document.body.appendChild(pageFooter.getHTML());
+
+    this.sectionCartTotal.renderActivatedPromoCodes();
   }
 
   private buildMainHTML(reqParams: IReqParams): void {
@@ -116,10 +118,15 @@ class CartPage {
 
   private startListeners(): void {
     const orderingButtonDOM = this.cartWrapper.querySelector('.promo__button') as HTMLButtonElement;
+    const promoButtonDOM = this.cartWrapper.querySelector('.button--special') as HTMLButtonElement;
+
+    promoButtonDOM.addEventListener('click', () => {
+      this.sectionCartTotal.addPromoCode();
+    });
 
     orderingButtonDOM.addEventListener('click', () => {
       this.showOrderingModal();
-    })
+    });
   }
 
   update(reqParams: IReqParams): void {

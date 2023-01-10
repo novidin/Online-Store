@@ -46,7 +46,7 @@ class SectionCartTotal {
 
     const cartCount = cartStorage.getCountProducts().toString();
     const cartTotal = cartStorage.getTotal().toString();
-    const promoSum = +cartTotal * (this.promoPercent / 100);
+    const promoSum = +(+cartTotal * (this.promoPercent / 100)).toFixed(2);
 
     columnDOM.innerHTML = `
       <ul class="promo__list">

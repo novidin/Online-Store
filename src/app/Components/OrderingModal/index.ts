@@ -232,12 +232,21 @@ class OrderingModal {
         <h2 class="ordering__header">Спасибо за заказ!</h2>
       `
       setTimeout(() => {
-        cartStorage.clearProducts();
+        cartStorage.clearProducts()
+        removeActivatedPromoCodes();
         this.closeModal();
         router.goTo('/catalog');
       }, 3000);
     }
+
+    function removeActivatedPromoCodes() {
+      localStorage.setItem('activatedCodes', JSON.stringify([]));
+
+      const deletePromoCode = new Event('deletePromoCode', {bubbles: true});
+      document.dispatchEvent(deletePromoCode);
+    }
   }
+
 }
 
 export default OrderingModal;

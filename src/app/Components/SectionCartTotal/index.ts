@@ -1,11 +1,17 @@
 import cartStorage from '../../Storage/Cart';
+import { promocodes } from '../../Storage/promocodes';
+import { IPromocode } from '../../Types';
 
 class SectionCartTotal {
 
   private readonly promoContentDOM: HTMLElement;
+  private promocodes: IPromocode[];
+  private promoPercent: 0;
 
   constructor() {
     this.promoContentDOM = this.createContainer();
+    this.promocodes = promocodes;
+    this.promoPercent = 0
 
     window.addEventListener('addedToCard', () => {
       this.promoContentDOM.removeChild(this.promoContentDOM.children[0]);
@@ -29,12 +35,12 @@ class SectionCartTotal {
     return this.promoContentDOM;
   }
 
-  createTotalColumnDOM(promoPerc = 0): HTMLDivElement {
+  createTotalColumnDOM(): HTMLDivElement {
     const columnDOM = this.createColumnDOM() as HTMLDivElement;
 
     const cartCount = cartStorage.getCountProducts().toString();
     const cartTotal = cartStorage.getTotal().toString();
-    const promoSum = +cartTotal * (promoPerc / 100);
+    const promoSum = +cartTotal * (this.promoPercent / 100);
 
     columnDOM.innerHTML = `
       <ul class="promo__list">
@@ -62,21 +68,72 @@ class SectionCartTotal {
 
   createActivateColumnDOM(): HTMLDivElement {
     const columnDOM = this.createColumnDOM() as HTMLDivElement;
+    const promoList = document.createElement('ul');
 
-    columnDOM.innerHTML = `
-      <ul class="promo__activated-list">
-        <li class="promo__activated-item">
-          <span class="promo__activated-code">LOLOLO</span>
-          <span class="promo__activated-delete">Удалить</span>
-        </li>
-      </ul>
-      <div class="promo__activate">
-        <input class="promo__input" type="text" placeholder="Введите промокод" autocomplete="off">
-        <button class="button button--special">Применить</button>
-      </div>
-    `;
+    promoList.className = 'promo__activated-list'
+    columnDOM.appendChild(promoList);
+    this.showActivatedPromocodes(promoList)
+
+    const activateInputsWrapper = document.createElement('div');
+
+    activateInputsWrapper.className = 'promo__activate';
+    columnDOM.appendChild(activateInputsWrapper);
+
+    const activateInput = document.createElement('input');
+
+    activateInput.className = 'promo__input';
+    activateInput.type = 'text';
+    activateInput.placeholder = 'RS, EPAM';
+    activateInputsWrapper.appendChild(activateInput);
+
+    const activateButton = document.createElement('button');
+
+    activateButton.className = 'button button--special';
+    activateButton.textContent = 'Применить';
+    activateButton.onclick = () => {
+      if (!activateInput.value) return;
+      const [ validCode ] = this.promocodes
+                                  .filter((promocode) => (promocode.isActivated === 'false') 
+                                    && (promocode.code === activateInput.value));
+
+      if (!validCode) return;  
+      validCode.isActivated = 'true';
+      this.showActivatedPromocodes(promoList);
+      this.promoPercent += +validCode.percent;
+      this.promoContentDOM.removeChild(this.promoContentDOM.children[0]);
+      this.promoContentDOM.prepend(this.createTotalColumnDOM());
+    }
+    activateInputsWrapper.appendChild(activateButton);
 
     return columnDOM;
+  }
+
+  showActivatedPromocodes(parentList: HTMLUListElement) {
+    parentList.innerHTML = '';
+    this.promocodes.forEach((code) => {
+      if (('isActivated' in code) && (code['isActivated'] === 'true')) {
+        const li = document.createElement('li');
+
+        li.className = 'promo__activated-item';
+        li.innerHTML = `
+          <span class="promo__activated-code">${code.code}(-${code.percent}%)</span>
+        `
+
+        const delButton = document.createElement('button');
+
+        delButton.className = 'promo__activated-delete';
+        delButton.textContent = 'Удалить';
+        li.appendChild(delButton);
+        delButton.onclick = () => {
+          code['isActivated'] = 'false';
+          this.showActivatedPromocodes(parentList)
+          this.promoPercent -= +code.percent;
+          this.promoContentDOM.removeChild(this.promoContentDOM.children[0]);
+          this.promoContentDOM.prepend(this.createTotalColumnDOM());
+        }
+        parentList.appendChild(li)
+      }
+    })
   }
 
   createConfirmColumnDOM(): HTMLDivElement {

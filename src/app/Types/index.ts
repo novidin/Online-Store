@@ -59,6 +59,10 @@ export interface ICartProduct {
   count: number;
 }
 
+export interface IPromocode {
+  [key: string]: string
+}
+
 // export interface ICartOrderedProduct extends ICartProduct {
 //   num: number
 // }

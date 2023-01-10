@@ -78,7 +78,7 @@ class SectionCartTotal {
     columnDOM.innerHTML = `
       <ul class="promo__activated-list"></ul>
       <div class="promo__activate">
-        <input class="promo__input" type="text" placeholder="Введите промокод" autocomplete="off">
+        <input class="promo__input" type="text" placeholder="Промокод (DARIM10, DARIM20)" autocomplete="off">
         <button class="button button--special">Применить</button>
       </div>
     `;

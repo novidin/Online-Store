@@ -1,6 +1,6 @@
 import dataStorage from '.';
 import Paginator from './Paginator';
-import { ICartProduct} from '../Types';
+import {ICartProduct} from '../Types';
 
 
 class CartStorage {
@@ -24,7 +24,9 @@ class CartStorage {
   addProduct(id: string): void {
     if (this.isProductInCart(id)) {
       const cartProduct = this.cartProducts.find((cartProd) => cartProd.id === id);
+
       if (cartProduct) cartProduct.count += 1;
+
     } else {
       this.cartProducts.push({
         id: id,
@@ -35,6 +37,7 @@ class CartStorage {
 
   removeProduct(id: string): void {
     const cartProduct = this.cartProducts.find((cartProd) => cartProd.id === id);
+
     if (cartProduct) {
       this.cartProducts = this.cartProducts.filter((cartProd) => cartProd.id !== id);
     }
@@ -42,8 +45,9 @@ class CartStorage {
 
   decrProduct(id: string): void {
     const cartProduct = this.cartProducts.find((cartProd) => cartProd.id === id);
+
     if (cartProduct) {
-      cartProduct.count -=1;
+      cartProduct.count -= 1;
       if (cartProduct.count === 0) {
         this.cartProducts = this.cartProducts.filter((cartProd) => cartProd.count !== 0);
       }
@@ -55,11 +59,10 @@ class CartStorage {
   }
 
   getOrderedProducts(): ICartProduct[] {
-    const orderedProducts = this.cartProducts.map((cartProd, i) => {
+    return this.cartProducts.map((cartProd, i) => {
       cartProd.num = i + 1;
       return cartProd;
     });
-    return orderedProducts;
   }
 
   getCountProducts(): number {
@@ -75,24 +78,23 @@ class CartStorage {
     return +product.price;
   }
 
-  isProductInCart(id: string) {
+  isProductInCart(id: string): boolean {
     const productInCart = this.cartProducts.filter((cartProd) => cartProd.id === id);
     return !!productInCart.length;
   }
 
   /* pagination */
 
-  setLimitProducts(limit: number) {
+  setLimitProducts(limit: number): void {
     this.paginator.setLimit(limit);
   }
 
-  getPagesCount() {
+  getPagesCount(): number {
     this.paginator.setItems(this.getOrderedProducts());
     return this.paginator.getPagesCount();
   }
 
-  getPaginatedItems(page = 1) {
-
+  getPaginatedItems(page = 1): ICartProduct[] {
     this.paginator.setItems(this.getOrderedProducts());
     return this.paginator.getPageItems(page);
   }

@@ -1,5 +1,5 @@
-import router from "../../Router";
-import dataStorage from "../../Storage";
+import router from '../../Router';
+import dataStorage from '../../Storage';
 
 
 class FilterSelect {

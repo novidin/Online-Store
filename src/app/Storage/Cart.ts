@@ -1,6 +1,6 @@
 import dataStorage from '.';
-import { ICartProduct} from '../Types';
 import Paginator from './Paginator';
+import { ICartProduct} from '../Types';
 
 
 class CartStorage {
@@ -58,13 +58,8 @@ class CartStorage {
     const orderedProducts = this.cartProducts.map((cartProd, i) => {
       cartProd.num = i + 1;
       return cartProd;
-    } );
+    });
     return orderedProducts;
-  }
-
-
-  getCount(): number {
-    return this.cartProducts.length;
   }
 
   getCountProducts(): number {

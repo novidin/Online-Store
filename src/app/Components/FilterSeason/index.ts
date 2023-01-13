@@ -1,7 +1,7 @@
-import router from "../../Router";
-import dataStorage from "../../Storage";
-import { seasonNames } from "../../Storage/consts";
-import { IFilterItems } from "../../Types/index"
+import router from '../../Router';
+import dataStorage from '../../Storage';
+import { seasonNames } from '../../Storage/consts';
+import { IFilterItems } from '../../Types';
 
 class FilterSeason {
 

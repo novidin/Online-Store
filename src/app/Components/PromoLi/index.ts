@@ -1,4 +1,4 @@
-import {IPromoCodes} from "../../Types";
+import {IPromoCodes} from '../../Types';
 
 class PromoLi {
 

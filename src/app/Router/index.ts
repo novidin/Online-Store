@@ -1,5 +1,5 @@
 import routes from './routes';
-import { IReqParams } from '../Types/index';
+import { IReqParams } from '../Types/';
 
 class Router {
 
@@ -17,6 +17,7 @@ class Router {
     const reqParams = this.getReqParamsAll();
 
     console.log('goTO', location.pathname);
+
     if (correctRoutes.length < 1) {
       this.goTo('/404');
     } else {
@@ -50,7 +51,7 @@ class Router {
   setReqParams(name: string, value: string) {
     const reqParams = new URLSearchParams(this.reqParams);
 
-    console.log('rputer', reqParams);
+    console.log('router', reqParams);
     if (reqParams.has(name)) {
       reqParams.set(name, value)
     } else {

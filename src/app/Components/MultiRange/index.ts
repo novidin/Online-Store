@@ -1,9 +1,5 @@
-import dataStorage from "../../Storage";
-import router from "../../Router";
-
-/**
- * I want to be refactored
- */
+import dataStorage from '../../Storage';
+import router from '../../Router';
 
 class MultiRange {
 

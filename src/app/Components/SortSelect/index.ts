@@ -1,4 +1,4 @@
-import router from "../../Router";
+import router from '../../Router';
 
 class SortSelect {
 

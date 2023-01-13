@@ -1,9 +1,9 @@
-import { IReqParams } from "../../Types/index";
-import dataStorage from "../../Storage/index";
-import pageHeader from "../../Components/PageHeader/index";
-import pageFooter from "../../Components/PageFooter/index";
-import SectionProducts from "../../Components/SectionProducts";
-import SectionFilters from "../../Components/SectionFilters";
+import { IReqParams } from '../../Types';
+import dataStorage from '../../Storage';
+import pageHeader from '../../Components/PageHeader';
+import pageFooter from '../../Components/PageFooter';
+import SectionProducts from '../../Components/SectionProducts';
+import SectionFilters from '../../Components/SectionFilters';
 
 class CatalogPage {
 

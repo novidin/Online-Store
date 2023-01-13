@@ -1,8 +1,8 @@
-import MainPage from "../Pages/Main/index";
-import CatalogPage from "../Pages/Catalog/index";
-import CartPage from "../Pages/Cart/index";
-import ProductPage from "../Pages/Product/index";
-import Error404Page from "../Pages/404/index";
+import MainPage from '../Pages/Main';
+import CatalogPage from '../Pages/Catalog';
+import CartPage from '../Pages/Cart';
+import ProductPage from '../Pages/Product';
+import Error404Page from '../Pages/404';
 
 const routes = [
   {path: '/', title: 'Home', isMenuItem: true, page: new MainPage()},

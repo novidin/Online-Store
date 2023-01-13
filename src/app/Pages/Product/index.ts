@@ -1,11 +1,11 @@
-import { IProduct, IReqParams } from '../../Types/index';
-import router from '../../Router/index';
-import dataStorage from '../../Storage/index';
-import pageHeader from '../../Components/PageHeader/index';
-import pageFooter from '../../Components/PageFooter/index';
+import { IProduct, IReqParams } from '../../Types';
+import router from '../../Router';
+import dataStorage from '../../Storage';
+import pageHeader from '../../Components/PageHeader';
+import pageFooter from '../../Components/PageFooter';
 import { seasonNames } from '../../Storage/consts';
 import cartStorage from '../../Storage/Cart';
-import { getRatingStyleColor } from '../../utils/index'
+import { getRatingStyleColor } from '../../utils'
 
 class ProductPage {
 

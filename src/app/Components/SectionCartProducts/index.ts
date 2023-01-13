@@ -1,6 +1,6 @@
-import dataStorage from "../../Storage";
-import { seasonNames } from "../../Storage/consts";
-import cartStorage from "../../Storage/Cart";
+import dataStorage from '../../Storage';
+import { seasonNames } from '../../Storage/consts';
+import cartStorage from '../../Storage/Cart';
 
 
 class SectionCartProducts {

@@ -1,5 +1,5 @@
-import router from "../../Router";
-import cartStorage from "../../Storage/Cart";
+import router from '../../Router';
+import cartStorage from '../../Storage/Cart';
 
 
 class PaginationControls {
@@ -16,9 +16,7 @@ class PaginationControls {
     this.paginationControlsWrapper = document.createElement('div');
     this.paginationControlsWrapper.className = 'pagination';
 
-    /**
-     *  Limit
-     */
+    /* Limit */
 
     const paginationLimitWrapper = document.createElement('div');
     paginationLimitWrapper.className = 'pagination__column';
@@ -43,9 +41,7 @@ class PaginationControls {
     }
     paginationLimitWrapper.appendChild(this.paginationLimitInput);
 
-    /**
-     *  Page
-     */
+    /* Page */
 
     const paginationPageWrapper = document.createElement('div');
     paginationPageWrapper.className = 'pagination__column pagination__column--end';

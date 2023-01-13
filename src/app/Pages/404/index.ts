@@ -1,7 +1,7 @@
-import { IReqParams } from "../../Types/index";
-import router from "../../Router/index";
-import pageHeader from "../../Components/PageHeader/index";
-import pageFooter from "../../Components/PageFooter/index";
+import { IReqParams } from '../../Types';
+import router from '../../Router/index';
+import pageHeader from '../../Components/PageHeader';
+import pageFooter from '../../Components/PageFooter';
 
 class Error404Page {
 
@@ -30,16 +30,3 @@ class Error404Page {
 }
 
 export default Error404Page;
-
-
-// const renderNotFoundPage = ():void => {
-//   addressesDOM.addEventListener('click', ():void => {
-//     deleteChildsInMain();
-
-//     const notFoundDOM = document.createElement('div') as HTMLElement;
-//     notFoundDOM.classList.add('not-found');
-//     notFoundDOM.innerHTML = `<div class="wrapper"><span class="not-found__image"></span><p class="not-found__title">Ой! Что-то пошло не так...</p></div>`;
-
-//     mainDOM.append(notFoundDOM);
-//   });
-// }

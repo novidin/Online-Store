@@ -1,7 +1,7 @@
 import template from './template.html';
 import cartStorage from '../../Storage/Cart';
 
-class PageHaeader {
+class PageHeader {
 
   getHTML(): HTMLElement {
     const header = document.createElement('header');
@@ -28,6 +28,6 @@ class PageHaeader {
   }
 }
 
-const pageHeader = new PageHaeader();
+const pageHeader = new PageHeader();
 
 export default pageHeader;

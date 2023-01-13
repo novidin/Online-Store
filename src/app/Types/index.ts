@@ -35,10 +35,7 @@ interface ISizes {
   radius: string;
 }
 
-export type IProductValue = string | string[] | IRating | IFeatures | ISizes;
-
 export interface IProduct extends IProductsItem {
-  // [key: string]: IProductValue;
   name: string;
   size: string;
 }
@@ -63,7 +60,3 @@ export interface IPromoCodes {
   name: string;
   percent: number;
 }
-
-// export interface ICartOrderedProduct extends ICartProduct {
-//   num: number
-// }

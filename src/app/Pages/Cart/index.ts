@@ -1,12 +1,12 @@
-import { IReqParams } from "../../Types/index";
-import pageHeader from "../../Components/PageHeader/index";
-import pageFooter from "../../Components/PageFooter/index";
-import cartStorage from "../../Storage/Cart";
-import PaginationControls from "../../Components/PaginationControls";
-import SectionCartProducts from "../../Components/SectionCartProducts";
-import SectionCartTotal from "../../Components/SectionCartTotal";
-import OrderingModal from "../../Components/OrderingModal";
-import router from "../../Router";
+import { IReqParams } from '../../Types';
+import pageHeader from '../../Components/PageHeader';
+import pageFooter from '../../Components/PageFooter';
+import cartStorage from '../../Storage/Cart';
+import PaginationControls from '../../Components/PaginationControls';
+import SectionCartProducts from '../../Components/SectionCartProducts';
+import SectionCartTotal from '../../Components/SectionCartTotal';
+import OrderingModal from '../../Components/OrderingModal';
+import router from '../../Router';
 
 
 class CartPage {
@@ -33,8 +33,6 @@ class CartPage {
 
     this.cartWrapper = document.createElement('div');
     this.cartWrapper.className = 'cart';
-
-    // this.paginationControls = new PaginationControls();
 
     this.totalWrapper = document.createElement('div');
     this.totalWrapper.className = 'promo';

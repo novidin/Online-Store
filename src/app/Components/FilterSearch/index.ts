@@ -1,5 +1,5 @@
-import ButtonCopyURL from "../ButtonCopyURL";
-import router from "../../Router";
+import ButtonCopyURL from '../ButtonCopyURL';
+import router from '../../Router';
 
 class FilterSearch {
 

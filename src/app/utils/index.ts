@@ -1,9 +1,12 @@
 export const getRatingStyleColor = (ratingValue: string): string => {
-  if (parseFloat(ratingValue) >= 4.8) {
-    return 'rating--good';
-  } else if (parseFloat(ratingValue) > 3.9) {
-    return 'rating--medium';
-  } else {
-    return 'rating--bad';
+  const rating: number = parseFloat(ratingValue);
+
+  switch (true) {
+    case rating >= 4.8:
+      return 'rating--good';
+    case rating > 3.9:
+      return 'rating--medium';
+    default:
+      return 'rating--bad';
   }
 }

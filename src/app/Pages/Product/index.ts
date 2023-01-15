@@ -1,11 +1,9 @@
 import { IProduct, IReqParams } from '../../Types';
 import router from '../../Router';
 import dataStorage from '../../Storage';
-import pageHeader from '../../Components/PageHeader';
-import pageFooter from '../../Components/PageFooter';
 import { seasonNames } from '../../Storage/consts';
 import cartStorage from '../../Storage/Cart';
-import { getRatingStyleColor } from '../../utils'
+import { addBlocksToDocument, getRatingStyleColor } from '../../utils'
 
 class ProductPage {
 
@@ -20,28 +18,22 @@ class ProductPage {
     document.title = `Online Store — ${product?.model || 'not found'}`;
 
     const main = document.createElement('main');
-
     main.className = 'main';
-    main.innerHTML = '<p>Товар не найден</p>';
 
     if (product) {
-      main.innerHTML = '';
-      main.appendChild(this.getbreadcrumbsHTML(product));
-      main.appendChild(this.getProducCardtHTML(product));
+      main.appendChild(this.getBreadcrumbsHTML(product));
+      main.appendChild(this.getProductCardHTML(product));
+    } else {
+      router.goTo('/404');
     }
 
-    document.body.appendChild(pageHeader.getHTML());
-    document.body.appendChild(main);
-    document.body.appendChild(pageFooter.getHTML());
-
+    addBlocksToDocument(main);
   }
 
-  private getbreadcrumbsHTML(product: IProduct): HTMLDivElement {
+  private getBreadcrumbsHTML(product: IProduct): HTMLDivElement {
     const breadcrumbsWrapper = document.createElement('div');
-
     breadcrumbsWrapper.className = 'link-navigation';
     breadcrumbsWrapper.innerHTML = this.getBreadcrumbsTemplate(product);
-
     return breadcrumbsWrapper;
   }
 
@@ -67,13 +59,11 @@ class ProductPage {
     `
   }
 
-  private getProducCardtHTML(product: IProduct): HTMLDivElement {
+  private getProductCardHTML(product: IProduct): HTMLDivElement {
     const productContainer = document.createElement('div') as HTMLDivElement;
-
     productContainer.classList.add('catalog');
 
     const productWrapper = document.createElement('div');
-
     productWrapper.className = 'product product--page-view';
     productContainer.appendChild(productWrapper);
     productWrapper.innerHTML = this.getProductCardTemplate(product);
@@ -84,24 +74,20 @@ class ProductPage {
 
     this.setCartButtonState(product.id, cartButton);
     cartButton.onclick = () => {
-      if (cartStorage.isProductInCart(product.id)) {
-        cartStorage.removeProduct(product.id);
-      } else {
-        cartStorage.addProduct(product.id);
-      }
+      cartStorage.isProductInCart(product.id)
+        ? cartStorage.removeProduct(product.id)
+        : cartStorage.addProduct(product.id);
+
       this.setCartButtonState(product.id, cartButton);
 
       const addToCartEvent = new Event('addedToCard', { bubbles: true });
-
       cartButton.dispatchEvent(addToCartEvent);
     }
 
     const buyButton = productWrapper.querySelector('#buyButton') as HTMLButtonElement;
 
     buyButton.onclick = () => {
-      if (!cartStorage.isProductInCart(product.id)) {
-        cartStorage.addProduct(product.id);
-      }
+      if (!cartStorage.isProductInCart(product.id)) cartStorage.addProduct(product.id);
       router.goTo('/cart?buy=true');
     }
 

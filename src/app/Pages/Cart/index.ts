@@ -1,53 +1,72 @@
 import { IReqParams } from '../../Types';
-import pageHeader from '../../Components/PageHeader';
-import pageFooter from '../../Components/PageFooter';
 import cartStorage from '../../Storage/Cart';
+import router from '../../Router';
 import PaginationControls from '../../Components/PaginationControls';
 import SectionCartProducts from '../../Components/SectionCartProducts';
 import SectionCartTotal from '../../Components/SectionCartTotal';
 import OrderingModal from '../../Components/OrderingModal';
-import router from '../../Router';
-
+import { addBlocksToDocument } from '../../utils';
 
 class CartPage {
 
   private sectionCartProducts: SectionCartProducts;
   private sectionCartProductsHTML?: HTMLDivElement;
-  private paginationSection: HTMLElement;
-  private main: HTMLElement;
-  private cartWrapper: HTMLElement;
-  private totalWrapper: HTMLElement;
+  private readonly main: HTMLElement;
+  private readonly paginationSection: HTMLElement;
+  private readonly cartWrapper: HTMLElement;
+  private readonly totalWrapper: HTMLElement;
   private paginationControls: PaginationControls;
   private sectionCartTotal: SectionCartTotal;
 
   constructor() {
+    this.main = CartPage.createMain();
+    this.cartWrapper = CartPage.createWrapper();
+    this.paginationSection = CartPage.createPagination();
+    this.totalWrapper = CartPage.totalWrapper();
     this.paginationControls = new PaginationControls();
     this.sectionCartProducts = new SectionCartProducts(this.goFirstPage.bind(this));
-    this.sectionCartProductsHTML;
-
-    this.paginationSection = document.createElement('section');
-    this.paginationSection.className = 'cart__section';
-
-    this.main = document.createElement('main');
-    this.main.className = 'main';
-
-    this.cartWrapper = document.createElement('div');
-    this.cartWrapper.className = 'cart';
-
-    this.totalWrapper = document.createElement('div');
-    this.totalWrapper.className = 'promo';
-    this.totalWrapper.innerHTML = '<h3 class="promo__header">Заказ</h3>';
     this.sectionCartTotal = new SectionCartTotal();
+  }
+
+  static createMain(): HTMLElement {
+    const mainDOM = document.createElement('main');
+    mainDOM.className = 'main';
+
+    return mainDOM;
+  }
+
+  static createPagination(): HTMLElement {
+    const paginationDOM = document.createElement('section');
+    paginationDOM.className = 'cart__section';
+
+    return paginationDOM;
+  }
+
+  static createWrapper(): HTMLElement {
+    const wrapperDOM = document.createElement('div');
+    wrapperDOM.className = 'cart';
+
+    return wrapperDOM;
+  }
+
+  static totalWrapper(): HTMLElement {
+    const promoDOM = document.createElement('div');
+    promoDOM.className = 'promo';
+    promoDOM.innerHTML = '<h3 class="promo__header">Заказ</h3>';
+
+    return promoDOM;
   }
 
   render(reqParams: IReqParams): void {
     document.title = `Online Store — Корзина`;
+
     this.buildMainHTML(reqParams);
-    document.body.innerHTML = '';
-    document.body.appendChild(pageHeader.getHTML());
-    document.body.appendChild(this.main);
+
     this.main.appendChild(this.cartWrapper);
-    document.body.appendChild(pageFooter.getHTML());
+
+    document.body.innerHTML = '';
+
+    addBlocksToDocument(this.main);
 
     this.sectionCartTotal.renderActivatedPromoCodes();
   }
@@ -64,7 +83,7 @@ class CartPage {
     this.cartWrapper.appendChild(this.paginationSection);
     this.checkBuyNow(reqParams);
     this.buildPagination();
-    this.setPaginationVals(reqParams);
+    this.setPaginationValues(reqParams);
     this.buildTotal();
     this.update(reqParams);
     this.startListeners();
@@ -95,7 +114,7 @@ class CartPage {
     this.paginationControls.goToFirstPage();
   }
 
-  private setPaginationVals(reqParams: IReqParams): void {
+  private setPaginationValues(reqParams: IReqParams): void {
     const limitVal = (reqParams.limit && reqParams.limit[0]) ?  +reqParams.limit[0] : 3;
 
     this.paginationControls.setValuesFromReqParams(limitVal)
@@ -118,13 +137,9 @@ class CartPage {
     const orderingButtonDOM = this.cartWrapper.querySelector('.promo__button') as HTMLButtonElement;
     const promoButtonDOM = this.cartWrapper.querySelector('.button--special') as HTMLButtonElement;
 
-    promoButtonDOM.addEventListener('click', () => {
-      this.sectionCartTotal.addPromoCode();
-    });
+    promoButtonDOM.addEventListener('click', () => this.sectionCartTotal.addPromoCode());
 
-    orderingButtonDOM.addEventListener('click', () => {
-      this.showOrderingModal();
-    });
+    orderingButtonDOM.addEventListener('click', () => this.showOrderingModal());
   }
 
   update(reqParams: IReqParams): void {

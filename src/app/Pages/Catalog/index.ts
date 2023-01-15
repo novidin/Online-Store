@@ -1,9 +1,8 @@
 import { IReqParams } from '../../Types';
 import dataStorage from '../../Storage';
-import pageHeader from '../../Components/PageHeader';
-import pageFooter from '../../Components/PageFooter';
 import SectionProducts from '../../Components/SectionProducts';
 import SectionFilters from '../../Components/SectionFilters';
+import { addBlocksToDocument } from "../../utils";
 
 class CatalogPage {
 
@@ -13,33 +12,38 @@ class CatalogPage {
 
   constructor() {
     this.sectionProducts = new SectionProducts();
+    this.main = this.createMain();
     this.sectionProductsHTML;
-    this.main = document.createElement('main');
-    this.main.className = 'main';
+  }
+
+  createMain(): HTMLElement {
+    const mainDOM = document.createElement('main');
+    mainDOM.className = 'main';
+    return mainDOM;
   }
 
   render(reqParams: IReqParams): void {
     dataStorage.setFilters(reqParams);
     document.title = `Online Store — Каталог`;
+
     if (this.main) this.main.remove();
-    this.main = document.createElement('main');
-    this.main.className = 'main';
+
+    this.main = this.createMain();
 
     const sectionFilters = new SectionFilters();
-
     this.main.appendChild(sectionFilters.getHTML());
 
-    this.sectionProductsHTML?.remove();
-    this.sectionProductsHTML = this.sectionProducts.getHTML();
-    this.main.appendChild(this.sectionProductsHTML);
+    this.updateDOM();
 
-    document.body.appendChild(pageHeader.getHTML());
-    document.body.appendChild(this.main);
-    document.body.appendChild(pageFooter.getHTML());
+    addBlocksToDocument(this.main);
   }
 
   update(reqParams: IReqParams): void {
     dataStorage.setFilters(reqParams);
+    this.updateDOM();
+  }
+
+  updateDOM() {
     this.sectionProductsHTML?.remove();
     this.sectionProductsHTML = this.sectionProducts.getHTML();
     this.main.appendChild(this.sectionProductsHTML);

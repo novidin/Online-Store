@@ -32,13 +32,14 @@ class PaginationControls {
     this.paginationLimitInput.type = 'number';
     this.paginationLimitInput.value = '3';
     this.paginationLimitInput.min = '1';
-    this.paginationLimitInput.onchange = () => {
 
+    this.paginationLimitInput.onchange = () => {
       cartStorage.setLimitProducts(+this.paginationLimitInput.value);
       this.goToLastPage();
       this.setButtonsState();
       this.route('limit', this.paginationLimitInput.value);
     }
+
     paginationLimitWrapper.appendChild(this.paginationLimitInput);
 
     /* Page */
@@ -55,7 +56,6 @@ class PaginationControls {
     const paginationCounterWrapper = document.createElement('div');
     paginationCounterWrapper.className = 'pagination__container';
     paginationPageWrapper.appendChild(paginationCounterWrapper);
-
 
     this.paginationPrevBtn = document.createElement('button');
     this.paginationPrevBtn.className = 'pagination__button button button--accent';
@@ -75,7 +75,6 @@ class PaginationControls {
     this.paginationNextBtn.textContent = '>';
     this.paginationNextBtn.onclick = () => this.incrPageNum()
     paginationCounterWrapper.appendChild(this.paginationNextBtn);
-
   }
 
   getHTML() {
@@ -84,63 +83,72 @@ class PaginationControls {
     return this.paginationControlsWrapper;
   }
 
-  goToLastPage() {
+  goToLastPage(): void {
     this.pageCount = cartStorage.getPagesCount().toString();
     let pageValue = +this.paginationPageNumInput.value;
+
     if (pageValue > +this.pageCount) {
       pageValue = +this.pageCount;
       this.setPageNum(pageValue);
     }
   }
 
-  goToFirstPage() {
+  goToFirstPage(): void {
     this.setPageNum(1);
   }
 
-  setValuesFromReqParams(limitVal: number) {
-    this.setLimitValue(limitVal.toString())
+  setValuesFromReqParams(limitVal: number): void {
+    this.setLimitValue(limitVal.toString());
   }
 
-  setLimitValue(limitVal: string) {
+  private setLimitValue(limitVal: string): void {
     this.paginationLimitInput.value = limitVal;
     cartStorage.setLimitProducts(+this.paginationLimitInput.value);
     this.setButtonsState();
   }
 
-  setButtonsState() {
+  private setButtonsState(): void {
     this.pageCount = cartStorage.getPagesCount().toString();
     this.paginationPrevBtn.disabled = (this.paginationPageNumInput.value === '1');
     this.paginationNextBtn.disabled = (this.paginationPageNumInput.value === this.pageCount);
   }
 
-  setPageNum(pageNum: number) {
+  private setPageNum(pageNum: number): void {
     this.setButtonsState();
-    this.paginationPageNumInput.value = pageNum.toString();
-    this.route('page', this.paginationPageNumInput.value);
+    this.setPageValue(pageNum);
   }
 
-  decrPageNum() {
+  private decrPageNum(): void {
     let pageValue = +this.paginationPageNumInput.value;
+
     if (pageValue > 1) {
       pageValue -= 1;
       if (pageValue === 1) this.paginationPrevBtn.disabled = true;
     }
+
     if (pageValue < +this.pageCount) {
       this.paginationNextBtn.disabled = false;
     }
-    this.paginationPageNumInput.value = pageValue.toString();
-    this.route('page', this.paginationPageNumInput.value);
+
+    this.setPageValue(pageValue);
   }
 
-  incrPageNum() {
+  private incrPageNum(): void {
     let pageValue = +this.paginationPageNumInput.value;
+
     if (pageValue < +this.pageCount) {
       pageValue += 1;
       if (pageValue === +this.pageCount) this.paginationNextBtn.disabled = true;
     }
+
     if (pageValue > 1) {
       this.paginationPrevBtn.disabled = false;
     }
+
+    this.setPageValue(pageValue);
+  }
+
+  private setPageValue(pageValue: number): void {
     this.paginationPageNumInput.value = pageValue.toString();
     this.route('page', this.paginationPageNumInput.value);
   }
@@ -151,4 +159,3 @@ class PaginationControls {
 }
 
 export default PaginationControls;
-

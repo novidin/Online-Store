@@ -29,7 +29,7 @@ class SectionFilters {
     this.filtersWrapper.appendChild(filtersGrid);
 
     this.selectSizes = new FilterSelect('size', 'Выберите размер', this.updateFilters.bind(this));
-    filtersGrid.appendChild(this.getfilterSizeHTML());
+    filtersGrid.appendChild(this.getFilterSizeHTML());
 
     this.selectBrands = new FilterSelect('brand', 'Выберите производителя', this.updateFilters.bind(this));
     filtersGrid.appendChild(this.getFilterBrandHTML());
@@ -79,7 +79,7 @@ class SectionFilters {
     return filterSwitcherButton;
   }
 
-  private getfilterSizeHTML(): HTMLDivElement {
+  private getFilterSizeHTML(): HTMLDivElement {
     const filterSizeWrapper = document.createElement('div');
 
     filterSizeWrapper.className = 'select filters__cell';

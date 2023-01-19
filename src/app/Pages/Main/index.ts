@@ -15,7 +15,7 @@ class MainPage {
     addBlocksToDocument(main);
   }
 
-  update(reqParams: IReqParams) {
+  update(reqParams: IReqParams): void {
     this.render(reqParams)
   }
 }

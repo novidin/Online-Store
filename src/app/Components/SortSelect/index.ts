@@ -4,12 +4,11 @@ class SortSelect {
 
   getHTML(): HTMLSelectElement {
     const reqParams =  router.getReqParamsAll();
-    const wrapper = document.createElement('div');
 
+    const wrapper = document.createElement('div');
     wrapper.className = 'catalog__select select';
 
     const selectInput = document.createElement('select');
-
     selectInput.className = 'select__select';
     selectInput.innerHTML = `
       <option hidden>Сортировка</option>
@@ -25,9 +24,7 @@ class SortSelect {
 
     if (sortValue) selectInput.value = sortValue[0];
 
-    selectInput.onchange = (): void => {
-      this.route(selectInput.value);
-    };
+    selectInput.addEventListener('change', () => this.route(selectInput.value));
 
     return selectInput;
   }

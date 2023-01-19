@@ -8,16 +8,15 @@ import cartStorage from '../../Storage/Cart';
 import router from '../../Router';
 import { getRatingStyleColor } from '../../utils';
 
-
 class SectionProducts {
 
-  private section: HTMLElement;
+  private readonly section: HTMLElement;
 
   constructor() {
     this.section = document.createElement('section');
   }
 
-  buildHTML() {
+  buildHTML(): void {
     const productsData = dataStorage.getCurrProducts();
 
     this.section.innerHTML = '';
@@ -45,47 +44,42 @@ class SectionProducts {
     productsContainer.className = 'catalog__container';
     this.section.appendChild(productsContainer);
 
-    // TODO: maybe class names below will be changed...
     if (!productsData.length) productsContainer.innerHTML = '<p class="catalog__title catalog__count">Товары не найдены</p>';
 
     const viewMode = this.isViewModeTile() ? 'tile' : 'list';
 
     productsData.forEach((product) => {
       const productCard = this.getProductCardHTML(product, viewMode);
-
       productsContainer.appendChild(productCard);
-    })
+    });
   }
 
-  getHTML() {
+  getHTML(): HTMLElement {
     this.buildHTML();
     return this.section;
   }
 
-  private getSwitchCardViewButtonHTML() {
+  private getSwitchCardViewButtonHTML(): HTMLElement {
     const switchCardViewButton = document.createElement('button');
     const iconSrc = this.isViewModeTile() ? listViewIcon : cardViewIcon;
 
     switchCardViewButton.className = 'catalog__button';
     switchCardViewButton.innerHTML = `<img class="catalog__image" src="${iconSrc}" alt="Change view style">`;
 
-    switchCardViewButton.onclick = () => {
+    switchCardViewButton.addEventListener('click', () => {
       router.setReqParams('tile', (!this.isViewModeTile()).toString());
-    }
+    });
 
     return switchCardViewButton;
   }
 
   private isViewModeTile(): boolean {
     const [viewModeVal] = router.getReqParamsAll()['tile'] || ['false'];
-
     return JSON.parse(viewModeVal);
-
   }
 
   private getProductCardHTML(product: IProduct, viewMode: string): HTMLElement {
     const wrapper = document.createElement('article') as HTMLElement;
-
     wrapper.className = `product product--${viewMode}-view`;
     wrapper.innerHTML = this.getProductCardTemplate(product);
 
@@ -96,16 +90,16 @@ class SectionProducts {
       cartButton.classList.add('button--in-cart');
     }
 
-    cartButton.onclick = () => {
-      if (cartStorage.isProductInCart(product.id)) {
-        cartStorage.removeProduct(product.id);
-      } else {
-        cartStorage.addProduct(product.id);
-      }
+    cartButton.addEventListener('click', () => {
+      cartStorage.isProductInCart(product.id)
+        ? cartStorage.removeProduct(product.id)
+        : cartStorage.addProduct(product.id);
+
       const addToCartEvent = new Event('addedToCard', { bubbles: true });
       cartButton.dispatchEvent(addToCartEvent);
       this.buildHTML();
-    }
+    });
+
     return wrapper;
   }
 

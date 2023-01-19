@@ -116,8 +116,7 @@ class CartPage {
 
   private setPaginationValues(reqParams: IReqParams): void {
     const limitVal = (reqParams.limit && reqParams.limit[0]) ?  +reqParams.limit[0] : 3;
-
-    this.paginationControls.setValuesFromReqParams(limitVal)
+    this.paginationControls.setValuesFromReqParams(limitVal);
   }
 
   private buildProductsHTML(pageNum = 1): void {

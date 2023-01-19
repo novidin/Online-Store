@@ -31,7 +31,7 @@ class SectionCartTotal {
     return container;
   }
 
-  getHTML() {
+  getHTML(): HTMLElement {
     this.promoContentDOM.innerHTML = '';
 
     const columnsDOM = [this.createTotalColumnDOM(), this.createActivateColumnDOM(), this.createConfirmColumnDOM()];
@@ -99,22 +99,17 @@ class SectionCartTotal {
     return columnDOM;
   }
 
-  updateTotalColumn() {
+  updateTotalColumn(): void {
     this.promoContentDOM.removeChild(this.promoContentDOM.children[0]);
     this.promoContentDOM.prepend(this.createTotalColumnDOM());
   }
 
-  updateState() {
+  updateState(): void {
     this.activatedCodes = this.getActivatedCodesFromStorage();
     this.promoPercent = 0;
 
-    console.log(this.activatedCodes);
-    console.log(this.promoPercent);
-
     this.findActivatedCodes();
     this.updateTotalColumn();
-
-    console.log('delete promo code');
   }
 
   addPromoCode(): void {
@@ -138,7 +133,7 @@ class SectionCartTotal {
     });
   }
 
-  renderActivatedPromoCodes() {
+  renderActivatedPromoCodes(): void {
     if (this.activatedCodes.length) {
       this.activatedCodes.forEach((item) => {
 
@@ -155,7 +150,7 @@ class SectionCartTotal {
     }
   }
 
-  findActivatedCodes() {
+  findActivatedCodes(): void {
     this.activatedCodes.forEach((item) => {
       this.promoCodes.find((code) => {
         if (code.name === item) this.promoPercent = this.promoPercent + code.percent;
@@ -163,7 +158,7 @@ class SectionCartTotal {
     });
   }
 
-  setActivatedCodesInStorage() {
+  setActivatedCodesInStorage(): void {
     localStorage.setItem('activatedCodes', JSON.stringify(this.activatedCodes));
   }
 

@@ -3,22 +3,27 @@ import router from '../../Router';
 
 class FilterSearch {
 
-  private wrapper: HTMLDivElement;
+  private readonly wrapper: HTMLDivElement;
   private updateCallback: <T>(thisObj: T) => void;
   private inputValue: string;
 
   constructor(updateCallback: <T>(thisObj: T) => void) {
-    this.wrapper = document.createElement('div');
-    this.wrapper.className = 'search__container';
+    this.wrapper = FilterSearch.createSearch();
     this.updateCallback = updateCallback;
     this.inputValue = '';
+  }
+
+  private static createSearch(): HTMLDivElement {
+    const searchDOM = document.createElement('div');
+    searchDOM.className = 'search__container';
+
+    return searchDOM;
   }
 
   getHTML(): HTMLDivElement {
     this.wrapper.innerHTML = '';
 
     const searchInput = document.createElement('input');
-
     searchInput.className = 'search__input';
     searchInput.type = 'search';
     searchInput.placeholder = 'Поиск';
@@ -27,18 +32,17 @@ class FilterSearch {
     this.wrapper.appendChild(searchInput);
 
     const buttonsWrapper = document.createElement('div');
-
     buttonsWrapper.className = 'search__buttons';
     this.wrapper.appendChild(buttonsWrapper);
 
     const searchButton = document.createElement('button');
-
     searchButton.className = 'button search__button-search';
     searchButton.textContent = 'Найти';
     searchButton.onclick = () => {
       this.inputValue = searchInput.value.trim();
       this.route();
     }
+
     buttonsWrapper.appendChild(searchButton);
 
     const buttonCopyURL = new ButtonCopyURL();
@@ -50,8 +54,7 @@ class FilterSearch {
 
   private static getSearchValue(): string {
     const reqParams = router.getReqParamsAll()['search'];
-    if (reqParams) return reqParams[0];
-    return '';
+    return reqParams ? reqParams[0] : '';
   }
 
   private route(): void {

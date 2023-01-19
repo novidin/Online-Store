@@ -1,76 +1,67 @@
 import router from '../../Router';
 import dataStorage from '../../Storage';
-import { seasonNames } from '../../Storage/consts';
-import { IFilterItems } from '../../Types';
+import {seasonNames} from '../../Storage/consts';
+import {IFilterItems} from '../../Types';
 
 class FilterSeason {
 
-  private seasonsVals: IFilterItems;
-  private ul: HTMLUListElement;
+  private seasonsValues: IFilterItems;
+  private readonly seasonListDOM: HTMLUListElement;
   private updateCallback: <T>(thisObj: T) => void;
 
   constructor(updateCallback: <T>(thisObj: T) => void) {
-    this.seasonsVals = dataStorage.getValuesByKey('season');
-    this.ul = document.createElement('ul');
-    this.ul.className = 'season__list';
+    this.seasonsValues = dataStorage.getValuesByKey('season');
+    this.seasonListDOM = FilterSeason.createList();
     this.updateCallback = updateCallback;
+  }
+
+  private static createList(): HTMLUListElement {
+    const seasonListDOM = document.createElement('ul');
+    seasonListDOM.className = 'season__list';
+
+    return seasonListDOM;
   }
 
   getHTML(): HTMLUListElement {
     this.update();
-    return this.ul;
+    return this.seasonListDOM;
   }
 
   update(): void {
-    this.seasonsVals = dataStorage.getValuesByKey('season');
-    this.ul.innerHTML = '';
+    this.seasonsValues = dataStorage.getValuesByKey('season');
+    this.seasonListDOM.innerHTML = '';
 
-    for (const seasonKey in this.seasonsVals) {
-      const li = document.createElement('li');
+    for (const seasonKey in this.seasonsValues) {
+      const seasonItemDOM = document.createElement('li');
+      seasonItemDOM.className = 'season__item';
+      seasonItemDOM.innerHTML = `
+        <span class="season__title">${seasonNames[seasonKey]}</span>
+        <div class="season__control">
+          <input id="${seasonKey}" class="season__check" type="checkbox" value="${seasonKey}">
+          <label class="season__label" for="${seasonKey}">
+            <span class="icon icon--${seasonKey}"></span>
+          </label>
+        </div>
+      `;
 
-      li.className = 'season__item';
-
-      const title = document.createElement('span');
-
-      title.className = 'season__title';
-      title.textContent = seasonNames[seasonKey];
-      li.appendChild(title);
-
-      const controlWrapper = document.createElement('div');
-
-      controlWrapper.className = 'season__control';
-      li.appendChild(controlWrapper);
-
-      const input = document.createElement('input');
-
-      input.type = 'checkbox';
-      input.value = seasonKey;
-      input.className = 'season__check';
-      input.id = seasonKey;
-      if (FilterSeason.isChecked(seasonKey)) input.checked = true;
-      input.onchange = () => {
-        this.route();
-      }
-      controlWrapper.appendChild(input);
-
-      const label = document.createElement('label');
-
-      label.className = 'season__label';
-      label.setAttribute('for', seasonKey);
-      controlWrapper.appendChild(label);
-
-      const icon = document.createElement('span');
-
-      icon.className = `icon icon--${seasonKey}`;
-      label.appendChild(icon);
-
-      this.ul.appendChild(li)
+      this.seasonListDOM.appendChild(seasonItemDOM);
+      this.updateInput(seasonKey);
     }
   }
 
-   private getChecked(): string[] {
-    const selected = this.ul.querySelectorAll<HTMLInputElement>('input:checked');
+  private updateInput(id: string): void {
+    const inputDOM = this.seasonListDOM.querySelectorAll('.season__check') as NodeListOf<HTMLInputElement>;
+    inputDOM.forEach(item => {
+      if (item.id === id) {
+        item.addEventListener('change', () => this.route());
 
+        if (FilterSeason.isChecked(id)) item.checked = true;
+      }
+    });
+  }
+
+  private getChecked(): string[] {
+    const selected = this.seasonListDOM.querySelectorAll<HTMLInputElement>('input:checked');
     return [...selected].map((input) => input.value);
   }
 
@@ -87,7 +78,6 @@ class FilterSeason {
     this.updateCallback(this);
   }
 }
-
 
 
 export default FilterSeason;

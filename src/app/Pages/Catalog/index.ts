@@ -16,7 +16,7 @@ class CatalogPage {
     this.sectionProductsHTML;
   }
 
-  createMain(): HTMLElement {
+  private createMain(): HTMLElement {
     const mainDOM = document.createElement('main');
     mainDOM.className = 'main';
     return mainDOM;
@@ -43,7 +43,7 @@ class CatalogPage {
     this.updateDOM();
   }
 
-  updateDOM() {
+  updateDOM(): void {
     this.sectionProductsHTML?.remove();
     this.sectionProductsHTML = this.sectionProducts.getHTML();
     this.main.appendChild(this.sectionProductsHTML);

@@ -1,6 +1,7 @@
 import dataStorage from '../../Storage';
 import { seasonNames } from '../../Storage/consts';
 import cartStorage from '../../Storage/Cart';
+import { getRatingStyleColor } from '../../utils';
 
 
 class SectionCartProducts {
@@ -18,7 +19,7 @@ class SectionCartProducts {
     this.cartProductsWrapper.className = 'cart__catalog';
   }
 
-  buildHTML() {
+  buildHTML(): void {
 
     const addToCartEvent = new Event('addedToCard', {bubbles: true});
     const productsData = cartStorage.getPaginatedItems(this.pageNum);
@@ -49,15 +50,7 @@ class SectionCartProducts {
 
       const featuresListWrapper = document.createElement('div');
 
-      let ratingStyleColor;
-
-      if (parseFloat(product.rating.overageRating) >= 4.8) {
-        ratingStyleColor = 'rating--good';
-      } else if (parseFloat(product.rating.overageRating) > 3.9) {
-        ratingStyleColor = 'rating--medium';
-      } else {
-        ratingStyleColor = 'rating--bad';
-      }
+      const ratingStyleColor = getRatingStyleColor(product.rating.overageRating);
 
       featuresListWrapper.innerHTML = `
       <ul class="product__labels-list">
@@ -218,13 +211,13 @@ class SectionCartProducts {
     })
   }
 
-  getHTML(pageNum: number) {
+  getHTML(pageNum: number): HTMLElement {
     this.pageNum = pageNum || 1;
     this.update();
     return this.cartProductsWrapper;
   }
 
-  update() {
+  update(): void {
     this.cartProductsWrapper.innerHTML = '';
     this.buildHTML();
   }

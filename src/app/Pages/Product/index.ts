@@ -220,7 +220,7 @@ class ProductPage {
     });
   }
 
-  update(reqParams: IReqParams) {
+  update(reqParams: IReqParams): void {
     this.render(reqParams)
   }
 }

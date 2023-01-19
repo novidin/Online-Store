@@ -3,7 +3,7 @@ import router from '../../Router';
 
 class MultiRange {
 
-  private wrapper: HTMLDivElement;
+  private readonly wrapper: HTMLDivElement;
   private title?: string;
   private minRangeVal: string;
   private maxRangeVal: string;
@@ -16,7 +16,6 @@ class MultiRange {
 
   constructor(key: string, title: string, updateCallback: <T>(thisObj: T) => void) {
     this.wrapper = document.createElement('div');
-
     this.wrapper.className = 'multi-range filters__cell filters__cell--v2';
 
     this.key = key;
@@ -32,7 +31,6 @@ class MultiRange {
 
     this.updateCallback = updateCallback;
     this.update();
-
   }
 
   buildElements() {
@@ -48,7 +46,6 @@ class MultiRange {
     }
 
     const fieldsWrapper = document.createElement('div');
-
     fieldsWrapper.className = 'multi-range__fields';
     this.wrapper.appendChild(fieldsWrapper);
 
@@ -58,6 +55,7 @@ class MultiRange {
     inputMin.placeholder = 'Мин';
     inputMin.min = this.minRangeVal;
     inputMin.max = this.maxRangeVal;
+
     inputMin.oninput = () => {
       if ((+inputMin.value < +this.maxCurrVal) && (+inputMin.value > +this.minRangeVal)) {
         this.minCurrVal = inputMin.value;
@@ -72,11 +70,13 @@ class MultiRange {
         this.minCurrVal = inputMin.value;
         this.setValues({ rangeMin });
       }
+
       if (+inputMin.value < +this.minRangeVal) {
         inputMin.value = this.minCurrVal;
         this.minCurrVal = inputMin.value;
         this.setValues({ rangeMin });
       }
+
       this.route();
     }
 
@@ -93,6 +93,7 @@ class MultiRange {
     inputMax.placeholder = 'Макс';
     inputMax.min = this.minRangeVal;
     inputMax.max = this.maxRangeVal;
+
     inputMax.oninput = () => {
       if ((+inputMax.value > +this.minCurrVal) && (+inputMax.value < +this.maxRangeVal)) {
         this.maxCurrVal = inputMax.value;
@@ -107,11 +108,13 @@ class MultiRange {
         this.maxCurrVal = inputMax.value;
         this.setValues({ rangeMax });
       }
+
       if (+inputMax.value > +this.maxRangeVal) {
         inputMax.value = this.maxCurrVal;
         this.maxCurrVal = inputMax.value;
         this.setValues({ rangeMax });
       }
+
       this.route();
     }
 
@@ -133,6 +136,7 @@ class MultiRange {
     rangeMin.max = this.maxRangeVal;
     rangeMin.step = '1';
     rangeMin.style.zIndex = '1';
+
     rangeMin.oninput = () => {
       if (+rangeMin.value > +this.maxCurrVal) rangeMin.value = this.maxCurrVal;
 
@@ -140,6 +144,7 @@ class MultiRange {
       this.setValues({ inputMin });
       this.route();
     }
+
     rangesWrapper.appendChild(rangeMin);
 
     const rangeMax = document.createElement('input');
@@ -151,13 +156,16 @@ class MultiRange {
     rangeMax.max = this.maxRangeVal;
     rangeMax.value = this.maxCurrVal;
     rangeMax.style.zIndex = '0';
+
     rangeMax.oninput = () => {
       if (+rangeMax.value < +this.minCurrVal) rangeMax.value = this.minCurrVal;
       this.maxCurrVal = rangeMax.value;
       this.setValues({ inputMax });
       this.route();
     }
+
     rangesWrapper.appendChild(rangeMax);
+
     this.setValues({ inputMin, inputMax, rangeMin, rangeMax });
   }
 
@@ -166,8 +174,8 @@ class MultiRange {
     if (inputMax) inputMax.value = this.maxCurrVal;
     if (rangeMin) rangeMin.value = this.minCurrVal;
     if (rangeMax) rangeMax.value = this.maxCurrVal;
-    this.fillRange();
 
+    this.fillRange();
   }
 
   private fillRange(): void {
@@ -189,21 +197,26 @@ class MultiRange {
     return this.wrapper;
   }
 
-  private setDataVals(): void {
-    const priceRangestring = dataStorage.getValuesByKey(this.key, true);
+  private setDataValues(): void {
+    const priceRangeString = dataStorage.getValuesByKey(this.key, true);
 
-    this.minRangeVal = Math.min(...Object.keys(priceRangestring).map((el) => +el)).toString();
-    this.maxRangeVal = Math.max(...Object.keys(priceRangestring).map((el) => +el)).toString();
-    this.minCurrVal = Math.min(...Object.keys(priceRangestring)
-                                    .filter((el:string) => priceRangestring[el].curr > 0)
-                                    .map((el) => +el)).toString();
-    this.maxCurrVal = Math.max(...Object.keys(priceRangestring)
-                                    .filter((el:string) => priceRangestring[el].curr > 0)
-                                    .map((el) => +el)).toString();
+    this.minRangeVal = Math.min(...Object.keys(priceRangeString).map((el) => +el)).toString();
+
+    this.maxRangeVal = Math.max(...Object.keys(priceRangeString).map((el) => +el)).toString();
+
+    this.minCurrVal = Math.min(...Object.keys(priceRangeString)
+      .filter((el:string) => priceRangeString[el].curr > 0)
+      .map((el) => +el))
+      .toString();
+
+    this.maxCurrVal = Math.max(...Object.keys(priceRangeString)
+      .filter((el:string) => priceRangeString[el].curr > 0)
+      .map((el) => +el))
+      .toString();
   }
 
   update(): void {
-    this.setDataVals();
+    this.setDataValues();
     this.buildElements();
   }
 
